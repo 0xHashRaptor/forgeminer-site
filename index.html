@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ForgeMiner - a fast, native NVIDIA GPU miner for Pearl (PRL), QubitCoin (QTC), KawPow (RVN/QUAI/XNA), Cryptix (CYTX) and BTX. Windows, Linux, HiveOS and Docker.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ForgeMiner - Native NVIDIA GPU Miner">
+<meta property="og:description" content="One binary, six coins, five GPU generations. Native CUDA, built-in overclock and live dashboard. Windows - Linux - HiveOS - Docker.">
+<meta property="og:url" content="https://forgeminer.org">
+<meta name="theme-color" content="#100d0b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M3 8h11c0 2.5-1.8 3.6-4 3.9V14h3l1.5 3H6l1.5-3h2.5v-2H7c-2.2 0-4-1.3-4-4z' fill='%23ff6a1a'/></svg>">
+<title>ForgeMiner — Native NVIDIA GPU Miner</title>
+<style>
+  :root{
+    --bg:#100d0b;
+    --bg-2:#17120e;
+    --panel:#1b1611;
+    --panel-2:#221a14;
+    --border:#312721;
+    --border-hot:rgba(255,106,26,.32);
+    --text:#f1e9df;
+    --muted:#a89787;
+    --faint:#7a6c5e;
+    --accent:#ff6a1a;
+    --accent-2:#ff9d2a;
+    --ember:#d23c17;
+    --straw:#ffcf5c;
+    --whitehot:#fff2d0;
+    --good:#7fbf8f;
+    --mono: ui-monospace, "Cascadia Code", "JetBrains Mono", "SF Mono", Menlo, Consolas, "Roboto Mono", monospace;
+    --maxw: 1080px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--text); }
+  .site{
+    font-family:var(--mono);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent); color:#100d0b; }
+  a{ color:var(--accent-2); text-decoration:none; }
+
+  /* lang toggle mechanics */
+  .site[data-lang="en"] .ru{ display:none; }
+  .site[data-lang="ru"] .en{ display:none; }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* ---------------- NAV ---------------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{ display:flex; align-items:center; gap:22px; height:60px; }
+  .brand{ display:flex; align-items:center; gap:9px; font-weight:700; letter-spacing:.04em; font-size:15px; }
+  .brand .anvil{ width:18px; height:18px; flex:none; }
+  .brand b{
+    background:linear-gradient(92deg, var(--ember), var(--accent) 45%, var(--straw));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-transform:uppercase;
+  }
+  nav.links{ display:flex; gap:20px; margin-left:auto; font-size:13px; }
+  nav.links a{ color:var(--muted); }
+  nav.links a:hover{ color:var(--text); }
+  .nav-cta{ display:flex; align-items:center; gap:14px; }
+  .lang{ display:flex; gap:2px; font-size:11px; border:1px solid var(--border); }
+  .lang button{
+    font-family:var(--mono); background:none; border:none; color:var(--faint);
+    padding:4px 8px; cursor:pointer; letter-spacing:.05em;
+  }
+  .lang button.on{ color:var(--accent-2); background:var(--panel-2); }
+  .btn{
+    display:inline-flex; align-items:center; gap:7px; font-family:var(--mono);
+    font-size:13px; padding:8px 16px; cursor:pointer; letter-spacing:.02em;
+    border:1px solid var(--accent); color:var(--accent-2); background:none; white-space:nowrap;
+  }
+  .btn:hover{ background:color-mix(in srgb, var(--accent) 14%, transparent); }
+  .btn.solid{
+    background:linear-gradient(95deg, var(--ember), var(--accent) 70%);
+    color:#160d06; border-color:transparent; font-weight:700;
+  }
+  .btn.solid:hover{ filter:brightness(1.08); }
+  @media (max-width:820px){ nav.links{ display:none; } }
+
+  /* ---------------- HERO ---------------- */
+  .hero{ position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
+  #embers{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:.9; }
+  .hero-glow{
+    position:absolute; top:-30%; left:50%; transform:translateX(-50%);
+    width:900px; height:600px; pointer-events:none;
+    background:radial-gradient(ellipse at center, rgba(255,106,26,.16), transparent 62%);
+  }
+  .hero-inner{ position:relative; z-index:2; padding:78px 0 66px; }
+  .eyebrow{
+    font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-2);
+    margin-bottom:22px;
+  }
+  h1.head{
+    font-size:clamp(34px, 6.2vw, 62px); line-height:1.02; margin:0 0 20px;
+    font-weight:800; letter-spacing:-.01em; text-wrap:balance; text-transform:uppercase;
+    max-width:16ch;
+  }
+  h1.head .flame{
+    background:linear-gradient(96deg, var(--ember), var(--accent) 40%, var(--accent-2) 68%, var(--straw));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lede{ font-size:clamp(15px,1.9vw,17px); color:var(--muted); max-width:60ch; margin:0 0 30px; }
+  .hero-cta{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:20px; }
+  .btn.lg{ font-size:14px; padding:12px 22px; }
+  .trust{ font-size:12.5px; color:var(--faint); display:flex; flex-wrap:wrap; gap:6px 18px; }
+  .trust b{ color:var(--muted); font-weight:400; }
+  .trust .dot{ color:var(--accent); }
+
+  .temper{ display:flex; height:6px; margin:34px 0 0; border:1px solid var(--border); }
+  .temper span{ flex:1; }
+
+  /* terminal card */
+  .term{
+    margin-top:40px; background:#0c0a08; border:1px solid var(--border);
+    border-radius:8px; overflow:hidden; box-shadow:0 24px 60px -30px rgba(0,0,0,.8);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px; padding:10px 14px;
+    background:#141009; border-bottom:1px solid var(--border); font-size:12px; color:var(--faint);
+  }
+  .term-bar .d{ width:10px; height:10px; border-radius:50%; background:#2c231b; }
+  .term-bar .t{ margin-left:8px; }
+  .term-body{ padding:16px 18px; font-size:12.5px; overflow-x:auto; white-space:pre; line-height:1.7; }
+  .term-body .c-cmd{ color:var(--text); }
+  .term-body .c-flag{ color:var(--accent-2); }
+  .term-body .c-ok{ color:var(--good); }
+  .term-body .c-dim{ color:var(--faint); }
+  .term-body .c-hot{ color:var(--accent); }
+  .cursor{ display:inline-block; width:8px; height:15px; background:var(--accent); vertical-align:-2px; animation:blink 1.1s steps(2) infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* ---------------- SECTIONS ---------------- */
+  section{ padding:64px 0; border-bottom:1px solid var(--border); }
+  .sec-tag{
+    font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+    margin-bottom:12px;
+  }
+  h2{ font-size:clamp(22px,3.2vw,30px); margin:0 0 14px; font-weight:700; letter-spacing:-.01em; text-wrap:balance; }
+  .sec-lede{ color:var(--muted); max-width:64ch; font-size:14.5px; margin:0 0 34px; }
+
+  /* coins matrix */
+  .matrix{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  .matrix th, .matrix td{ text-align:left; padding:14px 16px; border-bottom:1px solid var(--border); }
+  .matrix thead th{
+    font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); font-weight:600;
+    border-bottom:1px solid var(--border-hot);
+  }
+  .matrix tbody tr:hover{ background:var(--panel); }
+  .matrix .algo{ color:var(--accent-2); font-weight:700; }
+  .coin-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tag{
+    font-size:11.5px; padding:2px 9px; border:1px solid var(--border);
+    color:var(--muted); border-radius:2px; white-space:nowrap;
+  }
+  .fee{
+    font-variant-numeric:tabular-nums; font-weight:700;
+    color:var(--straw);
+  }
+  .matrix-note{ font-size:12.5px; color:var(--faint); margin-top:16px; }
+
+  /* feature grid */
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+  .cell{ background:var(--bg); padding:26px 22px; }
+  .cell:hover{ background:var(--panel); }
+  .cell .ic{ font-size:16px; color:var(--accent); margin-bottom:14px; font-weight:700; }
+  .cell h3{ font-size:15px; margin:0 0 8px; font-weight:700; }
+  .cell p{ font-size:13px; color:var(--muted); margin:0; }
+  @media (max-width:820px){ .grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .grid{ grid-template-columns:1fr; } }
+
+  /* dashboard mock */
+  .dash{ background:var(--panel); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .dash-top{ display:flex; flex-wrap:wrap; gap:1px; background:var(--border); border-bottom:1px solid var(--border); }
+  .stat{ background:var(--panel); padding:16px 18px; flex:1; min-width:130px; }
+  .stat .k{ font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-bottom:6px; }
+  .stat .v{ font-size:20px; font-variant-numeric:tabular-nums; font-weight:700; }
+  .stat .v small{ font-size:12px; color:var(--muted); font-weight:400; }
+  .stat .v.hot{ color:var(--accent-2); }
+  .spark{ height:44px; width:100%; display:block; }
+  .dash-tbl{ width:100%; border-collapse:collapse; font-size:12.5px; }
+  .dash-tbl th, .dash-tbl td{ padding:9px 14px; text-align:right; border-bottom:1px solid var(--border); font-variant-numeric:tabular-nums; }
+  .dash-tbl th{ font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); font-weight:600; text-align:right; }
+  .dash-tbl td:first-child, .dash-tbl th:first-child{ text-align:left; color:var(--text); }
+  .dash-tbl .acc{ color:var(--good); }
+  .dash-label{ font-size:11.5px; color:var(--faint); padding:8px 14px; background:var(--bg-2); }
+
+  /* gpu architecture list */
+  .archlist{ border:1px solid var(--border); }
+  .archrow{ display:grid; grid-template-columns:200px 1fr; gap:0; border-bottom:1px solid var(--border); }
+  .archrow:last-child{ border-bottom:none; }
+  .archrow:hover{ background:var(--panel); }
+  .archgen{ padding:18px 20px; border-right:1px solid var(--border); background:var(--bg-2); }
+  .archgen .g{ font-size:16px; font-weight:700; color:var(--accent-2); }
+  .archgen .fam{ font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.09em; margin-top:4px; }
+  .archcards{ padding:16px 20px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  .archnote{ font-size:12.5px; color:var(--faint); margin-top:16px; }
+  @media (max-width:600px){ .archrow{ grid-template-columns:1fr; } .archgen{ border-right:none; border-bottom:1px solid var(--border); } }
+
+  /* quick start tabs */
+  .tabs{ display:flex; gap:2px; margin-bottom:0; }
+  .tabs button{
+    font-family:var(--mono); font-size:13px; background:var(--panel); color:var(--muted);
+    border:1px solid var(--border); border-bottom:none; padding:9px 18px; cursor:pointer;
+  }
+  .tabs button.on{ background:#0c0a08; color:var(--accent-2); border-color:var(--border-hot); }
+  .tabpane{ display:none; background:#0c0a08; border:1px solid var(--border); }
+  .tabpane.on{ display:block; }
+  .tabpane pre{ margin:0; padding:18px; font-size:12.5px; overflow-x:auto; line-height:1.75; color:var(--text); }
+  .tabpane .c-flag{ color:var(--accent-2); }
+  .tabpane .c-dim{ color:var(--faint); }
+  .tabpane .c-hot{ color:var(--accent); }
+
+  /* options tables */
+  .opt-tbl{ width:100%; border-collapse:collapse; font-size:13px; margin-bottom:8px; }
+  .opt-tbl th, .opt-tbl td{ text-align:left; padding:11px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  .opt-tbl thead th{ font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); font-weight:600; border-bottom:1px solid var(--border-hot); }
+  .opt-tbl code{ color:var(--accent-2); font-size:12.5px; white-space:nowrap; }
+  .opt-tbl td.desc{ color:var(--muted); }
+  .opt-tbl tbody tr:hover{ background:var(--panel); }
+  .opt-sub{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin:30px 0 12px; }
+  .opt-eg{ background:#0c0a08; border:1px solid var(--border); padding:14px 16px; font-size:12.5px; overflow-x:auto; white-space:pre; line-height:1.7; margin:0 0 6px; }
+  .opt-eg .c-flag{ color:var(--accent-2); } .opt-eg .c-dim{ color:var(--faint); } .opt-eg .c-hot{ color:var(--accent); }
+
+  /* copy code block (docker + flight sheets) */
+  .codebox{ position:relative; background:#0c0a08; border:1px solid var(--border); }
+  .codebox pre{ margin:0; padding:16px 18px; font-size:12.5px; overflow-x:auto; line-height:1.65; color:var(--text); white-space:pre; }
+  .codebox .copy{
+    position:absolute; top:10px; right:10px; font-family:var(--mono); font-size:11px;
+    background:var(--panel-2); border:1px solid var(--border); color:var(--muted);
+    padding:5px 11px; cursor:pointer; letter-spacing:.03em;
+  }
+  .codebox .copy:hover{ border-color:var(--border-hot); color:var(--accent-2); }
+  .codebox .copy.done{ color:var(--good); border-color:var(--good); }
+  .codebox .c-key{ color:var(--accent-2); } .codebox .c-str{ color:var(--straw); } .codebox .c-dim{ color:var(--faint); }
+
+  /* flight-sheet coin picker */
+  .fs-pick{ display:flex; flex-wrap:wrap; gap:2px; margin-bottom:14px; }
+  .fs-pick button{ font-family:var(--mono); font-size:12.5px; background:var(--panel); color:var(--muted); border:1px solid var(--border); padding:7px 14px; cursor:pointer; }
+  .fs-pick button.on{ background:#0c0a08; color:var(--accent-2); border-color:var(--border-hot); }
+  .fs-pane{ display:none; } .fs-pane.on{ display:block; }
+
+  /* community */
+  .chan{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .chan a{
+    background:var(--panel); border:1px solid var(--border); padding:24px; display:block; color:inherit;
+    transition:border-color .15s;
+  }
+  .chan a:hover{ border-color:var(--border-hot); }
+  .chan .cn{ font-size:15px; font-weight:700; margin-bottom:6px; color:var(--text); }
+  .chan .cd{ font-size:12.5px; color:var(--muted); }
+  .chan .ch{ color:var(--accent-2); font-size:12.5px; margin-top:12px; }
+  @media (max-width:720px){ .chan{ grid-template-columns:1fr; } }
+
+  /* final cta */
+  .final{ text-align:center; border-bottom:none; }
+  .final h2{ margin-bottom:10px; }
+  .final .lede{ margin:0 auto 28px; }
+  .final-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+  footer{ padding:34px 0 60px; }
+  .foot-inner{ display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center; font-size:12px; color:var(--faint); }
+  .foot-inner a{ color:var(--muted); }
+
+  @media (prefers-reduced-motion: reduce){
+    #embers{ display:none; }
+    .cursor{ animation:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site" data-lang="en">
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <svg class="anvil" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 8h11c0 2.5-1.8 3.6-4 3.9V14h3l1.5 3H6l1.5-3h2.5v-2H7c-2.2 0-4-1.3-4-4z" fill="url(#g)"/>
+          <path d="M14 8h5l-1 3h-3.6" stroke="url(#g)" stroke-width="1.4" fill="none"/>
+          <rect x="6" y="18" width="12" height="2.4" rx="1" fill="url(#g)"/>
+          <defs><linearGradient id="g" x1="3" y1="8" x2="20" y2="20"><stop stop-color="#d23c17"/><stop offset="1" stop-color="#ffcf5c"/></linearGradient></defs>
+        </svg>
+        <b>ForgeMiner</b>
+      </div>
+      <nav class="links">
+        <a href="#coins"><span class="en">Coins</span><span class="ru">Монеты</span></a>
+        <a href="#features"><span class="en">Features</span><span class="ru">Возможности</span></a>
+        <a href="#dashboard"><span class="en">Dashboard</span><span class="ru">Дашборд</span></a>
+        <a href="#start"><span class="en">Quick start</span><span class="ru">Старт</span></a>
+        <a href="#options"><span class="en">Flags</span><span class="ru">Флаги</span></a>
+        <a href="https://github.com/0xHashRaptor/ForgeMiner">GitHub</a>
+      </nav>
+      <div class="nav-cta">
+        <div class="lang" role="group" aria-label="Language">
+          <button data-set="en" class="on">EN</button>
+          <button data-set="ru">RU</button>
+        </div>
+        <a class="btn solid" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
+          <span class="en">Download</span><span class="ru">Скачать</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <canvas id="embers"></canvas>
+    <div class="hero-glow"></div>
+    <div class="wrap hero-inner">
+      <div class="eyebrow">// <span class="en">native nvidia gpu miner</span><span class="ru">нативный nvidia gpu-майнер</span></div>
+      <h1 class="head">
+        <span class="en">Forged for <span class="flame">every architecture.</span></span>
+        <span class="ru">Выкован под <span class="flame">каждую архитектуру.</span></span>
+      </h1>
+      <p class="lede">
+        <span class="en">A fast, fully native NVIDIA GPU miner. Talks to the card directly through the CUDA Driver API — no Python, no WSL, no runtimes to install. One binary mines six coins across five GPU generations, each running its own tuned kernel.</span>
+        <span class="ru">Быстрый, полностью нативный NVIDIA GPU-майнер. Работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов. Один бинарь майнит шесть монет на пяти поколениях карт, и под каждое — своё ядро.</span>
+      </p>
+      <div class="hero-cta">
+        <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
+          <span class="en">↓ Download v1.4.1</span><span class="ru">↓ Скачать v1.4.1</span>
+        </a>
+        <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
+          <span class="en">View on GitHub</span><span class="ru">Открыть на GitHub</span>
+        </a>
+      </div>
+      <div class="trust">
+        <span><span class="dot">▪</span> <b><span class="en">Windows · Linux · HiveOS · Docker</span><span class="ru">Windows · Linux · HiveOS · Docker</span></b></span>
+        <span><span class="dot">▪</span> <b><span class="en">One self-contained binary</span><span class="ru">Один самодостаточный бинарь</span></b></span>
+        <span><span class="dot">▪</span> <b><span class="en">Built-in overclock &amp; dashboard</span><span class="ru">Встроенный разгон и дашборд</span></b></span>
+      </div>
+
+      <div class="temper" aria-hidden="true">
+        <span style="background:#5c1f0e"></span><span style="background:#8a2f12"></span><span style="background:#c8341a"></span>
+        <span style="background:#ff6a1a"></span><span style="background:#ff9d2a"></span><span style="background:#ffcf5c"></span>
+        <span style="background:#ffe9a8"></span><span style="background:#fff2d0"></span>
+      </div>
+
+      <div class="term" aria-hidden="true">
+        <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t">forge — rig01</span></div>
+        <div class="term-body"><span class="c-dim">$</span> <span class="c-cmd">./forge</span> <span class="c-flag">--algorithm</span> pearlhash <span class="c-flag">--wallet</span> PRL… <span class="c-flag">--pool</span> pearl.baikalmine.com:2010
+<span class="c-dim">[forge]</span> CUDA Driver API 12.4 · 4 device(s) detected
+<span class="c-dim">[forge]</span> GPU0 RTX 4090   → kernel <span class="c-hot">ada</span>      <span class="c-ok">ready</span>
+<span class="c-dim">[forge]</span> GPU1 RTX 3080   → kernel <span class="c-hot">ampere</span>   <span class="c-ok">ready</span>
+<span class="c-dim">[forge]</span> GPU2 RTX 5070Ti → kernel <span class="c-hot">blackwell</span> <span class="c-ok">ready</span>
+<span class="c-dim">[forge]</span> GPU3 P104-100   → kernel <span class="c-hot">pascal</span>   <span class="c-ok">ready</span>
+<span class="c-dim">[pool]</span>  connected · <span class="c-ok">share accepted</span> ✓  effort 84%
+<span class="c-dim">$</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT IT IS -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">What it is</span><span class="ru">Что это</span></div>
+      <h2>
+        <span class="en">Not a wrapper. A native miner.</span>
+        <span class="ru">Не обёртка. Нативный майнер.</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="en">ForgeMiner is closed-source and built from the metal up. Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch — so a Pascal rig and a Blackwell rig each run code written for them, not a lowest-common-denominator kernel. Near-zero CPU load keeps the GPUs fed even on weak hosts, crowded rigs and slow x1 risers.</span>
+        <span class="ru">ForgeMiner — closed-source, собран с самого низкого уровня. Под каждый алгоритм для каждой карты идёт отдельная сборка под её архитектуру, выбирается автоматически при запуске — так что и Pascal-риг, и Blackwell-риг гоняют код, написанный именно под них, а не универсальное «ядро на всех». Почти нулевая нагрузка на CPU держит карты загруженными даже на слабом хосте, забитом риге и медленных x1-райзерах.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- COINS -->
+  <section id="coins">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">Coins &amp; fees</span><span class="ru">Монеты и комиссия</span></div>
+      <h2>
+        <span class="en">Six coins, one binary.</span>
+        <span class="ru">Шесть монет, один бинарь.</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="en">Pick the coin with a single flag. Standard Stratum pools for everything, automatic reconnect and pool fail-over. Dev fees are flat and shown here — no hidden second fee.</span>
+        <span class="ru">Выбор монеты — одним флагом. Везде обычные Stratum-пулы, авто-переподключение и failover. Комиссия фиксированная и указана здесь — без скрытой второй комиссии.</span>
+      </p>
+      <div style="overflow-x:auto;">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th><span class="en">Algorithm</span><span class="ru">Алгоритм</span></th>
+            <th><span class="en">Coins</span><span class="ru">Монеты</span></th>
+            <th style="text-align:right;"><span class="en">Dev fee</span><span class="ru">Комиссия</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="algo">PearlHash</td>
+            <td><div class="coin-tags"><span class="tag">Pearl · PRL</span></div></td>
+            <td class="fee" style="text-align:right;">2%</td>
+          </tr>
+          <tr>
+            <td class="algo">qhash</td>
+            <td><div class="coin-tags"><span class="tag">QubitCoin · QTC</span></div></td>
+            <td class="fee" style="text-align:right;">1%</td>
+          </tr>
+          <tr>
+            <td class="algo">KawPow</td>
+            <td><div class="coin-tags"><span class="tag">Ravencoin · RVN</span><span class="tag">Quai · QUAI</span><span class="tag">Neurai · XNA</span></div></td>
+            <td class="fee" style="text-align:right;">0.7%</td>
+          </tr>
+          <tr>
+            <td class="algo">Cryptix</td>
+            <td><div class="coin-tags"><span class="tag">Cryptix · CYTX</span></div></td>
+            <td class="fee" style="text-align:right;">2%</td>
+          </tr>
+          <tr>
+            <td class="algo">BTX</td>
+            <td><div class="coin-tags"><span class="tag">BTX · btx.dev</span></div></td>
+            <td class="fee" style="text-align:right;">1%</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="matrix-note">
+        <span class="en">More algorithms are on the way — follow the channel for updates.</span>
+        <span class="ru">Больше алгоритмов в разработке — следите за каналом.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">Under the hood</span><span class="ru">Под капотом</span></div>
+      <h2>
+        <span class="en">Built lean, runs everywhere.</span>
+        <span class="ru">Лёгкий внутри, идёт везде.</span>
+      </h2>
+      <div class="grid">
+        <div class="cell">
+          <div class="ic">⌗</div>
+          <h3><span class="en">Native CUDA, no runtimes</span><span class="ru">Нативный CUDA, без рантаймов</span></h3>
+          <p><span class="en">Direct CUDA Driver API. No Python, no WSL, no NVRTC — it starts instantly and runs lean on low-spec rigs.</span><span class="ru">Напрямую через CUDA Driver API. Без Python, WSL и NVRTC — мгновенный старт и работа даже на слабых ригах.</span></p>
+        </div>
+        <div class="cell">
+          <div class="ic">⚒</div>
+          <h3><span class="en">Architecture-tuned kernels</span><span class="ru">Ядра под архитектуру</span></h3>
+          <p><span class="en">A dedicated kernel per generation — Pascal, Turing, Ampere, Ada, Blackwell — auto-selected at launch so each card runs at its peak.</span><span class="ru">Отдельное ядро под каждое поколение — Pascal, Turing, Ampere, Ada, Blackwell — выбирается само при старте, каждая карта на пике.</span></p>
+        </div>
+        <div class="cell">
+          <div class="ic">▣</div>
+          <h3><span class="en">One self-contained binary</span><span class="ru">Один самодостаточный бинарь</span></h3>
+          <p><span class="en">Everything is embedded in a single executable — no CUDA runtime, no loose kernel or library files to manage. Even KawPow ships as one .exe.</span><span class="ru">Всё внутри одного исполняемого файла — без CUDA runtime и разбросанных ядер и библиотек. Даже KawPow — один .exe.</span></p>
+        </div>
+        <div class="cell">
+          <div class="ic">⟳</div>
+          <h3><span class="en">Built-in OC &amp; fan control</span><span class="ru">Встроенный разгон и кулеры</span></h3>
+          <p><span class="en">Lock clocks, apply core/memory offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs. No third-party tool.</span><span class="ru">Фикс частот, оффсеты ядра/памяти, лимит мощности и управление кулерами прямо из майнера — свой разгон на каждую карту. Без сторонних утилит.</span></p>
+        </div>
+        <div class="cell">
+          <div class="ic">⇄</div>
+          <h3><span class="en">Multi-pool fail-over</span><span class="ru">Multi-pool с failover</span></h3>
+          <p><span class="en">Standard Stratum for every coin, automatic reconnect and pool fail-over. SSL/TLS pools supported out of the box.</span><span class="ru">Обычный Stratum для всех монет, авто-переподключение и failover пулов. SSL/TLS-пулы из коробки.</span></p>
+        </div>
+        <div class="cell">
+          <div class="ic">◉</div>
+          <h3><span class="en">Live dashboard &amp; API</span><span class="ru">Живой дашборд и API</span></h3>
+          <p><span class="en">A built-in web panel plus JSON, Prometheus and Claymore-compatible endpoints on one port — drops into Grafana, Awesome Miner, HiveOS and your own scripts.</span><span class="ru">Встроенная веб-панель плюс JSON, Prometheus и Claymore-совместимые эндпоинты на одном порту — для Grafana, Awesome Miner, HiveOS и своих скриптов.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">Live dashboard</span><span class="ru">Живой дашборд</span></div>
+      <h2>
+        <span class="en">Every card, one glance.</span>
+        <span class="ru">Все карты — одним взглядом.</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="en">Point a browser at the miner and watch the whole rig live: total and per-GPU hashrate, temperatures, clocks, fans, power, efficiency and accept rate. Dark/light toggle and adjustable refresh, all served from one built-in port — nothing to install.</span>
+        <span class="ru">Наведите браузер на майнер и смотрите весь риг в реальном времени: общий и по-картовый хешрейт, температуры, частоты, кулеры, мощность, эффективность и accept rate. Тёмная/светлая тема и настройка обновления — всё с одного встроенного порта, ставить ничего не нужно.</span>
+      </p>
+
+      <div class="dash">
+        <div class="dash-top">
+          <div class="stat"><div class="k"><span class="en">Total hashrate</span><span class="ru">Общий хешрейт</span></div><div class="v hot" id="d-hr">—</div></div>
+          <div class="stat"><div class="k"><span class="en">Power</span><span class="ru">Мощность</span></div><div class="v">1146 <small>W</small></div></div>
+          <div class="stat"><div class="k"><span class="en">Accept rate</span><span class="ru">Accept rate</span></div><div class="v">99.7<small>%</small></div></div>
+          <div class="stat"><div class="k"><span class="en">Uptime</span><span class="ru">Аптайм</span></div><div class="v">72<small>h</small></div></div>
+        </div>
+        <svg class="spark" id="spark" viewBox="0 0 600 44" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="dash-label"><span class="en">// sample view — values illustrate the panel, not a benchmark</span><span class="ru">// демо-вид — цифры показывают панель, это не бенчмарк</span></div>
+        <div style="overflow-x:auto;">
+        <table class="dash-tbl">
+          <thead>
+            <tr>
+              <th>GPU</th><th>Kernel</th><th>Hashrate</th><th>Temp</th><th>Fan</th><th>Power</th><th><span class="en">Shares</span><span class="ru">Шары</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>RTX 4090</td><td>ada</td><td>— </td><td>61°C</td><td>62%</td><td>318 W</td><td class="acc">1042 ✓</td></tr>
+            <tr><td>RTX 5070 Ti</td><td>blackwell</td><td>—</td><td>58°C</td><td>55%</td><td>272 W</td><td class="acc">861 ✓</td></tr>
+            <tr><td>RTX 3080</td><td>ampere</td><td>—</td><td>64°C</td><td>70%</td><td>254 W</td><td class="acc">733 ✓</td></tr>
+            <tr><td>P104-100</td><td>pascal</td><td>—</td><td>52°C</td><td>48%</td><td>112 W</td><td class="acc">318 ✓</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GPUS -->
+  <section id="gpus">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">Supported GPUs</span><span class="ru">Поддержка карт</span></div>
+      <h2>
+        <span class="en">Five generations, one download.</span>
+        <span class="ru">Пять поколений, одна загрузка.</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="en">Kernels are tuned per architecture, so a whole generation is covered — not a hand-picked few models. From an old P104-100 mining card to a Blackwell RTX 50, plus NVIDIA CMP cards.</span>
+        <span class="ru">Ядра затюнены под архитектуру, поэтому поддерживается всё поколение целиком — а не пара избранных моделей. От старой майнинг-карты P104-100 до Blackwell RTX 50, плюс NVIDIA CMP.</span>
+      </p>
+      <div class="archlist">
+        <div class="archrow">
+          <div class="archgen"><div class="g">Blackwell</div><div class="fam">RTX 50 · desktop &amp; laptop</div></div>
+          <div class="archcards">
+            <span class="tag">RTX 5090</span><span class="tag">5080</span><span class="tag">5070 Ti</span><span class="tag">5070</span><span class="tag">5060 Ti</span><span class="tag">5060</span><span class="tag">50-series Laptop</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">Ada</div><div class="fam">RTX 40 · desktop &amp; laptop</div></div>
+          <div class="archcards">
+            <span class="tag">RTX 4090</span><span class="tag">4080 Super</span><span class="tag">4080</span><span class="tag">4070 Ti Super</span><span class="tag">4070 Ti</span><span class="tag">4070 Super</span><span class="tag">4070</span><span class="tag">4060 Ti</span><span class="tag">4060</span><span class="tag">40-series Laptop</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">Ampere</div><div class="fam">RTX 30 · desktop &amp; laptop</div></div>
+          <div class="archcards">
+            <span class="tag">RTX 3090 Ti</span><span class="tag">3090</span><span class="tag">3080 Ti</span><span class="tag">3080</span><span class="tag">3070 Ti</span><span class="tag">3070</span><span class="tag">3060 Ti</span><span class="tag">3060</span><span class="tag">30-series Laptop</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">Turing</div><div class="fam">RTX 20 · driver 545+</div></div>
+          <div class="archcards">
+            <span class="tag">RTX 2080 Ti</span><span class="tag">2080 Super</span><span class="tag">2080</span><span class="tag">2070 Super</span><span class="tag">2070</span><span class="tag">2060 Super</span><span class="tag">2060</span><span class="tag">20-series Laptop</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">Pascal</div><div class="fam">Pearl · KawPow · Cryptix</div></div>
+          <div class="archcards">
+            <span class="tag">P104-100</span><span class="tag">P106</span><span class="tag">P108</span><span class="tag">· 8 GB mining cards</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">CMP</div><div class="fam">Mining cards · driver 545+</div></div>
+          <div class="archcards">
+            <span class="tag">CMP 90HX</span><span class="tag">50HX</span><span class="tag">40HX</span><span class="tag">30HX</span>
+          </div>
+        </div>
+      </div>
+      <p class="archnote">
+        <span class="en">Support is per-architecture — every card in a listed generation runs its matching kernel, desktop and laptop/mobile alike. RTX 20-series and CMP cards need NVIDIA driver 545 or newer. Pascal (P104-100 / P106 / P108) covers Pearl, KawPow and Cryptix.</span>
+        <span class="ru">Поддержка — на уровне архитектуры: любая карта из указанного поколения запускает своё ядро, десктопная и ноутбучная одинаково. Для RTX 20 и CMP нужен драйвер NVIDIA 545+. Pascal (P104-100 / P106 / P108) — для Pearl, KawPow и Cryptix.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- QUICK START -->
+  <section id="start">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">Quick start</span><span class="ru">Быстрый старт</span></div>
+      <h2>
+        <span class="en">Running in under a minute.</span>
+        <span class="ru">Запуск меньше чем за минуту.</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="en">Download, set your wallet, start. On Windows pick the ready-made .bat for your coin, pool and region; on Linux one command; on HiveOS a custom-miner slot.</span>
+        <span class="ru">Скачать, вписать кошелёк, запустить. На Windows — готовый .bat под монету, пул и регион; на Linux — одна команда; на HiveOS — слот кастомного майнера.</span>
+      </p>
+
+      <div class="tabs">
+        <button class="on" data-tab="win">Windows</button>
+        <button data-tab="lin">Linux</button>
+        <button data-tab="hive">HiveOS</button>
+        <button data-tab="docker">Docker</button>
+      </div>
+      <div class="tabpane on" id="tab-win">
+<pre><span class="c-dim"># 1. Unpack the Windows release, then open the .bat for your coin/pool/region</span>
+<span class="c-dim">#    files are named  &lt;algo&gt;_&lt;pool&gt;_&lt;region&gt;.bat   (_SSL = encrypted connection)</span>
+
+<span class="c-hot">Pearl (PRL)</span>        pearlhash_Baikal_Global.bat   pearlhash_HeroMiners_DE.bat
+                   pearlhash_Kryptex_RU.bat      pearlhash_LuckyPool_EU.bat   …
+<span class="c-hot">QubitCoin (QTC)</span>    qhash_LuckyPool_RU.bat        qhash_LuckyPool_CA.bat
+                   qhash_k1pool_RU.bat           qhash_k1pool_EU.bat
+<span class="c-hot">KawPow · RVN</span>       kawpow_RVN_Kryptex_Global.bat kawpow_RVN_HeroMiners_US.bat  …
+<span class="c-hot">KawPow · QUAI</span>      kawpow_QUAI_HeroMiners_DE.bat kawpow_QUAI_Kryptex_EU.bat
+<span class="c-hot">KawPow · XNA</span>       kawpow_XNA_Kryptex_Global.bat kawpow_XNA_Vipor_RU.bat       …
+<span class="c-hot">Cryptix (CYTX)</span>     cryptix_Baikalmine_Global.bat cryptix_CryptixNetwork_Global.bat
+<span class="c-hot">BTX (btx.dev)</span>      btx_lproute_EU.bat            btx_lproute_RU.bat
+
+<span class="c-dim"># 2. set your wallet + worker inside the .bat, then double-click it</span>
+<span class="c-dim">#    run as Administrator if you want the built-in overclock to apply</span></pre>
+      </div>
+      <div class="tabpane" id="tab-lin">
+<pre>chmod +x forge
+
+<span class="c-dim"># Pearl (PRL)</span>
+FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET \
+FORGE_WORKER=rig01 FORGE_PROTO=stratum ./forge
+
+<span class="c-dim"># QubitCoin (QTC)</span>
+./forge <span class="c-flag">--algorithm</span> qhash <span class="c-flag">--wallet</span> YOUR_QTC_WALLET <span class="c-flag">--pool</span> ru.luckypool.io:8610
+
+<span class="c-dim"># KawPow — Ravencoin (RVN) / Quai (QUAI); coin auto-detected from the pool host</span>
+./forge <span class="c-flag">--algorithm</span> kawpow <span class="c-flag">--wallet</span> YOUR_RVN_WALLET <span class="c-flag">--pool</span> us.ravencoin.herominers.com:1140
+
+<span class="c-dim"># KawPow — Neurai (XNA); set the coin explicitly</span>
+./forge <span class="c-flag">--algorithm</span> kawpow <span class="c-flag">--coin</span> xna <span class="c-flag">--wallet</span> YOUR_XNA_WALLET <span class="c-flag">--pool</span> xna.2miners.com:6060
+
+<span class="c-dim"># Cryptix (CYTX)</span>
+./forge <span class="c-flag">--algorithm</span> cryptix <span class="c-flag">--wallet</span> YOUR_CYTX_WALLET <span class="c-flag">--pool</span> cytx.baikalmine.com:9010
+
+<span class="c-dim"># BTX (btx.dev)</span>
+./forge <span class="c-flag">--algorithm</span> btx <span class="c-flag">--wallet</span> YOUR_BTX_WALLET <span class="c-flag">--pool</span> btx-eu.lproute.com:8660</pre>
+      </div>
+      <div class="tabpane" id="tab-hive">
+<pre><span class="c-dim"># Add a Custom miner flight sheet (or import a ready-made one below)</span>
+
+Installation URL : https://github.com/0xHashRaptor/ForgeMiner/releases/latest
+Wallet template  : %WAL%.%WORKER_NAME%
+Pool URL         : pearl.baikalmine.com:2010
+Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FORGE_CCLK=2505
+
+<span class="c-dim"># KawPow / qhash / Cryptix / BTX: set FORGE_ALGO=kawpow|qhash|cryptix|btx</span>
+<span class="c-dim"># KawPow coin: FORGE_COIN=rvn|quai|xna</span></pre>
+      </div>
+      <div class="tabpane" id="tab-docker">
+<pre><span class="c-dim"># Pull the official image (tags :1.4.1 and :latest)</span>
+docker pull hashraptor/forge
+
+<span class="c-dim"># Run — needs the NVIDIA Container Toolkit for --gpus</span>
+docker run --rm --gpus all hashraptor/forge \
+  <span class="c-flag">--algorithm</span> pearlhash \
+  <span class="c-flag">--wallet</span> YOUR_PRL_WALLET <span class="c-flag">--worker</span> rig01 \
+  <span class="c-flag">--pool</span> pearl.baikalmine.com:2010
+
+<span class="c-dim"># Other coins: --algorithm qhash | kawpow | cryptix | btx</span>
+<span class="c-dim">#   KawPow: add --coin rvn | quai | xna</span>
+<span class="c-dim"># Dashboard: add -p 7777:7777 and --api-bind 0.0.0.0:7777</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTIONS -->
+  <section id="options">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">Flags &amp; tuning</span><span class="ru">Флаги и тюнинг</span></div>
+      <h2>
+        <span class="en">Every knob, one reference.</span>
+        <span class="ru">Все настройки в одном месте.</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="en">Anything you pass on the command line has an <code>FORGE_*</code> environment-variable twin — handy for HiveOS extra-config and .bat files. Overclock and fans can be one value for all cards, or a comma list mapped to <code>--gpu</code>.</span>
+        <span class="ru">У любого флага командной строки есть двойник-переменная <code>FORGE_*</code> — удобно для extra-config в HiveOS и .bat. Разгон и кулеры — одно значение на все карты или список через запятую под <code>--gpu</code>.</span>
+      </p>
+
+      <div class="opt-sub"><span class="en">Core</span><span class="ru">Основные</span></div>
+      <div style="overflow-x:auto;">
+      <table class="opt-tbl">
+        <thead><tr><th>Flag</th><th>Env</th><th><span class="en">Description</span><span class="ru">Описание</span></th></tr></thead>
+        <tbody>
+          <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code> or <code>btx</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code> или <code>btx</code>.</span></td></tr>
+          <tr><td><code>--coin</code></td><td><code>FORGE_COIN</code></td><td class="desc"><span class="en">KawPow coin: <code>rvn</code>, <code>quai</code> or <code>xna</code> — auto-detected from the pool if omitted (set explicitly for Neurai/Vipor).</span><span class="ru">Монета KawPow: <code>rvn</code>, <code>quai</code> или <code>xna</code> — определяется по пулу, если не задана (для Neurai/Vipor указывать явно).</span></td></tr>
+          <tr><td><code>--pool</code></td><td><code>FORGE_POOL</code></td><td class="desc"><span class="en">Pool as <code>host:port</code>. SSL/TLS supported; list several for fail-over.</span><span class="ru">Пул как <code>host:port</code>. SSL/TLS поддерживается; можно перечислить несколько для failover.</span></td></tr>
+          <tr><td><code>--wallet</code></td><td><code>FORGE_WALLET</code></td><td class="desc"><span class="en">Your payout wallet address.</span><span class="ru">Адрес кошелька для выплат.</span></td></tr>
+          <tr><td><code>--worker</code></td><td><code>FORGE_WORKER</code></td><td class="desc"><span class="en">Worker / rig name shown on the pool.</span><span class="ru">Имя воркера/рига на пуле.</span></td></tr>
+          <tr><td><code>--password</code></td><td><code>FORGE_PASS</code></td><td class="desc"><span class="en">Pool password (usually <code>x</code>).</span><span class="ru">Пароль пула (обычно <code>x</code>).</span></td></tr>
+          <tr><td><code>--proto</code></td><td><code>FORGE_PROTO</code></td><td class="desc"><span class="en">Pearl dialect: <code>stratum</code> (HeroMiners, LuckyPool, Kryptex) or <code>alpha</code> (AlphaPool).</span><span class="ru">Диалект Pearl: <code>stratum</code> (HeroMiners, LuckyPool, Kryptex) или <code>alpha</code> (AlphaPool).</span></td></tr>
+          <tr><td><code>--gpu</code></td><td><code>FORGE_GPU</code></td><td class="desc"><span class="en">Mine only these indices, e.g. <code>0,1,2,6</code> (match <code>nvidia-smi</code> order). Default: all.</span><span class="ru">Майнить только эти индексы, напр. <code>0,1,2,6</code> (порядок <code>nvidia-smi</code>). По умолчанию — все.</span></td></tr>
+          <tr><td>—</td><td><code>FORGE_LOWVRAM</code></td><td class="desc"><span class="en">Low-VRAM mode for 8 GB cards (Pearl). <code>1</code> on, <code>0</code> off. Auto by default.</span><span class="ru">Режим low-VRAM для 8 ГБ карт (Pearl). <code>1</code> вкл, <code>0</code> выкл. По умолчанию авто.</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="opt-sub"><span class="en">Overclock</span><span class="ru">Разгон</span></div>
+      <p class="sec-lede" style="margin-bottom:14px;">
+        <span class="en">ForgeMiner is core-clock bound and memory-light — push the core high, leave memory low. Overclocking needs root (Linux/HiveOS) or Administrator (Windows).</span>
+        <span class="ru">ForgeMiner упирается в частоту ядра и нетребователен к памяти — поднимайте ядро, память можно оставить низкой. Разгон требует root (Linux/HiveOS) или Администратора (Windows).</span>
+      </p>
+      <div style="overflow-x:auto;">
+      <table class="opt-tbl">
+        <thead><tr><th>Flag</th><th>Env</th><th><span class="en">Description</span><span class="ru">Описание</span></th></tr></thead>
+        <tbody>
+          <tr><td><code>--cclk</code></td><td><code>FORGE_CCLK</code></td><td class="desc"><span class="en">Lock GPU core clock (MHz).</span><span class="ru">Зафиксировать частоту ядра (МГц).</span></td></tr>
+          <tr><td><code>--coff</code></td><td><code>FORGE_COFF</code></td><td class="desc"><span class="en">Core clock offset (MHz, +/−).</span><span class="ru">Оффсет ядра (МГц, +/−).</span></td></tr>
+          <tr><td><code>--mclk</code></td><td><code>FORGE_MCLK</code></td><td class="desc"><span class="en">Lock memory clock (MHz).</span><span class="ru">Зафиксировать частоту памяти (МГц).</span></td></tr>
+          <tr><td><code>--moff</code></td><td><code>FORGE_MOFF</code></td><td class="desc"><span class="en">Memory clock offset (MHz, +/−).</span><span class="ru">Оффсет памяти (МГц, +/−).</span></td></tr>
+          <tr><td><code>--plimit</code></td><td><code>FORGE_PLIMIT</code></td><td class="desc"><span class="en">Power limit (Watts).</span><span class="ru">Лимит мощности (Вт).</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="opt-eg"><span class="c-dim"># per-GPU: values map to --gpu order</span>
+<span class="c-flag">--gpu</span> 0,1,2,6 <span class="c-flag">--coff</span> 300,250,300,200 <span class="c-flag">--plimit</span> 280,280,300,260</div>
+
+      <div class="opt-sub"><span class="en">Fan control</span><span class="ru">Управление кулерами</span></div>
+      <p class="sec-lede" style="margin-bottom:14px;">
+        <span class="en">A fixed speed, or a temperature curve. With no fan flag the driver keeps automatic control; it's restored on exit. Setting fans needs Administrator/root. GeForce cards have a ~30% hardware fan floor.</span>
+        <span class="ru">Фиксированная скорость или температурная кривая. Без флага — автоматика драйвера; она восстанавливается при выходе. Управление требует Администратора/root. У GeForce есть аппаратный порог ~30%.</span>
+      </p>
+      <div class="opt-eg"><span class="c-dim"># fixed speed</span>
+<span class="c-flag">--fan</span> 70                 <span class="c-dim">every GPU at 70%</span>
+<span class="c-flag">--fan</span> 60,70,80,100       <span class="c-dim">per-GPU (maps to --gpu order)</span>
+
+<span class="c-dim"># temperature curve — temp°C:fan%  (linear between points)</span>
+<span class="c-flag">--fan-curve</span> 45:30,60:55,70:75,80:100
+<span class="c-dim">#  ≤45°C→30% · 60°C→55% · 70°C→75% · ≥80°C→100% · 65°C→~65%</span></div>
+
+      <div class="opt-sub"><span class="en">Monitoring API</span><span class="ru">API мониторинга</span></div>
+      <p class="sec-lede" style="margin-bottom:14px;">
+        <span class="en">Off by default, read-only, one port. It only ever reports stats — it can't control or reconfigure the miner. Keep <code>127.0.0.1</code> for local-only; use <code>0.0.0.0</code> only behind your own router/firewall/VPN.</span>
+        <span class="ru">Выключен по умолчанию, только чтение, один порт. Только отдаёт статистику — управлять майнером через него нельзя. Оставляйте <code>127.0.0.1</code> для локального доступа; <code>0.0.0.0</code> — только за своим роутером/файрволом/VPN.</span>
+      </p>
+      <div class="opt-eg"><span class="c-flag">--api</span>                      <span class="c-dim">on 127.0.0.1:7777 (this machine only)</span>
+<span class="c-flag">--api-bind</span> 0.0.0.0:7777    <span class="c-dim">watch from your phone / another PC on the LAN</span></div>
+      <div style="overflow-x:auto;">
+      <table class="opt-tbl" style="margin-top:8px;">
+        <thead><tr><th>Endpoint</th><th>Format</th><th><span class="en">Use with</span><span class="ru">Для чего</span></th></tr></thead>
+        <tbody>
+          <tr><td><code>GET /</code></td><td>HTML</td><td class="desc"><span class="en">The web dashboard (alias <code>/dashboard</code>).</span><span class="ru">Веб-дашборд (алиас <code>/dashboard</code>).</span></td></tr>
+          <tr><td><code>GET /summary</code></td><td>JSON</td><td class="desc"><span class="en">Grafana, bots, scripts — total + per-GPU everything, plus a short history for graphs.</span><span class="ru">Grafana, боты, скрипты — всё по картам и суммарно, плюс короткая история для графиков.</span></td></tr>
+          <tr><td><code>GET /metrics</code></td><td>Prometheus</td><td class="desc"><span class="en">Grafana dashboards and alerts (<code>forge_hashrate_hs</code>, …).</span><span class="ru">Дашборды и алерты Grafana (<code>forge_hashrate_hs</code>, …).</span></td></tr>
+          <tr><td><code>miner_getstat1</code></td><td>Claymore</td><td class="desc"><span class="en">Awesome Miner, mmpOS — add forge with the Claymore/Ethminer API on port 7777.</span><span class="ru">Awesome Miner, mmpOS — добавьте forge через Claymore/Ethminer API на порту 7777.</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIVEOS FLIGHT SHEETS -->
+  <section id="flightsheets">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">HiveOS flight sheets</span><span class="ru">HiveOS флайт-шиты</span></div>
+      <h2>
+        <span class="en">Import, set your wallet, fly.</span>
+        <span class="ru">Импорт, вписал кошелёк, полетели.</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="en">Ready-made custom-miner flight sheets, one per coin. In HiveOS go to <b>Flight Sheets → import</b>, paste the JSON, then set your own wallet. Pool shown is a default — swap it for your region.</span>
+        <span class="ru">Готовые флайт-шиты кастомного майнера, по одному на монету. В HiveOS: <b>Flight Sheets → import</b>, вставь JSON, впиши свой кошелёк. Пул указан по умолчанию — поменяй под свой регион.</span>
+      </p>
+
+      <div class="fs-pick" role="group">
+        <button class="on" data-fs="pearl">Pearl</button>
+        <button data-fs="qtc">QubitCoin</button>
+        <button data-fs="rvn">Ravencoin</button>
+        <button data-fs="quai">Quai</button>
+        <button data-fs="xna">Neurai</button>
+        <button data-fs="cytx">Cryptix</button>
+        <button data-fs="btx">BTX</button>
+      </div>
+
+      <div class="fs-pane on" id="fs-pearl">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_PEARL"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"PRL"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"pearl.baikalmine.com:2010"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"pearl.baikalmine.com:2010"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"pearlhash"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.1/ForgeMiner-1.4.1.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
+
+      <div class="fs-pane" id="fs-qtc">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_QTC"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"QTC"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"ru.luckypool.io:8610"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"ru.luckypool.io:8610"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"qhash"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.1/ForgeMiner-1.4.1.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
+
+      <div class="fs-pane" id="fs-rvn">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_RVN"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"RVN"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"us.ravencoin.herominers.com:1140"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"us.ravencoin.herominers.com:1140"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"kawpow"</span>,
+      <span class="c-key">"coin"</span>: <span class="c-str">"rvn"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.1/ForgeMiner-1.4.1.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
+
+      <div class="fs-pane" id="fs-quai">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_QUAI"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"QUAI"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"de.quai.herominers.com:1185"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"de.quai.herominers.com:1185"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"kawpow"</span>,
+      <span class="c-key">"coin"</span>: <span class="c-str">"quai"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.1/ForgeMiner-1.4.1.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
+
+      <div class="fs-pane" id="fs-xna">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_XNA"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"XNA"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"xna.2miners.com:6060"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"xna.2miners.com:6060"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"kawpow"</span>,
+      <span class="c-key">"coin"</span>: <span class="c-str">"xna"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.1/ForgeMiner-1.4.1.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
+
+      <div class="fs-pane" id="fs-cytx">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_CYTX"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"CYTX"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"cytx.baikalmine.com:9010"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"cytx.baikalmine.com:9010"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"cryptix"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.1/ForgeMiner-1.4.1.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
+
+      <div class="fs-pane" id="fs-btx">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_BTX"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"BTX"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"btx-eu.lproute.com:8660"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"btx-eu.lproute.com:8660"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"btx"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.1/ForgeMiner-1.4.1.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section id="community">
+    <div class="wrap">
+      <div class="sec-tag"><span class="en">Community</span><span class="ru">Сообщество</span></div>
+      <h2>
+        <span class="en">Releases, help, and the crowd.</span>
+        <span class="ru">Релизы, помощь и сообщество.</span>
+      </h2>
+      <div class="chan">
+        <a href="https://t.me/ForgeMiner">
+          <div class="cn">Telegram</div>
+          <div class="cd"><span class="en">Releases and news, straight to the channel.</span><span class="ru">Релизы и новости — прямо в канале.</span></div>
+          <div class="ch">t.me/ForgeMiner →</div>
+        </a>
+        <a href="https://t.me/ForgeMinerChat">
+          <div class="cn"><span class="en">Telegram chat</span><span class="ru">Telegram-чат</span></div>
+          <div class="cd"><span class="en">Support and setup help from other miners.</span><span class="ru">Поддержка и помощь с настройкой от других майнеров.</span></div>
+          <div class="ch">t.me/ForgeMinerChat →</div>
+        </a>
+        <a href="https://discord.gg/vxUTbb9B">
+          <div class="cn">Discord</div>
+          <div class="cd"><span class="en">The wider community — tuning, rigs, talk.</span><span class="ru">Большое сообщество — тюнинг, риги, общение.</span></div>
+          <div class="ch">discord.gg/vxUTbb9B →</div>
+        </a>
+        <a href="https://bitcointalk.org/index.php?topic=5586260.0">
+          <div class="cn">BitcoinTalk · EN</div>
+          <div class="cd"><span class="en">Announcement thread, changelog and community Q&amp;A.</span><span class="ru">ANN-тема, changelog и вопросы сообщества.</span></div>
+          <div class="ch">bitcointalk.org →</div>
+        </a>
+        <a href="https://bitcointalk.org/index.php?topic=5586261.0">
+          <div class="cn">BitcoinTalk · RU</div>
+          <div class="cd"><span class="en">Russian-language announcement and support thread.</span><span class="ru">Русскоязычная тема анонса и поддержки.</span></div>
+          <div class="ch">bitcointalk.org →</div>
+        </a>
+        <a href="https://github.com/0xHashRaptor/ForgeMiner/releases">
+          <div class="cn">GitHub Releases</div>
+          <div class="cd"><span class="en">Every build, release notes and checksums.</span><span class="ru">Все сборки, release notes и контрольные суммы.</span></div>
+          <div class="ch">github.com →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>
+        <span class="en">Put every card to work.</span>
+        <span class="ru">Загрузи каждую карту.</span>
+      </h2>
+      <p class="lede">
+        <span class="en">One download, six coins, five architectures. Free to use — the only cost is the flat dev fee above.</span>
+        <span class="ru">Одна загрузка, шесть монет, пять архитектур. Бесплатно — единственная плата это фиксированная комиссия выше.</span>
+      </p>
+      <div class="final-cta">
+        <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
+          <span class="en">↓ Download v1.4.1</span><span class="ru">↓ Скачать v1.4.1</span>
+        </a>
+        <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
+          <span class="en">Read the docs</span><span class="ru">Документация</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <div>© 2026 ForgeMiner · <span class="en">Not affiliated with NVIDIA. Mine responsibly.</span><span class="ru">Не связан с NVIDIA. Майньте ответственно.</span></div>
+      <div>
+        <a href="https://github.com/0xHashRaptor/ForgeMiner">GitHub</a> ·
+        <a href="https://t.me/ForgeMiner">Telegram</a> ·
+        <a href="https://discord.gg/vxUTbb9B">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var site = document.querySelector('.site');
+
+  /* language toggle */
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var l = b.getAttribute('data-set');
+      site.setAttribute('data-lang', l);
+      document.querySelectorAll('.lang button').forEach(function(x){ x.classList.toggle('on', x===b); });
+    });
+  });
+
+  /* quick-start tabs */
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = b.getAttribute('data-tab');
+      document.querySelectorAll('.tabs button').forEach(function(x){ x.classList.toggle('on', x===b); });
+      document.querySelectorAll('.tabpane').forEach(function(p){ p.classList.toggle('on', p.id==='tab-'+t); });
+    });
+  });
+
+  /* flight-sheet coin picker */
+  document.querySelectorAll('.fs-pick button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var f = b.getAttribute('data-fs');
+      document.querySelectorAll('.fs-pick button').forEach(function(x){ x.classList.toggle('on', x===b); });
+      document.querySelectorAll('.fs-pane').forEach(function(p){ p.classList.toggle('on', p.id==='fs-'+f); });
+    });
+  });
+
+  /* copy buttons */
+  document.querySelectorAll('.codebox .copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.parentElement.querySelector('pre');
+      var text = pre ? pre.innerText : '';
+      var done = function(){ var o=btn.textContent; btn.textContent='copied ✓'; btn.classList.add('done'); setTimeout(function(){ btn.textContent=o; btn.classList.remove('done'); }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done, function(){ done(); });
+      } else {
+        var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); done();
+      }
+    });
+  });
+
+  /* animated total hashrate + sparkline (illustrative UI, not a benchmark claim) */
+  var hrEl = document.getElementById('d-hr');
+  var spark = document.getElementById('spark');
+  var pts = [];
+  for (var i=0;i<60;i++){ pts.push(0.5 + Math.random()*0.5); }
+  function draw(){
+    var w=600,h=44, step=w/(pts.length-1);
+    var d='M0,'+(h-pts[0]*h);
+    for (var i=1;i<pts.length;i++){ d+=' L'+(i*step)+','+(h-pts[i]*(h-6)-3); }
+    var area = d + ' L'+w+','+h+' L0,'+h+' Z';
+    spark.innerHTML =
+      '<defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">'+
+      '<stop offset="0" stop-color="#ff6a1a" stop-opacity="0.35"/>'+
+      '<stop offset="1" stop-color="#ff6a1a" stop-opacity="0"/></linearGradient></defs>'+
+      '<path d="'+area+'" fill="url(#sg)"/>'+
+      '<path d="'+d+'" fill="none" stroke="#ff9d2a" stroke-width="1.5"/>';
+  }
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function tickHR(){
+    var base = 3.82 + (Math.random()-0.5)*0.06;
+    if (hrEl) hrEl.innerHTML = base.toFixed(2) + ' <small>GH/s</small>';
+    pts.push(0.5 + Math.random()*0.5); pts.shift(); draw();
+  }
+  draw(); tickHR();
+  if (!reduce) setInterval(tickHR, 1600);
+
+  /* ember particles */
+  if (!reduce){
+    var cv = document.getElementById('embers');
+    if (cv){
+      var ctx = cv.getContext('2d'), host = cv.parentElement;
+      function size(){ cv.width = host.clientWidth; cv.height = host.clientHeight; }
+      size(); window.addEventListener('resize', size);
+      var cols = ['#ff6a1a','#ff9d2a','#d23c17','#ffcf5c'], ps=[];
+      for (var i=0;i<30;i++){
+        ps.push({ x:Math.random()*cv.width, y:cv.height+Math.random()*60, r:0.6+Math.random()*1.7,
+          vy:0.15+Math.random()*0.4, vx:(Math.random()-0.5)*0.3, a:0.15+Math.random()*0.5,
+          c:cols[i%cols.length], f:Math.random()*6.28 });
+      }
+      (function loop(){
+        size(); ctx.clearRect(0,0,cv.width,cv.height);
+        for (var k=0;k<ps.length;k++){
+          var p=ps[k]; p.y-=p.vy; p.x+=p.vx; p.f+=0.05;
+          if (p.y<-10){ p.y=cv.height+Math.random()*30; p.x=Math.random()*cv.width; }
+          ctx.globalAlpha = p.a*(0.6+0.4*Math.sin(p.f));
+          ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28); ctx.fill();
+        }
+        ctx.globalAlpha=1; requestAnimationFrame(loop);
+      })();
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
