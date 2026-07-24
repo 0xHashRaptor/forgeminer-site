@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ForgeMiner - a fast, native NVIDIA GPU miner for Pearl (PRL), QubitCoin (QTC), KawPow (RVN/QUAI/XNA), Cryptix (CYTX) and BTX. Windows, Linux, HiveOS and Docker.">
+<meta name="description" content="ForgeMiner - a fast, native NVIDIA GPU miner for Pearl (PRL), QubitCoin (QTC), KawPow (RVN/QUAI/XNA), Cryptix (CYTX), BTX and Xelis (XEL). Windows, Linux, HiveOS and Docker.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ForgeMiner - Native NVIDIA GPU Miner">
-<meta property="og:description" content="One binary, six coins, five GPU generations. Native CUDA, built-in overclock and live dashboard. Windows - Linux - HiveOS - Docker.">
+<meta property="og:description" content="One binary, six coins, six GPU generations. Native CUDA, built-in overclock and live dashboard. Windows - Linux - HiveOS - Docker.">
 <meta property="og:url" content="https://forgeminer.org">
 <meta name="theme-color" content="#100d0b">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M3 8h11c0 2.5-1.8 3.6-4 3.9V14h3l1.5 3H6l1.5-3h2.5v-2H7c-2.2 0-4-1.3-4-4z' fill='%23ff6a1a'/></svg>">
@@ -324,12 +324,12 @@
         <span class="ru">Выкован под <span class="flame">каждую архитектуру.</span></span>
       </h1>
       <p class="lede">
-        <span class="en">A fast, fully native NVIDIA GPU miner. Talks to the card directly through the CUDA Driver API — no Python, no WSL, no runtimes to install. One binary mines six coins across five GPU generations, each running its own tuned kernel.</span>
-        <span class="ru">Быстрый, полностью нативный NVIDIA GPU-майнер. Работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов. Один бинарь майнит шесть монет на пяти поколениях карт, и под каждое — своё ядро.</span>
+        <span class="en">A fast, fully native NVIDIA GPU miner. Talks to the card directly through the CUDA Driver API — no Python, no WSL, no runtimes to install. One binary mines six coins across six GPU generations, each running its own tuned kernel.</span>
+        <span class="ru">Быстрый, полностью нативный NVIDIA GPU-майнер. Работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов. Один бинарь майнит шесть монет на шести поколениях карт, и под каждое — своё ядро.</span>
       </p>
       <div class="hero-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.4.2</span></span><span class="ru">↓ Скачать v<span data-ver>1.4.2</span></span>
+          <span class="en">↓ Download v<span data-ver>1.5.0</span></span><span class="ru">↓ Скачать v<span data-ver>1.5.0</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">View on GitHub</span><span class="ru">Открыть на GitHub</span>
@@ -404,24 +404,29 @@
             <td class="fee" style="text-align:right;">2%</td>
           </tr>
           <tr>
+            <td class="algo">Cryptix</td>
+            <td><div class="coin-tags"><span class="tag">Cryptix · CYTX</span></div></td>
+            <td class="fee" style="text-align:right;">2%</td>
+          </tr>
+          <tr>
             <td class="algo">qhash</td>
             <td><div class="coin-tags"><span class="tag">QubitCoin · QTC</span></div></td>
+            <td class="fee" style="text-align:right;">1%</td>
+          </tr>
+          <tr>
+            <td class="algo">BTX</td>
+            <td><div class="coin-tags"><span class="tag">BTX · btx.dev</span></div></td>
+            <td class="fee" style="text-align:right;">1%</td>
+          </tr>
+          <tr>
+            <td class="algo">XelisHash</td>
+            <td><div class="coin-tags"><span class="tag">Xelis · XEL</span></div></td>
             <td class="fee" style="text-align:right;">1%</td>
           </tr>
           <tr>
             <td class="algo">KawPow</td>
             <td><div class="coin-tags"><span class="tag">Ravencoin · RVN</span><span class="tag">Quai · QUAI</span><span class="tag">Neurai · XNA</span></div></td>
             <td class="fee" style="text-align:right;">0.7%</td>
-          </tr>
-          <tr>
-            <td class="algo">Cryptix</td>
-            <td><div class="coin-tags"><span class="tag">Cryptix · CYTX</span></div></td>
-            <td class="fee" style="text-align:right;">2%</td>
-          </tr>
-          <tr>
-            <td class="algo">BTX</td>
-            <td><div class="coin-tags"><span class="tag">BTX · btx.dev</span></div></td>
-            <td class="fee" style="text-align:right;">1%</td>
           </tr>
         </tbody>
       </table>
@@ -450,7 +455,7 @@
         <div class="cell">
           <div class="ic">⚒</div>
           <h3><span class="en">Architecture-tuned kernels</span><span class="ru">Ядра под архитектуру</span></h3>
-          <p><span class="en">A dedicated kernel per generation — Pascal, Turing, Ampere, Ada, Blackwell — auto-selected at launch so each card runs at its peak.</span><span class="ru">Отдельное ядро под каждое поколение — Pascal, Turing, Ampere, Ada, Blackwell — выбирается само при старте, каждая карта на пике.</span></p>
+          <p><span class="en">A dedicated kernel per generation — Pascal, Volta, Turing, Ampere, Ada, Blackwell — auto-selected at launch so each card runs at its peak.</span><span class="ru">Отдельное ядро под каждое поколение — Pascal, Volta, Turing, Ampere, Ada, Blackwell — выбирается само при старте, каждая карта на пике.</span></p>
         </div>
         <div class="cell">
           <div class="ic">▣</div>
@@ -522,8 +527,8 @@
     <div class="wrap">
       <div class="sec-tag"><span class="en">Supported GPUs</span><span class="ru">Поддержка карт</span></div>
       <h2>
-        <span class="en">Five generations, one download.</span>
-        <span class="ru">Пять поколений, одна загрузка.</span>
+        <span class="en">Six generations, one download.</span>
+        <span class="ru">Шесть поколений, одна загрузка.</span>
       </h2>
       <p class="sec-lede">
         <span class="en">Kernels are tuned per architecture, so a whole generation is covered — not a hand-picked few models. From an old P104-100 mining card to a Blackwell RTX 50, plus NVIDIA CMP cards.</span>
@@ -555,9 +560,15 @@
           </div>
         </div>
         <div class="archrow">
-          <div class="archgen"><div class="g">Pascal</div><div class="fam">Pearl · KawPow · Cryptix</div></div>
+          <div class="archgen"><div class="g">Volta</div><div class="fam">All coins</div></div>
           <div class="archcards">
-            <span class="tag">P104-100</span><span class="tag">P106</span><span class="tag">P108</span><span class="tag">· 8 GB mining cards</span>
+            <span class="tag">Tesla V100</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">Pascal</div><div class="fam">All coins</div></div>
+          <div class="archcards">
+            <span class="tag">GTX 10-series</span><span class="tag">P104-100</span><span class="tag">P106</span><span class="tag">P108</span><span class="tag">· 8 GB mining cards</span>
           </div>
         </div>
         <div class="archrow">
@@ -568,8 +579,8 @@
         </div>
       </div>
       <p class="archnote">
-        <span class="en">Support is per-architecture — every card in a listed generation runs its matching kernel, desktop and laptop/mobile alike. RTX 20-series and CMP cards need NVIDIA driver 545 or newer. Pascal (P104-100 / P106 / P108) covers Pearl, KawPow and Cryptix.</span>
-        <span class="ru">Поддержка — на уровне архитектуры: любая карта из указанного поколения запускает своё ядро, десктопная и ноутбучная одинаково. Для RTX 20 и CMP нужен драйвер NVIDIA 545+. Pascal (P104-100 / P106 / P108) — для Pearl, KawPow и Cryptix.</span>
+        <span class="en">Support is per-architecture — every card in a listed generation runs its matching kernel, desktop and laptop/mobile alike. RTX 20-series and CMP cards need NVIDIA driver 545 or newer. All coins run on every listed generation, from Pascal (GTX 10-series / P104-100 / P106 / P108) and Volta (Tesla V100) up to Blackwell.</span>
+        <span class="ru">Поддержка — на уровне архитектуры: любая карта из указанного поколения запускает своё ядро, десктопная и ноутбучная одинаково. Для RTX 20 и CMP нужен драйвер NVIDIA 545+. Все монеты работают на каждом поколении — от Pascal (GTX 10-й серии / P104-100 / P106 / P108) и Volta (Tesla V100) до Blackwell.</span>
       </p>
     </div>
   </section>
@@ -606,6 +617,7 @@
 <span class="c-hot">KawPow · XNA</span>       kawpow_XNA_Kryptex_Global.bat kawpow_XNA_Vipor_RU.bat       …
 <span class="c-hot">Cryptix (CYTX)</span>     cryptix_Baikalmine_Global.bat cryptix_CryptixNetwork_Global.bat
 <span class="c-hot">BTX (btx.dev)</span>      btx_lproute_EU.bat            btx_lproute_RU.bat
+<span class="c-hot">Xelis (XEL)</span>        xelis_XEL_HeroMiners_DE.bat   xelis_XEL_Kryptex_Global.bat
 
 <span class="c-dim"># 2. set your wallet + worker inside the .bat, then double-click it</span>
 <span class="c-dim">#    run as Administrator if you want the built-in overclock to apply</span></pre>
@@ -630,7 +642,10 @@ FORGE_WORKER=rig01 FORGE_PROTO=stratum ./forge
 ./forge <span class="c-flag">--algorithm</span> cryptix <span class="c-flag">--wallet</span> YOUR_CYTX_WALLET <span class="c-flag">--pool</span> cytx.baikalmine.com:9010
 
 <span class="c-dim"># BTX (btx.dev)</span>
-./forge <span class="c-flag">--algorithm</span> btx <span class="c-flag">--wallet</span> YOUR_BTX_WALLET <span class="c-flag">--pool</span> btx-eu.lproute.com:8660</pre>
+./forge <span class="c-flag">--algorithm</span> btx <span class="c-flag">--wallet</span> YOUR_BTX_WALLET <span class="c-flag">--pool</span> btx-eu.lproute.com:8660
+
+<span class="c-dim"># Xelis (XEL)</span>
+./forge <span class="c-flag">--algorithm</span> xelis <span class="c-flag">--wallet</span> YOUR_XEL_WALLET <span class="c-flag">--pool</span> de.xelis.herominers.com:1225</pre>
       </div>
       <div class="tabpane" id="tab-hive">
 <pre><span class="c-dim"># Add a Custom miner flight sheet (or import a ready-made one below)</span>
@@ -640,11 +655,11 @@ Wallet template  : %WAL%.%WORKER_NAME%
 Pool URL         : pearl.baikalmine.com:2010
 Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FORGE_CCLK=2505
 
-<span class="c-dim"># KawPow / qhash / Cryptix / BTX: set FORGE_ALGO=kawpow|qhash|cryptix|btx</span>
+<span class="c-dim"># qhash / KawPow / Cryptix / BTX / Xelis: set FORGE_ALGO=qhash|kawpow|cryptix|btx|xelis</span>
 <span class="c-dim"># KawPow coin: FORGE_COIN=rvn|quai|xna</span></pre>
       </div>
       <div class="tabpane" id="tab-docker">
-<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.4.2</span> and :latest)</span>
+<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.5.0</span> and :latest)</span>
 docker pull hashraptor/forge
 
 <span class="c-dim"># Run — needs the NVIDIA Container Toolkit for --gpus</span>
@@ -653,7 +668,7 @@ docker run --rm --gpus all hashraptor/forge \
   <span class="c-flag">--wallet</span> YOUR_PRL_WALLET <span class="c-flag">--worker</span> rig01 \
   <span class="c-flag">--pool</span> pearl.baikalmine.com:2010
 
-<span class="c-dim"># Other coins: --algorithm qhash | kawpow | cryptix | btx</span>
+<span class="c-dim"># Other coins: --algorithm qhash | kawpow | cryptix | btx | xelis</span>
 <span class="c-dim">#   KawPow: add --coin rvn | quai | xna</span>
 <span class="c-dim"># Dashboard: add -p 7777:7777 and --api-bind 0.0.0.0:7777</span></pre>
       </div>
@@ -678,7 +693,7 @@ docker run --rm --gpus all hashraptor/forge \
       <table class="opt-tbl">
         <thead><tr><th>Flag</th><th>Env</th><th><span class="en">Description</span><span class="ru">Описание</span></th></tr></thead>
         <tbody>
-          <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code> or <code>btx</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code> или <code>btx</code>.</span></td></tr>
+          <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code> or <code>xelis</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code> или <code>xelis</code>.</span></td></tr>
           <tr><td><code>--coin</code></td><td><code>FORGE_COIN</code></td><td class="desc"><span class="en">KawPow coin: <code>rvn</code>, <code>quai</code> or <code>xna</code> — auto-detected from the pool if omitted (set explicitly for Neurai/Vipor).</span><span class="ru">Монета KawPow: <code>rvn</code>, <code>quai</code> или <code>xna</code> — определяется по пулу, если не задана (для Neurai/Vipor указывать явно).</span></td></tr>
           <tr><td><code>--pool</code></td><td><code>FORGE_POOL</code></td><td class="desc"><span class="en">Pool as <code>host:port</code>. SSL/TLS supported; list several for fail-over.</span><span class="ru">Пул как <code>host:port</code>. SSL/TLS поддерживается; можно перечислить несколько для failover.</span></td></tr>
           <tr><td><code>--wallet</code></td><td><code>FORGE_WALLET</code></td><td class="desc"><span class="en">Your payout wallet address.</span><span class="ru">Адрес кошелька для выплат.</span></td></tr>
@@ -766,6 +781,7 @@ docker run --rm --gpus all hashraptor/forge \
         <button data-fs="xna">Neurai</button>
         <button data-fs="cytx">Cryptix</button>
         <button data-fs="btx">BTX</button>
+        <button data-fs="xel">Xelis</button>
       </div>
 
       <div class="fs-pane on" id="fs-pearl">
@@ -910,6 +926,26 @@ docker run --rm --gpus all hashraptor/forge \
   }]
 }</pre></div>
       </div>
+
+      <div class="fs-pane" id="fs-xel">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_XEL"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"XEL"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"de.xelis.herominers.com:1225"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"de.xelis.herominers.com:1225"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"xelis"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
     </div>
   </section>
 
@@ -964,12 +1000,12 @@ docker run --rm --gpus all hashraptor/forge \
         <span class="ru">Загрузи каждую карту.</span>
       </h2>
       <p class="lede">
-        <span class="en">One download, six coins, five architectures. Free to use — the only cost is the flat dev fee above.</span>
-        <span class="ru">Одна загрузка, шесть монет, пять архитектур. Бесплатно — единственная плата это фиксированная комиссия выше.</span>
+        <span class="en">One download, six coins, six architectures. Free to use — the only cost is the flat dev fee above.</span>
+        <span class="ru">Одна загрузка, шесть монет, шесть архитектур. Бесплатно — единственная плата это фиксированная комиссия выше.</span>
       </p>
       <div class="final-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.4.2</span></span><span class="ru">↓ Скачать v<span data-ver>1.4.2</span></span>
+          <span class="en">↓ Download v<span data-ver>1.5.0</span></span><span class="ru">↓ Скачать v<span data-ver>1.5.0</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">Read the docs</span><span class="ru">Документация</span>
