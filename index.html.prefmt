@@ -608,14 +608,16 @@
 <pre><span class="c-dim"># 1. Unpack the Windows release, then open the .bat for your coin/pool/region</span>
 <span class="c-dim">#    files are named  &lt;algo&gt;_&lt;pool&gt;_&lt;region&gt;.bat   (_SSL = encrypted connection)</span>
 
-<span class="c-hot">Pearl (PRL)</span>        pearlhash_Kryptex_Global.bat    pearlhash_Kryptex_EU.bat    pearlhash_Kryptex_RU.bat
-<span class="c-hot">QubitCoin (QTC)</span>    qhash_LuckyPool_RU.bat          qhash_LuckyPool_CA.bat      qhash_k1pool_EU.bat
-<span class="c-hot">KawPow · RVN</span>       kawpow_RVN_Kryptex_Global.bat   kawpow_RVN_Kryptex_EU.bat   kawpow_RVN_Kryptex_RU.bat
-<span class="c-hot">KawPow · QUAI</span>      kawpow_QUAI_Kryptex_Global.bat  kawpow_QUAI_Kryptex_EU.bat  kawpow_QUAI_Kryptex_RU.bat
-<span class="c-hot">KawPow · XNA</span>       kawpow_XNA_Kryptex_Global.bat   kawpow_XNA_Kryptex_EU.bat   kawpow_XNA_Kryptex_RU.bat
-<span class="c-hot">Cryptix (CYTX)</span>     cryptix_Baikalmine_Global.bat   cryptix_CryptixNetwork_Global.bat
-<span class="c-hot">BTX (btx.dev)</span>      btx_lproute_EU.bat              btx_lproute_RU.bat
-<span class="c-hot">Xelis (XEL)</span>        xelis_XEL_Kryptex_Global.bat    xelis_XEL_Kryptex_RU.bat
+<span class="c-hot">Pearl (PRL)</span>        pearlhash_Baikal_Global.bat   pearlhash_HeroMiners_DE.bat
+                   pearlhash_Kryptex_RU.bat      pearlhash_LuckyPool_EU.bat   …
+<span class="c-hot">QubitCoin (QTC)</span>    qhash_LuckyPool_RU.bat        qhash_LuckyPool_CA.bat
+                   qhash_k1pool_RU.bat           qhash_k1pool_EU.bat
+<span class="c-hot">KawPow · RVN</span>       kawpow_RVN_Kryptex_Global.bat kawpow_RVN_HeroMiners_US.bat  …
+<span class="c-hot">KawPow · QUAI</span>      kawpow_QUAI_HeroMiners_DE.bat kawpow_QUAI_Kryptex_EU.bat
+<span class="c-hot">KawPow · XNA</span>       kawpow_XNA_Kryptex_Global.bat kawpow_XNA_Vipor_RU.bat       …
+<span class="c-hot">Cryptix (CYTX)</span>     cryptix_Baikalmine_Global.bat cryptix_CryptixNetwork_Global.bat
+<span class="c-hot">BTX (btx.dev)</span>      btx_lproute_EU.bat            btx_lproute_RU.bat
+<span class="c-hot">Xelis (XEL)</span>        xelis_XEL_HeroMiners_DE.bat   xelis_XEL_Kryptex_Global.bat
 
 <span class="c-dim"># 2. set your wallet + worker inside the .bat, then double-click it</span>
 <span class="c-dim">#    run as Administrator if you want the built-in overclock to apply</span></pre>
@@ -624,7 +626,8 @@
 <pre>chmod +x forge
 
 <span class="c-dim"># Pearl (PRL)</span>
-./forge <span class="c-flag">--algorithm</span> pearlhash <span class="c-flag">--wallet</span> YOUR_PRL_WALLET <span class="c-flag">--pool</span> prl.kryptex.network:7048
+FORGE_POOL=prl.kryptex.network:7048 FORGE_WALLET=YOUR_PRL_WALLET \
+FORGE_WORKER=rig01 FORGE_PROTO=stratum ./forge
 
 <span class="c-dim"># QubitCoin (QTC)</span>
 ./forge <span class="c-flag">--algorithm</span> qhash <span class="c-flag">--wallet</span> YOUR_QTC_WALLET <span class="c-flag">--pool</span> ru.luckypool.io:8610

@@ -349,7 +349,7 @@
 
       <div class="term" aria-hidden="true">
         <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t">forge — rig01</span></div>
-        <div class="term-body"><span class="c-dim">$</span> <span class="c-cmd">./forge</span> <span class="c-flag">--algorithm</span> pearlhash <span class="c-flag">--wallet</span> PRL… <span class="c-flag">--pool</span> prl.kryptex.network:7048
+        <div class="term-body"><span class="c-dim">$</span> <span class="c-cmd">./forge</span> <span class="c-flag">--algorithm</span> pearlhash <span class="c-flag">--wallet</span> PRL… <span class="c-flag">--pool</span> pearl.baikalmine.com:2010
 <span class="c-dim">[forge]</span> CUDA Driver API 12.4 · 4 device(s) detected
 <span class="c-dim">[forge]</span> GPU0 RTX 4090   → kernel <span class="c-hot">ada</span>      <span class="c-ok">ready</span>
 <span class="c-dim">[forge]</span> GPU1 RTX 3080   → kernel <span class="c-hot">ampere</span>   <span class="c-ok">ready</span>
@@ -608,14 +608,16 @@
 <pre><span class="c-dim"># 1. Unpack the Windows release, then open the .bat for your coin/pool/region</span>
 <span class="c-dim">#    files are named  &lt;algo&gt;_&lt;pool&gt;_&lt;region&gt;.bat   (_SSL = encrypted connection)</span>
 
-<span class="c-hot">Pearl (PRL)</span>        pearlhash_Kryptex_Global.bat    pearlhash_Kryptex_EU.bat    pearlhash_Kryptex_RU.bat
-<span class="c-hot">QubitCoin (QTC)</span>    qhash_LuckyPool_RU.bat          qhash_LuckyPool_CA.bat      qhash_k1pool_EU.bat
-<span class="c-hot">KawPow · RVN</span>       kawpow_RVN_Kryptex_Global.bat   kawpow_RVN_Kryptex_EU.bat   kawpow_RVN_Kryptex_RU.bat
-<span class="c-hot">KawPow · QUAI</span>      kawpow_QUAI_Kryptex_Global.bat  kawpow_QUAI_Kryptex_EU.bat  kawpow_QUAI_Kryptex_RU.bat
-<span class="c-hot">KawPow · XNA</span>       kawpow_XNA_Kryptex_Global.bat   kawpow_XNA_Kryptex_EU.bat   kawpow_XNA_Kryptex_RU.bat
-<span class="c-hot">Cryptix (CYTX)</span>     cryptix_Baikalmine_Global.bat   cryptix_CryptixNetwork_Global.bat
-<span class="c-hot">BTX (btx.dev)</span>      btx_lproute_EU.bat              btx_lproute_RU.bat
-<span class="c-hot">Xelis (XEL)</span>        xelis_XEL_Kryptex_Global.bat    xelis_XEL_Kryptex_RU.bat
+<span class="c-hot">Pearl (PRL)</span>        pearlhash_Baikal_Global.bat   pearlhash_HeroMiners_DE.bat
+                   pearlhash_Kryptex_RU.bat      pearlhash_LuckyPool_EU.bat   …
+<span class="c-hot">QubitCoin (QTC)</span>    qhash_LuckyPool_RU.bat        qhash_LuckyPool_CA.bat
+                   qhash_k1pool_RU.bat           qhash_k1pool_EU.bat
+<span class="c-hot">KawPow · RVN</span>       kawpow_RVN_Kryptex_Global.bat kawpow_RVN_HeroMiners_US.bat  …
+<span class="c-hot">KawPow · QUAI</span>      kawpow_QUAI_HeroMiners_DE.bat kawpow_QUAI_Kryptex_EU.bat
+<span class="c-hot">KawPow · XNA</span>       kawpow_XNA_Kryptex_Global.bat kawpow_XNA_Vipor_RU.bat       …
+<span class="c-hot">Cryptix (CYTX)</span>     cryptix_Baikalmine_Global.bat cryptix_CryptixNetwork_Global.bat
+<span class="c-hot">BTX (btx.dev)</span>      btx_lproute_EU.bat            btx_lproute_RU.bat
+<span class="c-hot">Xelis (XEL)</span>        xelis_XEL_HeroMiners_DE.bat   xelis_XEL_Kryptex_Global.bat
 
 <span class="c-dim"># 2. set your wallet + worker inside the .bat, then double-click it</span>
 <span class="c-dim">#    run as Administrator if you want the built-in overclock to apply</span></pre>
@@ -624,16 +626,17 @@
 <pre>chmod +x forge
 
 <span class="c-dim"># Pearl (PRL)</span>
-./forge <span class="c-flag">--algorithm</span> pearlhash <span class="c-flag">--wallet</span> YOUR_PRL_WALLET <span class="c-flag">--pool</span> prl.kryptex.network:7048
+FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET \
+FORGE_WORKER=rig01 FORGE_PROTO=stratum ./forge
 
 <span class="c-dim"># QubitCoin (QTC)</span>
 ./forge <span class="c-flag">--algorithm</span> qhash <span class="c-flag">--wallet</span> YOUR_QTC_WALLET <span class="c-flag">--pool</span> ru.luckypool.io:8610
 
 <span class="c-dim"># KawPow — Ravencoin (RVN) / Quai (QUAI); coin auto-detected from the pool host</span>
-./forge <span class="c-flag">--algorithm</span> kawpow <span class="c-flag">--wallet</span> YOUR_RVN_WALLET <span class="c-flag">--pool</span> rvn.kryptex.network:7031
+./forge <span class="c-flag">--algorithm</span> kawpow <span class="c-flag">--wallet</span> YOUR_RVN_WALLET <span class="c-flag">--pool</span> us.ravencoin.herominers.com:1140
 
 <span class="c-dim"># KawPow — Neurai (XNA); set the coin explicitly</span>
-./forge <span class="c-flag">--algorithm</span> kawpow <span class="c-flag">--coin</span> xna <span class="c-flag">--wallet</span> YOUR_XNA_WALLET <span class="c-flag">--pool</span> xna.kryptex.network:7024
+./forge <span class="c-flag">--algorithm</span> kawpow <span class="c-flag">--coin</span> xna <span class="c-flag">--wallet</span> YOUR_XNA_WALLET <span class="c-flag">--pool</span> xna.2miners.com:6060
 
 <span class="c-dim"># Cryptix (CYTX)</span>
 ./forge <span class="c-flag">--algorithm</span> cryptix <span class="c-flag">--wallet</span> YOUR_CYTX_WALLET <span class="c-flag">--pool</span> cytx.baikalmine.com:9010
@@ -642,14 +645,14 @@
 ./forge <span class="c-flag">--algorithm</span> btx <span class="c-flag">--wallet</span> YOUR_BTX_WALLET <span class="c-flag">--pool</span> btx-eu.lproute.com:8660
 
 <span class="c-dim"># Xelis (XEL)</span>
-./forge <span class="c-flag">--algorithm</span> xelis <span class="c-flag">--wallet</span> YOUR_XEL_WALLET <span class="c-flag">--pool</span> xel.kryptex.network:7019</pre>
+./forge <span class="c-flag">--algorithm</span> xelis <span class="c-flag">--wallet</span> YOUR_XEL_WALLET <span class="c-flag">--pool</span> de.xelis.herominers.com:1225</pre>
       </div>
       <div class="tabpane" id="tab-hive">
 <pre><span class="c-dim"># Add a Custom miner flight sheet (or import a ready-made one below)</span>
 
 Installation URL : https://github.com/0xHashRaptor/ForgeMiner/releases/latest
 Wallet template  : %WAL%.%WORKER_NAME%
-Pool URL         : prl.kryptex.network:7048
+Pool URL         : pearl.baikalmine.com:2010
 Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FORGE_CCLK=2505
 
 <span class="c-dim"># qhash / KawPow / Cryptix / BTX / Xelis: set FORGE_ALGO=qhash|kawpow|cryptix|btx|xelis</span>
@@ -663,7 +666,7 @@ docker pull hashraptor/forge
 docker run --rm --gpus all hashraptor/forge \
   <span class="c-flag">--algorithm</span> pearlhash \
   <span class="c-flag">--wallet</span> YOUR_PRL_WALLET <span class="c-flag">--worker</span> rig01 \
-  <span class="c-flag">--pool</span> prl.kryptex.network:7048
+  <span class="c-flag">--pool</span> pearl.baikalmine.com:2010
 
 <span class="c-dim"># Other coins: --algorithm qhash | kawpow | cryptix | btx | xelis</span>
 <span class="c-dim">#   KawPow: add --coin rvn | quai | xna</span>
@@ -786,11 +789,11 @@ docker run --rm --gpus all hashraptor/forge \
   <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_PEARL"</span>,
   <span class="c-key">"items"</span>: [{
     <span class="c-key">"coin"</span>: <span class="c-str">"PRL"</span>,
-    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"prl.kryptex.network:7048"</span>],
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"pearl.baikalmine.com:2010"</span>],
     <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
     <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
     <span class="c-key">"miner_config"</span>: {
-      <span class="c-key">"url"</span>: <span class="c-str">"prl.kryptex.network:7048"</span>,
+      <span class="c-key">"url"</span>: <span class="c-str">"pearl.baikalmine.com:2010"</span>,
       <span class="c-key">"algo"</span>: <span class="c-str">"pearlhash"</span>,
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
@@ -826,11 +829,11 @@ docker run --rm --gpus all hashraptor/forge \
   <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_RVN"</span>,
   <span class="c-key">"items"</span>: [{
     <span class="c-key">"coin"</span>: <span class="c-str">"RVN"</span>,
-    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"rvn.kryptex.network:7031"</span>],
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"us.ravencoin.herominers.com:1140"</span>],
     <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
     <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
     <span class="c-key">"miner_config"</span>: {
-      <span class="c-key">"url"</span>: <span class="c-str">"rvn.kryptex.network:7031"</span>,
+      <span class="c-key">"url"</span>: <span class="c-str">"us.ravencoin.herominers.com:1140"</span>,
       <span class="c-key">"algo"</span>: <span class="c-str">"kawpow"</span>,
       <span class="c-key">"coin"</span>: <span class="c-str">"rvn"</span>,
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
@@ -847,11 +850,11 @@ docker run --rm --gpus all hashraptor/forge \
   <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_QUAI"</span>,
   <span class="c-key">"items"</span>: [{
     <span class="c-key">"coin"</span>: <span class="c-str">"QUAI"</span>,
-    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"quai-kawpow.kryptex.network:7043"</span>],
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"de.quai.herominers.com:1185"</span>],
     <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
     <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
     <span class="c-key">"miner_config"</span>: {
-      <span class="c-key">"url"</span>: <span class="c-str">"quai-kawpow.kryptex.network:7043"</span>,
+      <span class="c-key">"url"</span>: <span class="c-str">"de.quai.herominers.com:1185"</span>,
       <span class="c-key">"algo"</span>: <span class="c-str">"kawpow"</span>,
       <span class="c-key">"coin"</span>: <span class="c-str">"quai"</span>,
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
@@ -868,11 +871,11 @@ docker run --rm --gpus all hashraptor/forge \
   <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_XNA"</span>,
   <span class="c-key">"items"</span>: [{
     <span class="c-key">"coin"</span>: <span class="c-str">"XNA"</span>,
-    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"xna.kryptex.network:7024"</span>],
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"xna.2miners.com:6060"</span>],
     <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
     <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
     <span class="c-key">"miner_config"</span>: {
-      <span class="c-key">"url"</span>: <span class="c-str">"xna.kryptex.network:7024"</span>,
+      <span class="c-key">"url"</span>: <span class="c-str">"xna.2miners.com:6060"</span>,
       <span class="c-key">"algo"</span>: <span class="c-str">"kawpow"</span>,
       <span class="c-key">"coin"</span>: <span class="c-str">"xna"</span>,
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
@@ -929,11 +932,11 @@ docker run --rm --gpus all hashraptor/forge \
   <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_XEL"</span>,
   <span class="c-key">"items"</span>: [{
     <span class="c-key">"coin"</span>: <span class="c-str">"XEL"</span>,
-    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"xel.kryptex.network:7019"</span>],
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"de.xelis.herominers.com:1225"</span>],
     <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
     <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
     <span class="c-key">"miner_config"</span>: {
-      <span class="c-key">"url"</span>: <span class="c-str">"xel.kryptex.network:7019"</span>,
+      <span class="c-key">"url"</span>: <span class="c-str">"de.xelis.herominers.com:1225"</span>,
       <span class="c-key">"algo"</span>: <span class="c-str">"xelis"</span>,
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
