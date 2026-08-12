@@ -470,7 +470,7 @@
         <div class="cell">
           <div class="ic">⇄</div>
           <h3><span class="en">Multi-pool fail-over</span><span class="ru">Multi-pool с failover</span></h3>
-          <p><span class="en">Standard Stratum for every coin, automatic reconnect and pool fail-over. SSL/TLS pools supported out of the box.</span><span class="ru">Обычный Stratum для всех монет, авто-переподключение и failover пулов. SSL/TLS-пулы из коробки.</span></p>
+          <p><span class="en">Standard Stratum for every coin, instant reconnect and pool fail-over. TLS pools need no setup at all &mdash; the miner detects encryption by itself, on Windows, Linux, HiveOS and Docker alike.</span><span class="ru">Обычный Stratum для всех монет, мгновенное переподключение и failover пулов. TLS-пулы не требуют настройки &mdash; майнер сам определяет шифрование: на Windows, Linux, HiveOS и в Docker одинаково.</span></p>
         </div>
         <div class="cell">
           <div class="ic">◉</div>
@@ -698,7 +698,7 @@ docker run --rm --gpus all hashraptor/forge \
         <tbody>
           <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code> or <code>xelis</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code> или <code>xelis</code>.</span></td></tr>
           <tr><td><code>--coin</code></td><td><code>FORGE_COIN</code></td><td class="desc"><span class="en">KawPow coin: <code>rvn</code>, <code>quai</code> or <code>xna</code> — auto-detected from the pool if omitted (set explicitly for Neurai/Vipor).</span><span class="ru">Монета KawPow: <code>rvn</code>, <code>quai</code> или <code>xna</code> — определяется по пулу, если не задана (для Neurai/Vipor указывать явно).</span></td></tr>
-          <tr><td><code>--pool</code></td><td><code>FORGE_POOL</code></td><td class="desc"><span class="en">Pool as <code>host:port</code>. SSL/TLS supported; list several for fail-over.</span><span class="ru">Пул как <code>host:port</code>. SSL/TLS поддерживается; можно перечислить несколько для failover.</span></td></tr>
+          <tr><td><code>--pool</code></td><td><code>FORGE_POOL</code></td><td class="desc"><span class="en">Pool as <code>host:port</code>. TLS is detected automatically (<code>ssl://</code> also accepted); list several for fail-over.</span><span class="ru">Пул как <code>host:port</code>. TLS определяется автоматически (<code>ssl://</code> тоже принимается); можно перечислить несколько для failover.</span></td></tr>
           <tr><td><code>--wallet</code></td><td><code>FORGE_WALLET</code></td><td class="desc"><span class="en">Your payout wallet address.</span><span class="ru">Адрес кошелька для выплат.</span></td></tr>
           <tr><td><code>--worker</code></td><td><code>FORGE_WORKER</code></td><td class="desc"><span class="en">Worker / rig name shown on the pool.</span><span class="ru">Имя воркера/рига на пуле.</span></td></tr>
           <tr><td><code>--password</code></td><td><code>FORGE_PASS</code></td><td class="desc"><span class="en">Pool password (usually <code>x</code>).</span><span class="ru">Пароль пула (обычно <code>x</code>).</span></td></tr>
