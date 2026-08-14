@@ -588,6 +588,10 @@
         <span class="en">Support is per-architecture — every card in a listed generation runs its matching kernel, desktop and laptop/mobile alike. RTX 20-series and CMP cards need NVIDIA driver 545 or newer. All coins run on every listed generation, from Pascal (GTX 10-series / P102-100 / P104-100 / P106 / P108) and Volta (Tesla V100) up to Blackwell — except Hopper, where Pearl, Cryptix and QubitCoin have their own builds and Xelis and BTX do not.</span>
         <span class="ru">Поддержка — на уровне архитектуры: любая карта из указанного поколения запускает своё ядро, десктопная и ноутбучная одинаково. Для RTX 20 и CMP нужен драйвер NVIDIA 545+. Все монеты работают на каждом поколении — от Pascal (GTX 10-й серии / P102-100 / P104-100 / P106 / P108) и Volta (Tesla V100) до Blackwell, кроме Hopper: там свои сборки есть у Pearl, Cryptix и QubitCoin, а у Xelis и BTX — нет.</span>
       </p>
+      <p class="archnote">
+        <span class="en"><b>CMP 50HX and CMP 90HX — hardware unlock built into the miner (Linux).</b> Run <code>sudo forge --cmp-install</code> once and both cards run at full speed instead of throttled. Full walkthrough — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">wiki · CMP hardware unlock</a>.</span>
+        <span class="ru"><b>CMP 50HX и CMP 90HX — аппаратный разлок встроен в майнер (Linux).</b> Один раз запустите <code>sudo forge --cmp-install</code> — и обе карты работают на полной скорости вместо задушенных. Полная инструкция — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU">wiki · CMP аппаратный разлок</a>.</span>
+      </p>
     </div>
   </section>
 
@@ -659,10 +663,13 @@ Pool URL         : prl.kryptex.network:7048
 Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FORGE_CCLK=2505
 
 <span class="c-dim"># qhash / KawPow / Cryptix / BTX / Xelis: set FORGE_ALGO=qhash|kawpow|cryptix|btx|xelis</span>
-<span class="c-dim"># KawPow coin: FORGE_COIN=rvn|quai|xna</span></pre>
+<span class="c-dim"># KawPow coin: FORGE_COIN=rvn|quai|xna</span>
+
+<span class="c-dim"># CMP 50HX / 90HX rig — unlock built into the miner. Add this line to Extra config:</span>
+<span class="c-flag">--cmp-install</span>   <span class="c-dim">safe to leave in permanently — fast-paths on subsequent runs</span></pre>
       </div>
       <div class="tabpane" id="tab-docker">
-<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.5.9</span> and :latest)</span>
+<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.5.15</span> and :latest)</span>
 docker pull hashraptor/forge
 
 <span class="c-dim"># Run — needs the NVIDIA Container Toolkit for --gpus</span>
