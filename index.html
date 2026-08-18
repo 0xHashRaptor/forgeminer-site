@@ -580,7 +580,7 @@
         <div class="archrow">
           <div class="archgen"><div class="g">CMP</div><div class="fam">Mining cards · driver 545+</div></div>
           <div class="archcards">
-            <span class="tag">CMP 90HX</span><span class="tag">50HX</span><span class="tag">40HX</span><span class="tag">30HX</span>
+            <span class="tag">CMP 170HX</span><span class="tag">90HX</span><span class="tag">70HX</span><span class="tag">50HX</span><span class="tag">40HX</span><span class="tag">30HX</span>
           </div>
         </div>
       </div>
@@ -589,8 +589,8 @@
         <span class="ru">Поддержка — на уровне архитектуры: любая карта из указанного поколения запускает своё ядро, десктопная и ноутбучная одинаково. Для RTX 20 и CMP нужен драйвер NVIDIA 545+. Все монеты работают на каждом поколении — от Pascal (GTX 10-й серии / P102-100 / P104-100 / P106 / P108) и Volta (Tesla V100) до Blackwell, кроме Hopper: там свои сборки есть у Pearl, Cryptix и QubitCoin, а у Xelis и BTX — нет.</span>
       </p>
       <p class="archnote">
-        <span class="en"><b>CMP 50HX and CMP 90HX — hardware unlock built into the miner (Linux).</b> Run <code>sudo forge --cmp-install</code> once and both cards run at full speed instead of throttled. Full walkthrough — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">wiki · CMP hardware unlock</a>.</span>
-        <span class="ru"><b>CMP 50HX и CMP 90HX — аппаратный разлок встроен в майнер (Linux).</b> Один раз запустите <code>sudo forge --cmp-install</code> — и обе карты работают на полной скорости вместо задушенных. Полная инструкция — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU">wiki · CMP аппаратный разлок</a>.</span>
+        <span class="en"><b>CMP 40HX, 50HX, 70HX and 90HX — hardware unlock built into the miner (Linux), any kernel.</b> Run <code>sudo forge --cmp-install</code> once and the card runs at full speed instead of being throttled. CMP 30HX is a permanent hardware limitation, never supported. Full walkthrough — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">wiki · CMP hardware unlock</a>.</span>
+        <span class="ru"><b>CMP 40HX, 50HX, 70HX и 90HX — аппаратный разлок встроен в майнер (Linux), любое ядро.</b> Один раз запустите <code>sudo forge --cmp-install</code> — и карта работает на полной скорости вместо задушенной. CMP 30HX — постоянное аппаратное ограничение, никогда не будет поддержана. Полная инструкция — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU">wiki · CMP аппаратный разлок</a>.</span>
       </p>
     </div>
   </section>
@@ -665,7 +665,7 @@ Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FOR
 <span class="c-dim"># qhash / KawPow / Cryptix / BTX / Xelis: set FORGE_ALGO=qhash|kawpow|cryptix|btx|xelis</span>
 <span class="c-dim"># KawPow coin: FORGE_COIN=rvn|quai|xna</span>
 
-<span class="c-dim"># CMP 50HX / 90HX rig — unlock built into the miner. Add this line to Extra config:</span>
+<span class="c-dim"># CMP 40HX/50HX/70HX/90HX rig — unlock built into the miner, any kernel. Add this line to Extra config:</span>
 <span class="c-flag">--cmp-install</span>   <span class="c-dim">safe to leave in permanently — fast-paths on subsequent runs</span></pre>
       </div>
       <div class="tabpane" id="tab-docker">
@@ -749,14 +749,22 @@ docker run --rm --gpus all hashraptor/forge \
 <span class="c-flag">--fan-curve</span> 45:30,60:55,70:75,80:100
 <span class="c-dim">#  ≤45°C→30% · 60°C→55% · 70°C→75% · ≥80°C→100% · 65°C→~65%</span></div>
 
-      <div class="opt-sub"><span class="en">CMP hardware unlock <span style="opacity:.7;font-weight:400;">(Linux, since 1.5.15)</span></span><span class="ru">Аппаратный разлок CMP <span style="opacity:.7;font-weight:400;">(Linux, с 1.5.15)</span></span></div>
+      <div class="opt-sub"><span class="en">Reliability</span><span class="ru">Надёжность</span></div>
       <p class="sec-lede" style="margin-bottom:14px;">
-        <span class="en">CMP 50HX and CMP 90HX ship with a hardware throttle — stock hashrate is a small fraction of what the chip can actually do. Forge can install a hardware-unlock helper directly on the rig: one command, one reboot, both cards then run at full speed (roughly <b>20× higher</b> than the stock throttled hashrate). The helper is embedded in the miner binary; no external download, no manual steps. Everything is reversible via <code>--cmp-rollback</code>. Only CMP 50HX and 90HX are touched; every other card on a mixed rig runs untouched.</span>
-        <span class="ru">CMP 50HX и CMP 90HX с завода задушены аппаратно — стоковый хешрейт составляет лишь малую долю того, на что способен чип. Форж умеет поставить хелпер разлока прямо на риге: одна команда, одна перезагрузка, обе карты работают на полной скорости (примерно <b>в 20 раз выше</b> задушенного стока). Хелпер встроен в бинарь; ничего внешнего скачивать не нужно. Всё обратимо через <code>--cmp-rollback</code>. Затрагивает только CMP 50HX и 90HX; остальные карты работают без изменений.</span>
+        <span class="en"><code>--temp-limit</code> / <code>--temp-resume</code> pause a card automatically once it hits a temperature threshold, and resume it once it cools back down. <code>--oc-delay</code> delays applying your overclock by N seconds after startup, for rigs where clocking straight from boot causes instability.</span>
+        <span class="ru"><code>--temp-limit</code> / <code>--temp-resume</code> сами ставят карту на паузу при перегреве и возобновляют майнинг после остывания. <code>--oc-delay</code> откладывает применение разгона на N секунд после старта — для ригов, где мгновенный разгон сразу после загрузки вызывает нестабильность.</span>
+      </p>
+      <div class="opt-eg"><span class="c-dim"># pause at 80°C, resume at 70°C; apply overclock 20s after startup</span>
+<span class="c-flag">--temp-limit</span> 80 <span class="c-flag">--temp-resume</span> 70 <span class="c-flag">--oc-delay</span> 20</div>
+
+      <div class="opt-sub"><span class="en">CMP hardware unlock <span style="opacity:.7;font-weight:400;">(Linux)</span></span><span class="ru">Аппаратный разлок CMP <span style="opacity:.7;font-weight:400;">(Linux)</span></span></div>
+      <p class="sec-lede" style="margin-bottom:14px;">
+        <span class="en">CMP 40HX, 50HX, 70HX and 90HX ship with a hardware throttle — stock hashrate is a small fraction of what the chip can actually do. Forge can install a hardware-unlock helper directly on the rig: one command, one reboot, the card then runs at full speed. The helper is embedded in the miner binary; no external download, no manual steps. Everything is reversible via <code>--cmp-rollback</code>. Only the detected CMP cards are touched; every other card on a mixed rig runs untouched. CMP 30HX is detected but never attempted — a permanent hardware limitation, not a bug.</span>
+        <span class="ru">CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно — стоковый хешрейт составляет лишь малую долю того, на что способен чип. Форж умеет поставить хелпер разлока прямо на риге: одна команда, одна перезагрузка, карта работает на полной скорости. Хелпер встроен в бинарь; ничего внешнего скачивать не нужно. Всё обратимо через <code>--cmp-rollback</code>. Затрагивает только обнаруженные CMP-карты; остальные работают без изменений. CMP 30HX обнаруживается, но никогда не трогается — постоянное аппаратное ограничение, не баг.</span>
       </p>
       <p class="sec-lede" style="margin-bottom:14px;">
-        <span class="en"><b>Requires</b> Linux kernel <code>6.10.0-hiveos</code> and NVIDIA driver <code>610.43.03</code>. On a fresh rig without this combo, reflash to the HiveOS beta image that ships it (<code>hiveos-0.6-229-beta-jammy@241231</code>), then <code>sudo nvidia-driver-update --force 610.43.03</code>. Full walkthrough — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">wiki · CMP hardware unlock</a> (<a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU">Русский</a>).</span>
-        <span class="ru"><b>Требуется</b> Linux с ядром <code>6.10.0-hiveos</code> и драйвером NVIDIA <code>610.43.03</code>. На свежем риге без этой связки — перепрошейте на HiveOS beta образ (<code>hiveos-0.6-229-beta-jammy@241231</code>), потом <code>sudo nvidia-driver-update --force 610.43.03</code>. Полная инструкция — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU">wiki · CMP аппаратный разлок</a> (<a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">English</a>).</span>
+        <span class="en"><b>Builds from source</b> for whatever kernel the rig is actually running — no exact kernel pin, tested clean across 10 different kernel versions. NVIDIA driver <code>610.43.03</code> still required. Full walkthrough — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">wiki · CMP hardware unlock</a> (<a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU">Русский</a>).</span>
+        <span class="ru"><b>Собирается из исходников</b> под то ядро, что реально стоит на риге — точная привязка ядра больше не нужна, протестировано без единого сбоя на 10 разных версиях ядра. Драйвер NVIDIA <code>610.43.03</code> по-прежнему обязателен. Полная инструкция — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU">wiki · CMP аппаратный разлок</a> (<a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">English</a>).</span>
       </p>
       <div style="overflow-x:auto;">
       <table class="opt-tbl">
@@ -764,7 +772,7 @@ docker run --rm --gpus all hashraptor/forge \
         <tbody>
           <tr><td><code>--cmp-install</code></td><td class="desc"><span class="en">Install the hardware unlock helper, reboot the rig after a 10-second cancel window. Safe to leave in the HiveOS flight sheet permanently — if the unlock is already active forge prints one line and drops straight into mining, so no reinstall loop.</span><span class="ru">Установить хелпер разлока, ребут через 10-секундный обратный отсчёт. Можно оставить в полётнике HiveOS навсегда — если разлок уже стоит, форж напечатает одну строку и сразу идёт майнить, без цикла переустановок.</span></td></tr>
           <tr><td><code>--cmp-install --no-reboot</code></td><td class="desc"><span class="en">Install only — you reboot the rig yourself.</span><span class="ru">Только установить — ребут делаете сами.</span></td></tr>
-          <tr><td><code>--cmp-verify</code></td><td class="desc"><span class="en">Print live per-card unlock status. On CMP 50HX the register is walled off by the driver — live status is the miner's hashrate.</span><span class="ru">Показать живой статус разлока по картам. На CMP 50HX регистр закрыт драйвером — живой источник правды это хешрейт майнера.</span></td></tr>
+          <tr><td><code>--cmp-verify</code></td><td class="desc"><span class="en">Print live per-card unlock status. On CMP 40HX/50HX the register is walled off by the driver — live status is the miner's hashrate.</span><span class="ru">Показать живой статус разлока по картам. На CMP 40HX/50HX регистр закрыт драйвером — живой источник правды — хешрейт майнера.</span></td></tr>
           <tr><td><code>--cmp-rollback</code></td><td class="desc"><span class="en">Restore the previous NVIDIA driver from backup and reboot (10-second cancel window). Add <code>--no-reboot</code> to reboot yourself.</span><span class="ru">Восстановить предыдущий NVIDIA-драйвер из бэкапа и ребут (10 секунд на отмену). Добавьте <code>--no-reboot</code>, чтобы ребутнуться самому.</span></td></tr>
         </tbody>
       </table>
