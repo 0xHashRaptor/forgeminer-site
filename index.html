@@ -329,7 +329,7 @@
       </p>
       <div class="hero-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.5.9</span></span><span class="ru">↓ Скачать v<span data-ver>1.5.9</span></span>
+          <span class="en">↓ Download v<span data-ver>1.6.2</span></span><span class="ru">↓ Скачать v<span data-ver>1.6.2</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">View on GitHub</span><span class="ru">Открыть на GitHub</span>
@@ -409,24 +409,24 @@
             <td class="fee" style="text-align:right;">2%</td>
           </tr>
           <tr>
-            <td class="algo">qhash</td>
-            <td><div class="coin-tags"><span class="tag">QubitCoin · QTC</span></div></td>
-            <td class="fee" style="text-align:right;">1%</td>
-          </tr>
-          <tr>
             <td class="algo">BTX</td>
             <td><div class="coin-tags"><span class="tag">BTX · btx.dev</span></div></td>
+            <td class="fee" style="text-align:right;">2%</td>
+          </tr>
+          <tr>
+            <td class="algo">Octopus</td>
+            <td><div class="coin-tags"><span class="tag">Conflux · CFX</span></div></td>
+            <td class="fee" style="text-align:right;">1.5%</td>
+          </tr>
+          <tr>
+            <td class="algo">qhash</td>
+            <td><div class="coin-tags"><span class="tag">QubitCoin · QTC</span></div></td>
             <td class="fee" style="text-align:right;">1%</td>
           </tr>
           <tr>
             <td class="algo">XelisHash</td>
             <td><div class="coin-tags"><span class="tag">Xelis · XEL</span></div></td>
             <td class="fee" style="text-align:right;">1%</td>
-          </tr>
-          <tr>
-            <td class="algo">Octopus</td>
-            <td><div class="coin-tags"><span class="tag">Conflux · CFX</span></div></td>
-            <td class="fee" style="text-align:right;">1.5%</td>
           </tr>
           <tr>
             <td class="algo">KawPow</td>
@@ -621,17 +621,18 @@
       </div>
       <div class="tabpane on" id="tab-win">
 <pre><span class="c-dim"># 1. Unpack the Windows release, then open the .bat for your coin/pool/region</span>
-<span class="c-dim">#    one folder per coin, 97 ready-made launchers  (-SSL = encrypted connection)</span>
+<span class="c-dim">#    one folder per coin/pool, 98 ready-made launchers  (-SSL = encrypted connection)</span>
 
-<span class="c-hot">Pearl (PRL)\</span>            20   Kryptex · LuckyPool · HeroMiners · BaikalMine · 2Miners
-<span class="c-hot">Ravencoin (RVN)\</span>        18   Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool
-<span class="c-hot">Quai (QUAI)\</span>           14   Kryptex · HeroMiners · k1pool
-<span class="c-hot">Neurai (XNA)\</span>          12   Kryptex · 2Miners · Vipor
-<span class="c-hot">Conflux (CFX)\</span>         10   Kryptex · HeroMiners
-<span class="c-hot">Xelis (XEL)\</span>           10   Kryptex · HeroMiners
-<span class="c-hot">QubitCoin (QTC)\</span>        6   LuckyPool · k1pool
-<span class="c-hot">BTX\</span>                    3   LuckyPool · diffpool
-<span class="c-hot">Cryptix (CYTX)\</span>         2   BaikalMine · CryptixNetwork
+<span class="c-hot">Pearl (PRL)\</span>             20   Kryptex · LuckyPool · HeroMiners · BaikalMine · 2Miners
+<span class="c-hot">Ravencoin (RVN)\</span>         19   Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool
+<span class="c-hot">Quai (QUAI)\</span>             14   Kryptex · HeroMiners · k1pool
+<span class="c-hot">Neurai (XNA)\</span>            12   Kryptex · 2Miners · Vipor
+<span class="c-hot">Conflux (CFX)\</span>           10   Kryptex · HeroMiners
+<span class="c-hot">Xelis (XEL)\</span>             10   Kryptex · HeroMiners
+<span class="c-hot">QubitCoin (QTC)\</span>          6   LuckyPool · k1pool
+<span class="c-hot">BTX\</span>                      3   LuckyPool · diffpool
+<span class="c-hot">Cryptix (CYTX)\</span>           2   BaikalMine · CryptixNetwork
+<span class="c-hot">Pearl (PRL) - AlphaPool\</span>  2   AlphaPool
 
 <span class="c-dim"># 2. set your wallet + worker inside the .bat, then double-click it</span>
 <span class="c-dim">#    run as Administrator if you want the built-in overclock to apply</span></pre>
@@ -678,7 +679,7 @@ Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FOR
 <span class="c-flag">--cmp-install</span>   <span class="c-dim">safe to leave in permanently — fast-paths on subsequent runs</span></pre>
       </div>
       <div class="tabpane" id="tab-docker">
-<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.5.15</span> and :latest)</span>
+<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.6.2</span> and :latest)</span>
 docker pull hashraptor/forge
 
 <span class="c-dim"># Run — needs the NVIDIA Container Toolkit for --gpus</span>
@@ -1067,7 +1068,7 @@ docker run --rm --gpus all hashraptor/forge \
       </p>
       <div class="final-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.5.9</span></span><span class="ru">↓ Скачать v<span data-ver>1.5.9</span></span>
+          <span class="en">↓ Download v<span data-ver>1.6.2</span></span><span class="ru">↓ Скачать v<span data-ver>1.6.2</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">Read the docs</span><span class="ru">Документация</span>
