@@ -1,0 +1,8 @@
+# Working copies saved before each edit to index.html. Two of them (index.html.prefmt and
+# index.html.prekryptex) had been committed by mistake, so GitHub Pages served them at
+# forgeminer.org/index.html.prefmt — July snapshots of the whole site, still showing the old
+# six-row fee table with BTX at 1% and no Conflux. Keep them out of the repo entirely.
+index.html.pre*
+
+# Sample dashboard payload used when checking the stats view locally; not part of the site.
+forge_stats.json

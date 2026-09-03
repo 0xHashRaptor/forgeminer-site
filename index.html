@@ -672,7 +672,7 @@ Wallet template  : %WAL%.%WORKER_NAME%
 Pool URL         : prl.kryptex.network:7048
 Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FORGE_CCLK=2505
 
-<span class="c-dim"># qhash / KawPow / Cryptix / BTX / Xelis: set FORGE_ALGO=qhash|kawpow|cryptix|btx|xelis</span>
+<span class="c-dim"># qhash / KawPow / Cryptix / BTX / Xelis / Conflux: set FORGE_ALGO=qhash|kawpow|cryptix|btx|xelis|cfx</span>
 <span class="c-dim"># KawPow coin: FORGE_COIN=rvn|quai|xna</span>
 
 <span class="c-dim"># CMP 40HX/50HX/70HX/90HX rig — unlock built into the miner, any kernel. Add this line to Extra config:</span>
@@ -713,7 +713,7 @@ docker run --rm --gpus all hashraptor/forge \
       <table class="opt-tbl">
         <thead><tr><th>Flag</th><th>Env</th><th><span class="en">Description</span><span class="ru">Описание</span></th></tr></thead>
         <tbody>
-          <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code> or <code>xelis</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code> или <code>xelis</code>.</span></td></tr>
+          <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code>, <code>xelis</code> or <code>cfx</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code>, <code>xelis</code> или <code>cfx</code>.</span></td></tr>
           <tr><td><code>--coin</code></td><td><code>FORGE_COIN</code></td><td class="desc"><span class="en">KawPow coin: <code>rvn</code>, <code>quai</code> or <code>xna</code> — auto-detected from the pool if omitted (set explicitly for Neurai/Vipor).</span><span class="ru">Монета KawPow: <code>rvn</code>, <code>quai</code> или <code>xna</code> — определяется по пулу, если не задана (для Neurai/Vipor указывать явно).</span></td></tr>
           <tr><td><code>--pool</code></td><td><code>FORGE_POOL</code></td><td class="desc"><span class="en">Pool as <code>host:port</code>. TLS is detected automatically (<code>ssl://</code> also accepted); list several for fail-over.</span><span class="ru">Пул как <code>host:port</code>. TLS определяется автоматически (<code>ssl://</code> тоже принимается); можно перечислить несколько для failover.</span></td></tr>
           <tr><td><code>--wallet</code></td><td><code>FORGE_WALLET</code></td><td class="desc"><span class="en">Your payout wallet address.</span><span class="ru">Адрес кошелька для выплат.</span></td></tr>
@@ -845,6 +845,7 @@ docker run --rm --gpus all hashraptor/forge \
         <button data-fs="cytx">Cryptix</button>
         <button data-fs="btx">BTX</button>
         <button data-fs="xel">Xelis</button>
+        <button data-fs="cfx">Conflux</button>
       </div>
 
       <div class="fs-pane on" id="fs-pearl">
@@ -1001,6 +1002,26 @@ docker run --rm --gpus all hashraptor/forge \
     <span class="c-key">"miner_config"</span>: {
       <span class="c-key">"url"</span>: <span class="c-str">"xel.kryptex.network:7019"</span>,
       <span class="c-key">"algo"</span>: <span class="c-str">"xelis"</span>,
+      <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
+      <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
+      <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+    }
+  }]
+}</pre></div>
+      </div>
+
+      <div class="fs-pane" id="fs-cfx">
+        <div class="codebox"><button class="copy">copy JSON</button><pre>{
+  <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_CFX"</span>,
+  <span class="c-key">"items"</span>: [{
+    <span class="c-key">"coin"</span>: <span class="c-str">"CFX"</span>,
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"cfx.kryptex.network:7027"</span>],
+    <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
+    <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
+    <span class="c-key">"miner_config"</span>: {
+      <span class="c-key">"url"</span>: <span class="c-str">"cfx.kryptex.network:7027"</span>,
+      <span class="c-key">"algo"</span>: <span class="c-str">"cfx"</span>,
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
