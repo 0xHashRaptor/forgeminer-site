@@ -329,7 +329,7 @@
       </p>
       <div class="hero-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.6.3</span></span><span class="ru">↓ Скачать v<span data-ver>1.6.3</span></span>
+          <span class="en">↓ Download v<span data-ver>1.6.4</span></span><span class="ru">↓ Скачать v<span data-ver>1.6.4</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">View on GitHub</span><span class="ru">Открыть на GitHub</span>
@@ -655,8 +655,8 @@
 <span class="c-dim"># Cryptix (CYTX)</span>
 ./forge <span class="c-flag">--algorithm</span> cryptix <span class="c-flag">--wallet</span> YOUR_CYTX_WALLET <span class="c-flag">--pool</span> cytx.baikalmine.com:9010
 
-<span class="c-dim"># BTX (btx.dev)</span>
-./forge <span class="c-flag">--algorithm</span> btx <span class="c-flag">--wallet</span> YOUR_BTX_WALLET <span class="c-flag">--pool</span> btx-eu.lproute.com:8665
+<span class="c-dim"># BTX (btx.dev) — 8666 is the new protocol; the old port still runs as stratum+tls://btx-eu.lproute.com:8665</span>
+./forge <span class="c-flag">--algorithm</span> btx <span class="c-flag">--wallet</span> YOUR_BTX_WALLET <span class="c-flag">--pool</span> btx-eu.lproute.com:8666
 
 <span class="c-dim"># Conflux (CFX)</span>
 ./forge <span class="c-flag">--algorithm</span> cfx <span class="c-flag">--wallet</span> YOUR_CFX_WALLET <span class="c-flag">--pool</span> cfx.kryptex.network:7027
@@ -679,7 +679,7 @@ Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FOR
 <span class="c-flag">--cmp-install</span>   <span class="c-dim">safe to leave in permanently — fast-paths on subsequent runs</span></pre>
       </div>
       <div class="tabpane" id="tab-docker">
-<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.6.3</span> and :latest)</span>
+<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.6.4</span> and :latest)</span>
 docker pull hashraptor/forge
 
 <span class="c-dim"># Run — needs the NVIDIA Container Toolkit for --gpus</span>
@@ -976,11 +976,11 @@ docker run --rm --gpus all hashraptor/forge \
   <span class="c-key">"name"</span>: <span class="c-str">"FORGEMINER_BTX"</span>,
   <span class="c-key">"items"</span>: [{
     <span class="c-key">"coin"</span>: <span class="c-str">"BTX"</span>,
-    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"btx-eu.lproute.com:8665"</span>],
+    <span class="c-key">"pool_urls"</span>: [<span class="c-str">"btx-eu.lproute.com:8666"</span>],
     <span class="c-key">"miner"</span>: <span class="c-str">"custom"</span>,
     <span class="c-key">"miner_alt"</span>: <span class="c-str">"forge"</span>,
     <span class="c-key">"miner_config"</span>: {
-      <span class="c-key">"url"</span>: <span class="c-str">"btx-eu.lproute.com:8665"</span>,
+      <span class="c-key">"url"</span>: <span class="c-str">"btx-eu.lproute.com:8666"</span>,
       <span class="c-key">"algo"</span>: <span class="c-str">"btx"</span>,
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
@@ -1089,7 +1089,7 @@ docker run --rm --gpus all hashraptor/forge \
       </p>
       <div class="final-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.6.3</span></span><span class="ru">↓ Скачать v<span data-ver>1.6.3</span></span>
+          <span class="en">↓ Download v<span data-ver>1.6.4</span></span><span class="ru">↓ Скачать v<span data-ver>1.6.4</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">Read the docs</span><span class="ru">Документация</span>
