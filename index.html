@@ -675,10 +675,13 @@
       <div class="tabpane" id="tab-hive">
 <pre><span class="c-dim"># Add a Custom miner flight sheet (or import a ready-made one below)</span>
 
-Installation URL : https://github.com/0xHashRaptor/ForgeMiner/releases/latest
+Installation URL : https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz
 Wallet template  : %WAL%.%WORKER_NAME%
 Pool URL         : prl.kryptex.network:7048
 Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FORGE_CCLK=2505
+
+<span class="c-dim"># To upgrade: change the version in the URL and update the flight sheet.</span>
+<span class="c-dim"># HiveOS installs a custom miner once per URL — the same URL keeps the old version.</span>
 
 <span class="c-dim"># qhash / KawPow / Cryptix / BTX / Xelis / Conflux / NOID: set FORGE_ALGO=qhash|kawpow|cryptix|btx|xelis|cfx|noid</span>
 <span class="c-dim"># KawPow coin: FORGE_COIN=rvn|quai|xna</span>
@@ -873,7 +876,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -893,7 +896,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -914,7 +917,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -935,7 +938,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -956,7 +959,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -976,7 +979,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -996,7 +999,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1016,7 +1019,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1036,7 +1039,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"forge"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.3</span>/ForgeMiner-<span data-ver>1.8.3</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
