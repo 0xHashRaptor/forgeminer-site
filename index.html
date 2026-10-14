@@ -330,7 +330,7 @@
       </p>
       <div class="hero-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.8.6</span></span><span class="ru">↓ Скачать v<span data-ver>1.8.6</span></span>
+          <span class="en">↓ Download v<span data-ver>1.8.7</span></span><span class="ru">↓ Скачать v<span data-ver>1.8.7</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">View on GitHub</span><span class="ru">Открыть на GitHub</span>
@@ -601,8 +601,8 @@
         </div>
       </div>
       <p class="archnote">
-        <span class="en">Support is per-architecture — every card in a listed generation runs its matching kernel, desktop and laptop/mobile alike. RTX 20-series and CMP cards need NVIDIA driver 545 or newer; the RTX 50-series needs 580 or newer. Pearl, QubitCoin, KawPow, Cryptix and Xelis run on every listed generation, from Pascal (GTX 10-series / P102-100 / P104-100 / P106 / P108) and Volta (Tesla V100) up to Blackwell. BTX and Conflux need Turing (RTX 20 / CMP 40HX–70HX) or newer — they do not run on Pascal, Volta or the CMP 170HX. Quantus runs from Pascal (GTX 10-series) up, but not on Volta (Tesla V100) or the CMP 170HX. NOID needs an RTX 30-series card or newer (CMP 90HX included), and on a mixed rig the older cards stay idle while the rest mine it. On Hopper, Pearl, Cryptix and QubitCoin have their own builds; Xelis, BTX, Conflux, NOID and Quantus do not.</span>
-        <span class="ru">Поддержка — на уровне архитектуры: любая карта из указанного поколения запускает своё ядро, десктопная и ноутбучная одинаково. Для RTX 20 и CMP нужен драйвер NVIDIA 545+, для RTX 50 — 580+. Pearl, QubitCoin, KawPow, Cryptix и Xelis работают на каждом поколении — от Pascal (GTX 10-й серии / P102-100 / P104-100 / P106 / P108) и Volta (Tesla V100) до Blackwell. BTX и Conflux требуют Turing (RTX 20 / CMP 40HX–70HX) или новее — на Pascal, Volta и CMP 170HX они не идут. Quantus работает начиная с Pascal (GTX 10-й серии), но не на Volta (Tesla V100) и CMP 170HX. NOID нужна RTX 30-й серии или новее (включая CMP 90HX), а на смешанном риге старые карты простаивают, пока остальные майнят. На Hopper свои сборки есть у Pearl, Cryptix и QubitCoin; у Xelis, BTX, Conflux, NOID и Quantus — нет.</span>
+        <span class="en">Support is per-architecture — every card in a listed generation runs its matching kernel, desktop and laptop/mobile alike. RTX 20-series and CMP cards need NVIDIA driver 545 or newer; the RTX 50-series needs 580 or newer. Pearl, QubitCoin, KawPow, Cryptix and Xelis run on every listed generation, from Pascal (GTX 10-series / P102-100 / P104-100 / P106 / P108) and Volta (Tesla V100) up to Blackwell. BTX needs Volta (Tesla V100) or Turing (RTX 20 / CMP 40HX–70HX) and newer — it does not run on Pascal or the CMP 170HX. Conflux runs from Pascal up on cards with more than 8 GB (GTX 1080 Ti, Tesla V100, RTX 20 and newer), not on the CMP 170HX. Quantus, NOID and QubitCoin run from Pascal (GTX 10-series) up, Tesla V100 included, but not on the CMP 170HX; a card without a kernel for the chosen coin says so in one line while the rest of the rig mines. On Hopper, Pearl, Cryptix and QubitCoin have their own builds; Xelis, BTX, Conflux, NOID and Quantus do not.</span>
+        <span class="ru">Поддержка — на уровне архитектуры: любая карта из указанного поколения запускает своё ядро, десктопная и ноутбучная одинаково. Для RTX 20 и CMP нужен драйвер NVIDIA 545+, для RTX 50 — 580+. Pearl, QubitCoin, KawPow, Cryptix и Xelis работают на каждом поколении — от Pascal (GTX 10-й серии / P102-100 / P104-100 / P106 / P108) и Volta (Tesla V100) до Blackwell. BTX нужен Volta (Tesla V100) или Turing (RTX 20 / CMP 40HX–70HX) и новее — на Pascal и CMP 170HX он не идёт. Conflux работает начиная с Pascal на картах с памятью больше 8 ГБ (GTX 1080 Ti, Tesla V100, RTX 20 и новее), кроме CMP 170HX. Quantus, NOID и QubitCoin работают начиная с Pascal (GTX 10-й серии), включая Tesla V100, но не на CMP 170HX; карта, для которой у выбранной монеты нет ядра, скажет об этом одной строкой, остальные карты рига майнят. На Hopper свои сборки есть у Pearl, Cryptix и QubitCoin; у Xelis, BTX, Conflux, NOID и Quantus — нет.</span>
       </p>
       <p class="archnote">
         <span class="en"><b>CMP 40HX, 50HX, 70HX and 90HX — hardware unlock built into the miner (Linux), any kernel.</b> Run <code>sudo forge --cmp-install</code> once and the card runs at full speed instead of being throttled. CMP 30HX is a permanent hardware limitation, never supported. Full walkthrough — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">wiki · CMP hardware unlock</a>.</span>
@@ -676,10 +676,10 @@
 <span class="c-dim"># Xelis (XEL)</span>
 ./forge <span class="c-flag">--algorithm</span> xelis <span class="c-flag">--wallet</span> YOUR_XEL_WALLET <span class="c-flag">--pool</span> xel.kryptex.network:7019
 
-<span class="c-dim"># Quantus — GTX 10-series and newer (not Tesla V100 / CMP 170HX)</span>
+<span class="c-dim"># Quantus — GTX 10-series and newer, Tesla V100 included (not the CMP 170HX)</span>
 ./forge <span class="c-flag">--algorithm</span> quantus <span class="c-flag">--wallet</span> YOUR_QUANTUS_WALLET <span class="c-flag">--pool</span> qtc-eu.kryptex.network:7049
 
-<span class="c-dim"># NOID (Parano1d) — RTX 30-series and newer</span>
+<span class="c-dim"># NOID (Parano1d) — GTX 10-series and newer, Tesla V100 included (not the CMP 170HX)</span>
 ./forge <span class="c-flag">--algorithm</span> noid <span class="c-flag">--wallet</span> YOUR_NOID_WALLET <span class="c-flag">--pool</span> stratum+ssl://eu2.innovlab.cc:19601</pre>
       </div>
       <div class="tabpane" id="tab-hive">
@@ -688,7 +688,7 @@
 
 <span class="c-dim"># Add a Custom miner flight sheet (or import a ready-made one below)</span>
 
-Installation URL : https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz
+Installation URL : https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz
 Wallet template  : %WAL%.%WORKER_NAME%
 Pool URL         : prl.kryptex.network:7048
 Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FORGE_CCLK=2505
@@ -703,7 +703,7 @@ Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FOR
 <span class="c-flag">--cmp-install</span>   <span class="c-dim">safe to leave in permanently — fast-paths on subsequent runs</span></pre>
       </div>
       <div class="tabpane" id="tab-docker">
-<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.8.6</span> and :latest)</span>
+<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.8.7</span> and :latest)</span>
 docker pull hashraptor/forge
 
 <span class="c-dim"># Run — needs the NVIDIA Container Toolkit for --gpus</span>
@@ -899,7 +899,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -919,7 +919,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -940,7 +940,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -961,7 +961,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -982,7 +982,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1002,7 +1002,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1022,7 +1022,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1042,7 +1042,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1062,7 +1062,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1082,7 +1082,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1102,7 +1102,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.6</span>/ForgeMiner-<span data-ver>1.8.6</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.7</span>/ForgeMiner-<span data-ver>1.8.7</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1166,7 +1166,7 @@ docker run --rm --gpus all hashraptor/forge \
       </p>
       <div class="final-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.8.6</span></span><span class="ru">↓ Скачать v<span data-ver>1.8.6</span></span>
+          <span class="en">↓ Download v<span data-ver>1.8.7</span></span><span class="ru">↓ Скачать v<span data-ver>1.8.7</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">Read the docs</span><span class="ru">Документация</span>
