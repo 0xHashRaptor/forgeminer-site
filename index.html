@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ForgeMiner - a fast, native NVIDIA GPU miner for Pearl (PRL), Quantus, QubitCoin (QTC), KawPow (RVN/QUAI/XNA), Cryptix (CYTX), BTX, Xelis (XEL), Conflux (CFX) and NOID. Windows, Linux, HiveOS and Docker.">
+<meta name="description" content="ForgeMiner - a fast, native NVIDIA and AMD GPU miner for Pearl (PRL), Quantus, QubitCoin (QTC), KawPow (RVN/QUAI/XNA), Cryptix (CYTX), BTX, Xelis (XEL), Conflux (CFX) and NOID. Windows, Linux, HiveOS and Docker.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ForgeMiner - Native NVIDIA GPU Miner">
-<meta property="og:description" content="One binary, eleven coins, six GPU generations. Native CUDA, built-in overclock and live dashboard. Windows - Linux - HiveOS - Docker.">
+<meta property="og:title" content="ForgeMiner - Native NVIDIA and AMD GPU Miner">
+<meta property="og:description" content="One binary, eleven coins, NVIDIA and AMD Radeon. Native CUDA and OpenCL, built-in overclock and live dashboard. Windows - Linux - HiveOS - Docker.">
 <meta property="og:url" content="https://forgeminer.org">
 <meta name="theme-color" content="#100d0b">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M3 8h11c0 2.5-1.8 3.6-4 3.9V14h3l1.5 3H6l1.5-3h2.5v-2H7c-2.2 0-4-1.3-4-4z' fill='%23ff6a1a'/></svg>">
-<title>ForgeMiner — Native NVIDIA GPU Miner</title>
+<title>ForgeMiner — Native NVIDIA &amp; AMD GPU Miner</title>
 <style>
   :root{
     --bg:#100d0b;
@@ -319,18 +319,18 @@
     <canvas id="embers"></canvas>
     <div class="hero-glow"></div>
     <div class="wrap hero-inner">
-      <div class="eyebrow">// <span class="en">native nvidia gpu miner</span><span class="ru">нативный nvidia gpu-майнер</span></div>
+      <div class="eyebrow">// <span class="en">native nvidia &amp; amd gpu miner</span><span class="ru">нативный gpu-майнер для nvidia и amd</span></div>
       <h1 class="head">
         <span class="en">Forged for <span class="flame">every architecture.</span></span>
         <span class="ru">Выкован под <span class="flame">каждую архитектуру.</span></span>
       </h1>
       <p class="lede">
-        <span class="en">A fast, fully native NVIDIA GPU miner. Talks to the card directly through the CUDA Driver API — no Python, no WSL, no runtimes to install. One binary mines eleven coins across six GPU generations, each running its own tuned kernel.</span>
-        <span class="ru">Быстрый, полностью нативный NVIDIA GPU-майнер. Работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов. Один бинарь майнит одиннадцать монет на шести поколениях карт, и под каждое — своё ядро.</span>
+        <span class="en">A fast, fully native GPU miner for NVIDIA and AMD. Talks to NVIDIA cards directly through the CUDA Driver API and to AMD Radeon through OpenCL — no Python, no WSL, no extra runtimes. One binary mines eleven coins across ten GPU generations, NVIDIA and AMD in the same rig, each card running its own tuned kernel.</span>
+        <span class="ru">Быстрый, полностью нативный GPU-майнер для NVIDIA и AMD. С картами NVIDIA работает напрямую через CUDA Driver API, с AMD Radeon — через OpenCL, без Python, WSL и лишних рантаймов. Один бинарь майнит одиннадцать монет на десяти поколениях карт, NVIDIA и AMD в одном риге, и под каждую карту — своё ядро.</span>
       </p>
       <div class="hero-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.8.8</span></span><span class="ru">↓ Скачать v<span data-ver>1.8.8</span></span>
+          <span class="en">↓ Download v<span data-ver>1.8.9</span></span><span class="ru">↓ Скачать v<span data-ver>1.8.9</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">View on GitHub</span><span class="ru">Открыть на GitHub</span>
@@ -340,6 +340,7 @@
         <span><span class="dot">▪</span> <b><span class="en">Windows · Linux · HiveOS · Docker</span><span class="ru">Windows · Linux · HiveOS · Docker</span></b></span>
         <span><span class="dot">▪</span> <b><span class="en">One self-contained binary</span><span class="ru">Один самодостаточный бинарь</span></b></span>
         <span><span class="dot">▪</span> <b><span class="en">Built-in overclock &amp; dashboard</span><span class="ru">Встроенный разгон и дашборд</span></b></span>
+        <span><span class="dot">▪</span> <b><span class="en">NVIDIA &amp; AMD in one rig</span><span class="ru">NVIDIA и AMD в одном риге</span></b></span>
       </div>
 
       <div class="temper" aria-hidden="true">
@@ -351,11 +352,12 @@
       <div class="term" aria-hidden="true">
         <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t">forge — rig01</span></div>
         <div class="term-body"><span class="c-dim">$</span> <span class="c-cmd">./forge</span> <span class="c-flag">--algorithm</span> pearlhash <span class="c-flag">--wallet</span> PRL… <span class="c-flag">--pool</span> prl.kryptex.network:7048
-<span class="c-dim">[forge]</span> CUDA Driver API 12.4 · 4 device(s) detected
+<span class="c-dim">[forge]</span> CUDA Driver API 12.4 · OpenCL · 4 NVIDIA + 1 AMD device(s)
 <span class="c-dim">[forge]</span> GPU0 RTX 4090   → kernel <span class="c-hot">ada</span>      <span class="c-ok">ready</span>
 <span class="c-dim">[forge]</span> GPU1 RTX 3080   → kernel <span class="c-hot">ampere</span>   <span class="c-ok">ready</span>
 <span class="c-dim">[forge]</span> GPU2 RTX 5070Ti → kernel <span class="c-hot">blackwell</span> <span class="c-ok">ready</span>
 <span class="c-dim">[forge]</span> GPU3 P104-100   → kernel <span class="c-hot">pascal</span>   <span class="c-ok">ready</span>
+<span class="c-dim">[forge]</span> GPU4 RX 7900XTX → kernel <span class="c-hot">rdna3</span>    <span class="c-ok">ready</span>
 <span class="c-dim">[pool]</span>  connected · <span class="c-ok">share accepted</span> ✓  effort 84%
 <span class="c-dim">$</span> <span class="cursor"></span></div>
       </div>
@@ -371,8 +373,8 @@
         <span class="ru">Не обёртка. Нативный майнер.</span>
       </h2>
       <p class="sec-lede">
-        <span class="en">ForgeMiner is closed-source and built from the metal up. Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch — so a Pascal rig and a Blackwell rig each run code written for them, not a lowest-common-denominator kernel. Near-zero CPU load keeps the GPUs fed even on weak hosts, crowded rigs and slow x1 risers.</span>
-        <span class="ru">ForgeMiner — closed-source, собран с самого низкого уровня. Под каждый алгоритм для каждой карты идёт отдельная сборка под её архитектуру, выбирается автоматически при запуске — так что и Pascal-риг, и Blackwell-риг гоняют код, написанный именно под них, а не универсальное «ядро на всех». Почти нулевая нагрузка на CPU держит карты загруженными даже на слабом хосте, забитом риге и медленных x1-райзерах.</span>
+        <span class="en">ForgeMiner is closed-source and built from the metal up. Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch — so a Pascal rig, a Blackwell rig and a Radeon RDNA 3 rig each run code written for them, not a lowest-common-denominator kernel. Near-zero CPU load keeps the GPUs fed even on weak hosts, crowded rigs and slow x1 risers.</span>
+        <span class="ru">ForgeMiner — closed-source, собран с самого низкого уровня. Под каждый алгоритм для каждой карты идёт отдельная сборка под её архитектуру, выбирается автоматически при запуске — так что и Pascal-риг, и Blackwell-риг, и риг на Radeon RDNA 3 гоняют код, написанный именно под них, а не универсальное «ядро на всех». Почти нулевая нагрузка на CPU держит карты загруженными даже на слабом хосте, забитом риге и медленных x1-райзерах.</span>
       </p>
     </div>
   </section>
@@ -465,13 +467,13 @@
       <div class="grid">
         <div class="cell">
           <div class="ic">⌗</div>
-          <h3><span class="en">Native CUDA, no runtimes</span><span class="ru">Нативный CUDA, без рантаймов</span></h3>
-          <p><span class="en">Direct CUDA Driver API. No Python, no WSL, no NVRTC — it starts instantly and runs lean on low-spec rigs.</span><span class="ru">Напрямую через CUDA Driver API. Без Python, WSL и NVRTC — мгновенный старт и работа даже на слабых ригах.</span></p>
+          <h3><span class="en">Native CUDA &amp; OpenCL</span><span class="ru">Нативно: CUDA и OpenCL</span></h3>
+          <p><span class="en">Direct CUDA Driver API on NVIDIA, OpenCL on AMD Radeon. No Python, no WSL — it starts instantly and runs lean on low-spec rigs.</span><span class="ru">Напрямую через CUDA Driver API на NVIDIA и через OpenCL на AMD Radeon. Без Python и WSL — мгновенный старт и работа даже на слабых ригах.</span></p>
         </div>
         <div class="cell">
           <div class="ic">⚒</div>
           <h3><span class="en">Architecture-tuned kernels</span><span class="ru">Ядра под архитектуру</span></h3>
-          <p><span class="en">A dedicated kernel per generation — Pascal, Volta, Turing, Ampere, Ada, Blackwell — auto-selected at launch so each card runs at its peak.</span><span class="ru">Отдельное ядро под каждое поколение — Pascal, Volta, Turing, Ampere, Ada, Blackwell — выбирается само при старте, каждая карта на пике.</span></p>
+          <p><span class="en">A dedicated kernel per generation — Pascal, Volta, Turing, Ampere, Ada, Blackwell and AMD RDNA 1–4 — auto-selected at launch so each card runs at its peak.</span><span class="ru">Отдельное ядро под каждое поколение — Pascal, Volta, Turing, Ampere, Ada, Blackwell и AMD RDNA 1–4 — выбирается само при старте, каждая карта на пике.</span></p>
         </div>
         <div class="cell">
           <div class="ic">▣</div>
@@ -481,7 +483,7 @@
         <div class="cell">
           <div class="ic">⟳</div>
           <h3><span class="en">Built-in OC &amp; fan control</span><span class="ru">Встроенный разгон и кулеры</span></h3>
-          <p><span class="en">Lock clocks, apply core/memory offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs. No third-party tool.</span><span class="ru">Фикс частот, оффсеты ядра/памяти, лимит мощности и управление кулерами прямо из майнера — свой разгон на каждую карту. Без сторонних утилит.</span></p>
+          <p><span class="en">Lock clocks, apply core/memory offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs, plus the core voltage on AMD. No third-party tool.</span><span class="ru">Фикс частот, оффсеты ядра/памяти, лимит мощности и управление кулерами прямо из майнера — свой разгон на каждую карту, а на AMD ещё и напряжение ядра. Без сторонних утилит.</span></p>
         </div>
         <div class="cell">
           <div class="ic">⇄</div>
@@ -492,6 +494,21 @@
           <div class="ic">◉</div>
           <h3><span class="en">Live dashboard &amp; API</span><span class="ru">Живой дашборд и API</span></h3>
           <p><span class="en">A built-in web panel plus JSON, Prometheus and Claymore-compatible endpoints on one port — drops into Grafana, Awesome Miner, HiveOS and your own scripts.</span><span class="ru">Встроенная веб-панель плюс JSON, Prometheus и Claymore-совместимые эндпоинты на одном порту — для Grafana, Awesome Miner, HiveOS и своих скриптов.</span></p>
+        </div>
+        <div class="cell">
+          <div class="ic">◐</div>
+          <h3><span class="en">NVIDIA &amp; AMD in one rig</span><span class="ru">NVIDIA и AMD в одном риге</span></h3>
+          <p><span class="en">Radeon RX 5000 / 6000 / 7000 / 9000 mine every coin except BTX with the same command lines. A mixed rig runs in one ForgeMiner: NVIDIA cards first, then AMD.</span><span class="ru">Radeon RX 5000 / 6000 / 7000 / 9000 майнят все монеты, кроме BTX, с теми же командными строками. Смешанный риг работает в одном ForgeMiner: сначала карты NVIDIA, потом AMD.</span></p>
+        </div>
+        <div class="cell">
+          <div class="ic">△</div>
+          <h3><span class="en">Thermal guard</span><span class="ru">Термозащита</span></h3>
+          <p><span class="en"><code>--temp-limit</code> pauses only the card that overheats — core or VRAM, whichever is hotter — and <code>--temp-resume</code> brings it back once it cools. The rest of the rig keeps mining.</span><span class="ru"><code>--temp-limit</code> ставит на паузу только перегретую карту — по ядру или VRAM, что горячее, — а <code>--temp-resume</code> возвращает её после остывания. Остальные карты рига майнят дальше.</span></p>
+        </div>
+        <div class="cell">
+          <div class="ic">⇢</div>
+          <h3><span class="en">Through a proxy</span><span class="ru">Через прокси</span></h3>
+          <p><span class="en"><code>--proxy</code> sends every pool connection — backups and the dev fee included — through SOCKS5 or HTTP. The proxy resolves pool names, so a blocked local DNS does not matter.</span><span class="ru"><code>--proxy</code> пускает все соединения с пулами — включая резервные и комиссию — через SOCKS5 или HTTP. Имена пулов разрешает прокси, так что заблокированный локальный DNS не мешает.</span></p>
         </div>
       </div>
     </div>
@@ -506,8 +523,8 @@
         <span class="ru">Все карты — одним взглядом.</span>
       </h2>
       <p class="sec-lede">
-        <span class="en">Point a browser at the miner and watch the whole rig live: total and per-GPU hashrate, temperatures, clocks, fans, power, efficiency and accept rate. Dark/light toggle and adjustable refresh, all served from one built-in port — nothing to install.</span>
-        <span class="ru">Наведите браузер на майнер и смотрите весь риг в реальном времени: общий и по-картовый хешрейт, температуры, частоты, кулеры, мощность, эффективность и accept rate. Тёмная/светлая тема и настройка обновления — всё с одного встроенного порта, ставить ничего не нужно.</span>
+        <span class="en">Point a browser at the miner and watch the whole rig live: total and per-GPU hashrate, temperatures, clocks, fans, power, efficiency and accept rate. NVIDIA and AMD cards side by side. Dark/light toggle and adjustable refresh, all served from one built-in port — nothing to install.</span>
+        <span class="ru">Наведите браузер на майнер и смотрите весь риг в реальном времени: общий и по-картовый хешрейт, температуры, частоты, кулеры, мощность, эффективность и accept rate. Карты NVIDIA и AMD рядом. Тёмная/светлая тема и настройка обновления — всё с одного встроенного порта, ставить ничего не нужно.</span>
       </p>
 
       <div class="dash">
@@ -531,6 +548,7 @@
             <tr><td>RTX 5070 Ti</td><td>blackwell</td><td>—</td><td>58°C</td><td>55%</td><td>272 W</td><td class="acc">861 ✓</td></tr>
             <tr><td>RTX 3080</td><td>ampere</td><td>—</td><td>64°C</td><td>70%</td><td>254 W</td><td class="acc">733 ✓</td></tr>
             <tr><td>P104-100</td><td>pascal</td><td>—</td><td>52°C</td><td>48%</td><td>112 W</td><td class="acc">318 ✓</td></tr>
+            <tr><td>RX 7900 XTX</td><td>rdna3</td><td>—</td><td>63°C</td><td>45%</td><td>190 W</td><td class="acc">654 ✓</td></tr>
           </tbody>
         </table>
         </div>
@@ -543,12 +561,12 @@
     <div class="wrap">
       <div class="sec-tag"><span class="en">Supported GPUs</span><span class="ru">Поддержка карт</span></div>
       <h2>
-        <span class="en">Six generations, one download.</span>
-        <span class="ru">Шесть поколений, одна загрузка.</span>
+        <span class="en">NVIDIA and AMD, one download.</span>
+        <span class="ru">NVIDIA и AMD — одна загрузка.</span>
       </h2>
       <p class="sec-lede">
-        <span class="en">Kernels are tuned per architecture, so a whole generation is covered — not a hand-picked few models. From an old P104-100 mining card to a Blackwell RTX 50, plus NVIDIA CMP cards.</span>
-        <span class="ru">Ядра затюнены под архитектуру, поэтому поддерживается всё поколение целиком — а не пара избранных моделей. От старой майнинг-карты P104-100 до Blackwell RTX 50, плюс NVIDIA CMP.</span>
+        <span class="en">Kernels are tuned per architecture, so a whole generation is covered — not a hand-picked few models. From an old P104-100 mining card to a Blackwell RTX 50, plus NVIDIA CMP cards and AMD Radeon RX 5000 to RX 9000.</span>
+        <span class="ru">Ядра затюнены под архитектуру, поэтому поддерживается всё поколение целиком — а не пара избранных моделей. От старой майнинг-карты P104-100 до Blackwell RTX 50, плюс NVIDIA CMP и AMD Radeon от RX 5000 до RX 9000.</span>
       </p>
       <div class="archlist">
         <div class="archrow">
@@ -582,13 +600,13 @@
           </div>
         </div>
         <div class="archrow">
-          <div class="archgen"><div class="g">Volta</div><div class="fam">Pearl · QubitCoin · KawPow · Cryptix · Xelis</div></div>
+          <div class="archgen"><div class="g">Volta</div><div class="fam"><span class="en">every coin</span><span class="ru">все монеты</span></div></div>
           <div class="archcards">
             <span class="tag">Tesla V100</span>
           </div>
         </div>
         <div class="archrow">
-          <div class="archgen"><div class="g">Pascal</div><div class="fam">Pearl · QubitCoin · KawPow · Cryptix · Xelis</div></div>
+          <div class="archgen"><div class="g">Pascal</div><div class="fam"><span class="en">every coin except BTX</span><span class="ru">все монеты, кроме BTX</span></div></div>
           <div class="archcards">
             <span class="tag">GTX 10-series</span><span class="tag">P102-100</span><span class="tag">P104-100</span><span class="tag">P106</span><span class="tag">P108</span><span class="tag">· mining cards</span>
           </div>
@@ -599,10 +617,38 @@
             <span class="tag">CMP 170HX</span><span class="tag">90HX</span><span class="tag">70HX</span><span class="tag">50HX</span><span class="tag">40HX</span><span class="tag">30HX</span>
           </div>
         </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">AMD RDNA 4</div><div class="fam"><span class="en">RX 9000 · recent driver</span><span class="ru">RX 9000 · свежий драйвер</span></div></div>
+          <div class="archcards">
+            <span class="tag">RX 9070 XT</span><span class="tag">9070</span><span class="tag">9060 XT</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">AMD RDNA 3</div><div class="fam"><span class="en">RX 7000</span><span class="ru">RX 7000</span></div></div>
+          <div class="archcards">
+            <span class="tag">RX 7900 XTX</span><span class="tag">7900 XT</span><span class="tag">7900 GRE</span><span class="tag">7800 XT</span><span class="tag">7700 XT</span><span class="tag">7600 XT</span><span class="tag">7600</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">AMD RDNA 2</div><div class="fam"><span class="en">RX 6000</span><span class="ru">RX 6000</span></div></div>
+          <div class="archcards">
+            <span class="tag">RX 6950 XT</span><span class="tag">6900 XT</span><span class="tag">6800 XT</span><span class="tag">6800</span><span class="tag">6750 XT</span><span class="tag">6700 XT</span><span class="tag">6700</span><span class="tag">6650 XT</span><span class="tag">6600 XT</span><span class="tag">6600</span>
+          </div>
+        </div>
+        <div class="archrow">
+          <div class="archgen"><div class="g">AMD RDNA 1</div><div class="fam"><span class="en">RX 5000</span><span class="ru">RX 5000</span></div></div>
+          <div class="archcards">
+            <span class="tag">RX 5700 XT</span><span class="tag">5700</span><span class="tag">5600 XT</span><span class="tag">5500 XT</span>
+          </div>
+        </div>
       </div>
       <p class="archnote">
         <span class="en">Support is per-architecture — every card in a listed generation runs its matching kernel, desktop and laptop/mobile alike. RTX 20-series and CMP cards need NVIDIA driver 545 or newer; the RTX 50-series needs 580 or newer. Pearl, QubitCoin, KawPow, Cryptix and Xelis run on every listed generation, from Pascal (GTX 10-series / P102-100 / P104-100 / P106 / P108) and Volta (Tesla V100) up to Blackwell. BTX needs Volta (Tesla V100) or Turing (RTX 20 / CMP 40HX–70HX) and newer — it does not run on Pascal or the CMP 170HX. Conflux runs from Pascal up on cards with more than 8 GB (GTX 1080 Ti, Tesla V100, RTX 20 and newer), not on the CMP 170HX. Quantus, NOID and QubitCoin run from Pascal (GTX 10-series) up, Tesla V100 included, but not on the CMP 170HX; a card without a kernel for the chosen coin says so in one line while the rest of the rig mines. On Hopper, Pearl, Cryptix and QubitCoin have their own builds; Xelis, BTX, Conflux, NOID and Quantus do not.</span>
         <span class="ru">Поддержка — на уровне архитектуры: любая карта из указанного поколения запускает своё ядро, десктопная и ноутбучная одинаково. Для RTX 20 и CMP нужен драйвер NVIDIA 545+, для RTX 50 — 580+. Pearl, QubitCoin, KawPow, Cryptix и Xelis работают на каждом поколении — от Pascal (GTX 10-й серии / P102-100 / P104-100 / P106 / P108) и Volta (Tesla V100) до Blackwell. BTX нужен Volta (Tesla V100) или Turing (RTX 20 / CMP 40HX–70HX) и новее — на Pascal и CMP 170HX он не идёт. Conflux работает начиная с Pascal на картах с памятью больше 8 ГБ (GTX 1080 Ti, Tesla V100, RTX 20 и новее), кроме CMP 170HX. Quantus, NOID и QubitCoin работают начиная с Pascal (GTX 10-й серии), включая Tesla V100, но не на CMP 170HX; карта, для которой у выбранной монеты нет ядра, скажет об этом одной строкой, остальные карты рига майнят. На Hopper свои сборки есть у Pearl, Cryptix и QubitCoin; у Xelis, BTX, Conflux, NOID и Quantus — нет.</span>
+      </p>
+      <p class="archnote">
+        <span class="en"><b>AMD Radeon RX 5000 – RX 9000 (RDNA 1–4), on Linux / HiveOS and Windows.</b> Every coin except BTX, with the same command lines as on NVIDIA. Conflux needs a card with more than 8 GB there too; Pearl on the RX 9060 XT runs at the stock core voltage only. The RX 6500 XT / 6400 and integrated Radeon graphics are not supported. On plain Linux install AMD's OpenCL runtime (ROCm) and run the miner as root or as a user in the <code>render</code> group; HiveOS has everything. The RX 9000 series needs a recent driver — on HiveOS a current image. A rig with NVIDIA and AMD cards mines in one ForgeMiner: NVIDIA cards are numbered first, then AMD in PCI bus order; <code>FORGE_AMD=1</code> mines on the AMD cards only, <code>FORGE_AMD=0</code> on the NVIDIA cards only.</span>
+        <span class="ru"><b>AMD Radeon RX 5000 – RX 9000 (RDNA 1–4), на Linux / HiveOS и Windows.</b> Все монеты, кроме BTX, с теми же командными строками, что на NVIDIA. Conflux и здесь требует карту больше 8 ГБ; Pearl на RX 9060 XT работает только на штатном напряжении ядра. RX 6500 XT / 6400 и встроенная графика Radeon не поддерживаются. На обычном Linux поставьте OpenCL от AMD (ROCm) и запускайте майнер от root или пользователем из группы <code>render</code>; в HiveOS всё уже есть. Для RX 9000 нужен свежий драйвер — на HiveOS свежий образ. Риг с картами NVIDIA и AMD майнит в одном ForgeMiner: сначала нумеруются NVIDIA, потом AMD по порядку шины PCI; <code>FORGE_AMD=1</code> — майнить только на AMD, <code>FORGE_AMD=0</code> — только на NVIDIA.</span>
       </p>
       <p class="archnote">
         <span class="en"><b>CMP 40HX, 50HX, 70HX and 90HX — hardware unlock built into the miner (Linux), any kernel.</b> Run <code>sudo forge --cmp-install</code> once and the card runs at full speed instead of being throttled. CMP 30HX is a permanent hardware limitation, never supported. Full walkthrough — <a href="https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock">wiki · CMP hardware unlock</a>.</span>
@@ -620,8 +666,8 @@
         <span class="ru">Запуск меньше чем за минуту.</span>
       </h2>
       <p class="sec-lede">
-        <span class="en">Download, set your wallet, start. On Windows pick the ready-made .bat for your coin, pool and region; on Linux one command; on HiveOS a custom-miner slot.</span>
-        <span class="ru">Скачать, вписать кошелёк, запустить. На Windows — готовый .bat под монету, пул и регион; на Linux — одна команда; на HiveOS — слот кастомного майнера.</span>
+        <span class="en">Download, set your wallet, start. On Windows pick the ready-made .bat for your coin, pool and region; on Linux one command; on HiveOS a custom-miner slot. AMD Radeon uses the same files and commands.</span>
+        <span class="ru">Скачать, вписать кошелёк, запустить. На Windows — готовый .bat под монету, пул и регион; на Linux — одна команда; на HiveOS — слот кастомного майнера. Для AMD Radeon — те же файлы и команды.</span>
       </p>
 
       <div class="tabs">
@@ -640,14 +686,15 @@
 <span class="c-hot">Neurai (XNA)\</span>            12   Kryptex · 2Miners · Vipor
 <span class="c-hot">Conflux (CFX)\</span>           10   Kryptex · HeroMiners
 <span class="c-hot">Xelis (XEL)\</span>             10   Kryptex · HeroMiners
-<span class="c-hot">Quantus (QTC)\</span>            8   Kryptex · LuckyPool
+<span class="c-hot">Quantus (QTC)\</span>            9   Kryptex · LuckyPool · BaikalMine
 <span class="c-hot">QubitCoin (QTC)\</span>          6   LuckyPool · k1pool
-<span class="c-hot">BTX\</span>                      4   LuckyPool
-<span class="c-hot">NOID (Parano1d)\</span>          3   InnovLab · Suprnova
+<span class="c-hot">NOID (Parano1d)\</span>          5   InnovLab · LuckyPool · Suprnova
 <span class="c-hot">Cryptix (CYTX)\</span>           2   BaikalMine · CryptixNetwork
+<span class="c-hot">BTX\</span>                      1   btx-pool.com
 
 <span class="c-dim"># 2. set your wallet + worker inside the .bat, then double-click it</span>
-<span class="c-dim">#    run as Administrator if you want the built-in overclock to apply</span></pre>
+<span class="c-dim">#    run as Administrator if you want the built-in overclock to apply</span>
+<span class="c-dim">#    AMD Radeon: the same .bat files</span></pre>
       </div>
       <div class="tabpane" id="tab-lin">
 <pre>chmod +x forge
@@ -676,11 +723,14 @@
 <span class="c-dim"># Xelis (XEL)</span>
 ./forge <span class="c-flag">--algorithm</span> xelis <span class="c-flag">--wallet</span> YOUR_XEL_WALLET <span class="c-flag">--pool</span> xel.kryptex.network:7019
 
-<span class="c-dim"># Quantus — GTX 10-series and newer, Tesla V100 included (not the CMP 170HX)</span>
+<span class="c-dim"># Quantus — GTX 10-series and newer, Tesla V100 included, AMD RX 5000 and newer (not the CMP 170HX)</span>
 ./forge <span class="c-flag">--algorithm</span> quantus <span class="c-flag">--wallet</span> YOUR_QUANTUS_WALLET <span class="c-flag">--pool</span> qtc-eu.kryptex.network:7049
 
-<span class="c-dim"># NOID (Parano1d) — GTX 10-series and newer, Tesla V100 included (not the CMP 170HX)</span>
-./forge <span class="c-flag">--algorithm</span> noid <span class="c-flag">--wallet</span> YOUR_NOID_WALLET <span class="c-flag">--pool</span> stratum+ssl://eu2.innovlab.cc:19601</pre>
+<span class="c-dim"># NOID (Parano1d) — GTX 10-series and newer, Tesla V100 included, AMD RX 5000 and newer (not the CMP 170HX)</span>
+./forge <span class="c-flag">--algorithm</span> noid <span class="c-flag">--wallet</span> YOUR_NOID_WALLET <span class="c-flag">--pool</span> stratum+ssl://eu2.innovlab.cc:19601
+
+<span class="c-dim"># AMD Radeon: the same commands. Needs AMD's OpenCL runtime (ROCm); run as root or as a user in the render group.</span>
+<span class="c-dim"># NVIDIA + AMD in one rig mine together — FORGE_AMD=1 for AMD only, FORGE_AMD=0 for NVIDIA only.</span></pre>
       </div>
       <div class="tabpane" id="tab-hive">
 <pre><span class="c-dim"># ForgeMiner is also in HiveOS's built-in miner list; new versions appear there once HiveOS packages them.</span>
@@ -688,7 +738,7 @@
 
 <span class="c-dim"># Add a Custom miner flight sheet (or import a ready-made one below)</span>
 
-Installation URL : https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz
+Installation URL : https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz
 Wallet template  : %WAL%.%WORKER_NAME%
 Pool URL         : prl.kryptex.network:7048
 Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FORGE_CCLK=2505
@@ -698,15 +748,16 @@ Extra config     : <span class="c-dim"># empty for Stratum · OC e.g.</span> FOR
 
 <span class="c-dim"># qhash / KawPow / Cryptix / BTX / Xelis / Conflux / NOID / Quantus: set FORGE_ALGO=qhash|kawpow|cryptix|btx|xelis|cfx|noid|quantus</span>
 <span class="c-dim"># KawPow coin: FORGE_COIN=rvn|quai|xna</span>
+<span class="c-dim"># AMD and mixed NVIDIA + AMD rigs use the same flight sheet; FORGE_AMD=1 (AMD only) or 0 (NVIDIA only)</span>
 
 <span class="c-dim"># CMP 40HX/50HX/70HX/90HX rig — unlock built into the miner, any kernel. Add this line to Extra config:</span>
 <span class="c-flag">--cmp-install</span>   <span class="c-dim">safe to leave in permanently — fast-paths on subsequent runs</span></pre>
       </div>
       <div class="tabpane" id="tab-docker">
-<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.8.8</span> and :latest)</span>
+<pre><span class="c-dim"># Pull the official image (tags :<span data-ver>1.8.9</span> and :latest)</span>
 docker pull hashraptor/forge
 
-<span class="c-dim"># Run — needs the NVIDIA Container Toolkit for --gpus</span>
+<span class="c-dim"># Run — NVIDIA cards, needs the NVIDIA Container Toolkit for --gpus (AMD: use the Linux build)</span>
 docker run --rm --gpus all hashraptor/forge \
   <span class="c-flag">--algorithm</span> pearlhash \
   <span class="c-flag">--wallet</span> YOUR_PRL_WALLET <span class="c-flag">--worker</span> rig01 \
@@ -740,11 +791,15 @@ docker run --rm --gpus all hashraptor/forge \
           <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>quantus</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code>, <code>xelis</code>, <code>cfx</code> or <code>noid</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>quantus</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code>, <code>xelis</code>, <code>cfx</code> или <code>noid</code>.</span></td></tr>
           <tr><td><code>--coin</code></td><td><code>FORGE_COIN</code></td><td class="desc"><span class="en">KawPow coin: <code>rvn</code>, <code>quai</code> or <code>xna</code> — auto-detected from the pool if omitted (set explicitly for Neurai/Vipor).</span><span class="ru">Монета KawPow: <code>rvn</code>, <code>quai</code> или <code>xna</code> — определяется по пулу, если не задана (для Neurai/Vipor указывать явно).</span></td></tr>
           <tr><td><code>--pool</code></td><td><code>FORGE_POOL</code></td><td class="desc"><span class="en">Pool as <code>host:port</code>. TLS is detected automatically (<code>ssl://</code> also accepted); list several for fail-over.</span><span class="ru">Пул как <code>host:port</code>. TLS определяется автоматически (<code>ssl://</code> тоже принимается); можно перечислить несколько для failover.</span></td></tr>
+          <tr><td><code>--tls</code></td><td><code>FORGE_TLS</code></td><td class="desc"><span class="en">Force TLS on (<code>--tls</code>) or off (<code>--tls false</code>) for every pool. Rarely needed — TLS is detected on its own; an <code>ssl://</code> prefix on one address wins.</span><span class="ru">Включить (<code>--tls</code>) или выключить (<code>--tls false</code>) TLS на всех пулах. Нужно редко — TLS определяется сам; префикс <code>ssl://</code> у адреса важнее.</span></td></tr>
+          <tr><td><code>--proxy</code></td><td><code>FORGE_PROXY</code></td><td class="desc"><span class="en">Every pool connection — backups and dev fee included — through a proxy: <code>socks5://[user:pass@]host:port</code> (the proxy resolves pool names) or <code>http://[user:pass@]host:port</code> (CONNECT). TLS pools work through either.</span><span class="ru">Все соединения с пулами — включая резервные и комиссию — через прокси: <code>socks5://[user:pass@]host:port</code> (имена пулов разрешает прокси) или <code>http://[user:pass@]host:port</code> (CONNECT). Пулы с TLS работают через оба.</span></td></tr>
           <tr><td><code>--wallet</code></td><td><code>FORGE_WALLET</code></td><td class="desc"><span class="en">Your payout wallet address.</span><span class="ru">Адрес кошелька для выплат.</span></td></tr>
           <tr><td><code>--worker</code></td><td><code>FORGE_WORKER</code></td><td class="desc"><span class="en">Worker / rig name shown on the pool.</span><span class="ru">Имя воркера/рига на пуле.</span></td></tr>
           <tr><td><code>--password</code></td><td><code>FORGE_PASS</code></td><td class="desc"><span class="en">Pool password (usually <code>x</code>).</span><span class="ru">Пароль пула (обычно <code>x</code>).</span></td></tr>
-          <tr><td><code>--gpu</code></td><td><code>FORGE_GPU</code></td><td class="desc"><span class="en">Mine only these indices, e.g. <code>0,1,2,6</code> (match <code>nvidia-smi</code> order). Default: all.</span><span class="ru">Майнить только эти индексы, напр. <code>0,1,2,6</code> (порядок <code>nvidia-smi</code>). По умолчанию — все.</span></td></tr>
+          <tr><td><code>--gpu</code></td><td><code>FORGE_GPU</code></td><td class="desc"><span class="en">Mine only these indices, e.g. <code>0,1,2,6</code>. Default: all. NVIDIA cards are numbered first (<code>nvidia-smi</code> order), then AMD in PCI bus order.</span><span class="ru">Майнить только эти индексы, напр. <code>0,1,2,6</code>. По умолчанию — все. Сначала нумеруются карты NVIDIA (порядок <code>nvidia-smi</code>), потом AMD по порядку шины PCI.</span></td></tr>
+          <tr><td>—</td><td><code>FORGE_AMD</code></td><td class="desc"><span class="en"><code>1</code> — mine on the AMD cards only, <code>0</code> — on the NVIDIA cards only. Both by default.</span><span class="ru"><code>1</code> — майнить только на картах AMD, <code>0</code> — только на NVIDIA. По умолчанию на всех.</span></td></tr>
           <tr><td><code>--log [file]</code></td><td><code>FORGE_LOG</code></td><td class="desc"><span class="en">Also write the output to a file (colours stripped, appends). Without a name: <code>forge_&lt;date&gt;.log</code>. Off by default.</span><span class="ru">Дополнительно писать вывод в файл (без цветов, дописывает). Без имени — <code>forge_&lt;дата&gt;.log</code>. По умолчанию выключено.</span></td></tr>
+          <tr><td><code>--v1-tui</code></td><td>—</td><td class="desc"><span class="en">Start in the classic scrolling output instead of the pinned dashboard. Press <code>L</code> to switch at any time.</span><span class="ru">Запуститься в классическом прокручивающемся виде вместо закреплённой панели. Клавиша <code>L</code> переключает в любой момент.</span></td></tr>
           <tr><td>—</td><td><code>FORGE_LOWVRAM</code></td><td class="desc"><span class="en">Low-VRAM mode for 8 GB cards (Pearl). <code>1</code> on, <code>0</code> off. Auto by default.</span><span class="ru">Режим low-VRAM для 8 ГБ карт (Pearl). <code>1</code> вкл, <code>0</code> выкл. По умолчанию авто.</span></td></tr>
         </tbody>
       </table>
@@ -752,8 +807,8 @@ docker run --rm --gpus all hashraptor/forge \
 
       <div class="opt-sub"><span class="en">Overclock</span><span class="ru">Разгон</span></div>
       <p class="sec-lede" style="margin-bottom:14px;">
-        <span class="en">ForgeMiner is core-clock bound and memory-light — push the core high, leave memory low. Overclocking needs root (Linux/HiveOS) or Administrator (Windows).</span>
-        <span class="ru">ForgeMiner упирается в частоту ядра и нетребователен к памяти — поднимайте ядро, память можно оставить низкой. Разгон требует root (Linux/HiveOS) или Администратора (Windows).</span>
+        <span class="en">ForgeMiner is core-clock bound and memory-light — push the core high, leave memory low. KawPow and Conflux are the exception: they read a large dataset from memory, so keep the memory clock up for them. Overclocking needs root (Linux/HiveOS) or Administrator (Windows). AMD Radeon takes the same flags plus the core voltage. On exit every card goes back to its previous power limit, offsets and clocks (<code>--oc-keep</code> leaves the overclock on).</span>
+        <span class="ru">ForgeMiner упирается в частоту ядра и нетребователен к памяти — поднимайте ядро, память можно оставить низкой. Исключение — KawPow и Conflux: они читают из памяти большой набор данных, им частоту памяти оставляйте высокой. Разгон требует root (Linux/HiveOS) или Администратора (Windows). AMD Radeon принимает те же флаги плюс напряжение ядра. При выходе каждая карта возвращается к прежним лимиту мощности, оффсетам и частотам (<code>--oc-keep</code> оставляет разгон).</span>
       </p>
       <div style="overflow-x:auto;">
       <table class="opt-tbl">
@@ -761,9 +816,13 @@ docker run --rm --gpus all hashraptor/forge \
         <tbody>
           <tr><td><code>--cclk</code></td><td><code>FORGE_CCLK</code></td><td class="desc"><span class="en">Lock GPU core clock (MHz).</span><span class="ru">Зафиксировать частоту ядра (МГц).</span></td></tr>
           <tr><td><code>--coff</code></td><td><code>FORGE_COFF</code></td><td class="desc"><span class="en">Core clock offset (MHz, +/−).</span><span class="ru">Оффсет ядра (МГц, +/−).</span></td></tr>
-          <tr><td><code>--mclk</code></td><td><code>FORGE_MCLK</code></td><td class="desc"><span class="en">Lock memory clock (MHz).</span><span class="ru">Зафиксировать частоту памяти (МГц).</span></td></tr>
+          <tr><td><code>--mclk</code></td><td><code>FORGE_MCLK</code></td><td class="desc"><span class="en">Lock memory clock (MHz). On GTX 10 / RTX 20, <code>810</code> holds the memory at 810 MHz — Quantus and NOID keep their hashrate at less power.</span><span class="ru">Зафиксировать частоту памяти (МГц). На GTX 10 / RTX 20 <code>810</code> держит память на 810 МГц — Quantus и NOID сохраняют хешрейт при меньшей мощности.</span></td></tr>
           <tr><td><code>--moff</code></td><td><code>FORGE_MOFF</code></td><td class="desc"><span class="en">Memory clock offset (MHz, +/−).</span><span class="ru">Оффсет памяти (МГц, +/−).</span></td></tr>
-          <tr><td><code>--plimit</code></td><td><code>FORGE_PLIMIT</code></td><td class="desc"><span class="en">Power limit (Watts).</span><span class="ru">Лимит мощности (Вт).</span></td></tr>
+          <tr><td><code>--plimit</code></td><td><code>FORGE_PLIMIT</code></td><td class="desc"><span class="en">Power limit (Watts; on Windows with AMD, percent of the card's limit).</span><span class="ru">Лимит мощности (Вт; на Windows с AMD — процент от лимита карты).</span></td></tr>
+          <tr><td><code>--vddoff</code></td><td>—</td><td class="desc"><span class="en">AMD: core voltage offset, mV, signed — e.g. <code>-80</code> (RX 6000 / 7000 / 9000; alias <code>--vo</code>).</span><span class="ru">AMD: смещение напряжения ядра, мВ, со знаком — напр. <code>-80</code> (RX 6000 / 7000 / 9000; псевдоним <code>--vo</code>).</span></td></tr>
+          <tr><td><code>--vddc</code></td><td>—</td><td class="desc"><span class="en">AMD: absolute core voltage, mV (RX 5000 / 6000; alias <code>--vcore</code>). RX 7000 / 9000 take only the offset.</span><span class="ru">AMD: абсолютное напряжение ядра, мВ (RX 5000 / 6000; псевдоним <code>--vcore</code>). RX 7000 / 9000 принимают только смещение.</span></td></tr>
+          <tr><td><code>--oc-keep</code></td><td><code>FORGE_OC_KEEP=1</code></td><td class="desc"><span class="en">Leave the overclock on the cards when the miner exits.</span><span class="ru">Оставить разгон на картах после выхода майнера.</span></td></tr>
+          <tr><td><code>--oc-reset</code></td><td>—</td><td class="desc"><span class="en">Put the cards back to stock (default power limit, clock locks released, offsets 0) and exit — after a crash or a hard kill. With <code>--gpu</code> only those cards.</span><span class="ru">Вернуть карты в сток (штатный лимит мощности, без фиксации частот, оффсеты 0) и выйти — после падения или жёсткого убийства процесса. С <code>--gpu</code> — только эти карты.</span></td></tr>
         </tbody>
       </table>
       </div>
@@ -775,8 +834,8 @@ docker run --rm --gpus all hashraptor/forge \
 
       <div class="opt-sub"><span class="en">Fan control</span><span class="ru">Управление кулерами</span></div>
       <p class="sec-lede" style="margin-bottom:14px;">
-        <span class="en">A fixed speed, or a temperature curve. With no fan flag the driver keeps automatic control; it's restored on exit. Setting fans needs Administrator/root. GeForce cards have a ~30% hardware fan floor.</span>
-        <span class="ru">Фиксированная скорость или температурная кривая. Без флага — автоматика драйвера; она восстанавливается при выходе. Управление требует Администратора/root. У GeForce есть аппаратный порог ~30%.</span>
+        <span class="en">A fixed speed, or a temperature curve. With no fan flag the driver keeps automatic control; it's restored on exit. Setting fans needs Administrator/root. GeForce cards have a ~30% hardware fan floor. On AMD <code>--fan</code> sets a static speed; <code>--fan-curve</code> is NVIDIA-only for now.</span>
+        <span class="ru">Фиксированная скорость или температурная кривая. Без флага — автоматика драйвера; она восстанавливается при выходе. Управление требует Администратора/root. У GeForce есть аппаратный порог ~30%. На AMD <code>--fan</code> задаёт постоянные обороты; <code>--fan-curve</code> пока только для NVIDIA.</span>
       </p>
       <div class="opt-eg"><span class="c-dim"># fixed speed</span>
 <span class="c-flag">--fan</span> 70                 <span class="c-dim">every GPU at 70%</span>
@@ -899,7 +958,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -919,7 +978,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -940,7 +999,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -961,7 +1020,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -982,7 +1041,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1002,7 +1061,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1022,7 +1081,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1042,7 +1101,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1062,7 +1121,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1082,7 +1141,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1102,7 +1161,7 @@ docker run --rm --gpus all hashraptor/forge \
       <span class="c-key">"pass"</span>: <span class="c-str">"x"</span>,
       <span class="c-key">"miner"</span>: <span class="c-str">"ForgeMiner"</span>,
       <span class="c-key">"template"</span>: <span class="c-str">"%WAL%.%WORKER_NAME%"</span>,
-      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.8</span>/ForgeMiner-<span data-ver>1.8.8</span>.tar.gz"</span>
+      <span class="c-key">"install_url"</span>: <span class="c-str">"https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<span data-ver>1.8.9</span>/ForgeMiner-<span data-ver>1.8.9</span>.tar.gz"</span>
     }
   }]
 }</pre></div>
@@ -1161,12 +1220,12 @@ docker run --rm --gpus all hashraptor/forge \
         <span class="ru">Загрузи каждую карту.</span>
       </h2>
       <p class="lede">
-        <span class="en">One download, eleven coins, six architectures. Free to use — the only cost is the flat dev fee above.</span>
-        <span class="ru">Одна загрузка, одиннадцать монет, шесть архитектур. Бесплатно — единственная плата это фиксированная комиссия выше.</span>
+        <span class="en">One download, eleven coins, NVIDIA and AMD. Free to use — the only cost is the flat dev fee above.</span>
+        <span class="ru">Одна загрузка, одиннадцать монет, NVIDIA и AMD. Бесплатно — единственная плата это фиксированная комиссия выше.</span>
       </p>
       <div class="final-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
-          <span class="en">↓ Download v<span data-ver>1.8.8</span></span><span class="ru">↓ Скачать v<span data-ver>1.8.8</span></span>
+          <span class="en">↓ Download v<span data-ver>1.8.9</span></span><span class="ru">↓ Скачать v<span data-ver>1.8.9</span></span>
         </a>
         <a class="btn lg" href="https://github.com/0xHashRaptor/ForgeMiner">
           <span class="en">Read the docs</span><span class="ru">Документация</span>
@@ -1177,7 +1236,7 @@ docker run --rm --gpus all hashraptor/forge \
 
   <footer>
     <div class="wrap foot-inner">
-      <div>© 2026 ForgeMiner · <span class="en">Not affiliated with NVIDIA. Mine responsibly.</span><span class="ru">Не связан с NVIDIA. Майньте ответственно.</span></div>
+      <div>© 2026 ForgeMiner · <span class="en">Not affiliated with NVIDIA or AMD. Mine responsibly.</span><span class="ru">Не связан с NVIDIA и AMD. Майньте ответственно.</span></div>
       <div>
         <a href="https://github.com/0xHashRaptor/ForgeMiner">GitHub</a> ·
         <a href="https://t.me/ForgeMiner">Telegram</a> ·
