@@ -144,12 +144,25 @@
   }
   @keyframes flick{ 0%,100%{ opacity:.85; transform:scaleY(1); } 50%{ opacity:1; transform:scaleY(1.06); } }
   .anvil-big{ position:absolute; left:50%; bottom:3%; width:84%; transform:translateX(-50%); filter:drop-shadow(0 -6px 30px rgba(255,110,30,.35)); }
+  .defs{ position:absolute; width:0; height:0; overflow:hidden; }
+  /* .gpu follows the pointer (--tx/--ty from the script), .gpu-sway turns the card in and keeps it moving */
   .gpu{
-    position:absolute; left:50%; top:38%; width:min(560px,96%);
-    transform:translate(-50%,-50%) rotateX(14deg) rotateY(-24deg) rotateZ(-3deg); transform-style:preserve-3d;
-    animation:hover 6s ease-in-out infinite;
+    position:absolute; left:50%; top:38%; width:min(560px,96%); transform-style:preserve-3d;
+    transform:translate(-50%,-50%) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg));
+    transition:transform .8s cubic-bezier(.2,.8,.2,1);
   }
-  @keyframes hover{ 0%,100%{ margin-top:0; } 50%{ margin-top:-10px; } }
+  .gpu-sway{
+    transform-style:preserve-3d; transform:rotateX(14deg) rotateY(-24deg) rotateZ(-3deg);
+    animation:turn-in 1.8s cubic-bezier(.2,.8,.2,1) both, sway 11s ease-in-out 1.8s infinite;
+  }
+  @keyframes turn-in{
+    from{ opacity:0; transform:translateY(40px) rotateX(30deg) rotateY(-80deg) rotateZ(-10deg); }
+    to{ opacity:1; transform:rotateX(14deg) rotateY(-24deg) rotateZ(-3deg); }
+  }
+  @keyframes sway{
+    0%,100%{ transform:rotateX(14deg) rotateY(-24deg) rotateZ(-3deg); }
+    50%{ transform:translateY(-12px) rotateX(8deg) rotateY(-8deg) rotateZ(-1deg); }
+  }
   .shroud{
     position:relative; border-radius:20px; padding:30px 26px 34px;
     background:linear-gradient(160deg,#2c221c 0%,#1a130f 45%,#120d0a 100%);
@@ -165,13 +178,9 @@
     background:radial-gradient(circle,#0b0705 0 64%,#2a1f19 65% 68%,#0d0906 69% 100%);
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 26px rgba(0,0,0,.9), 0 0 0 3px #0e0907;
   }
-  .fan b{
-    position:absolute; inset:9%; border-radius:50%;
-    background:repeating-conic-gradient(from 10deg,#3b2a20 0deg 22deg,#140e0b 22deg 40deg);
-    -webkit-mask:radial-gradient(circle,transparent 0 24%,#000 25%); mask:radial-gradient(circle,transparent 0 24%,#000 25%);
-    animation:spin 1.8s linear infinite;
-  }
-  .fan:nth-child(2) b{ animation-duration:1.5s; }
+  .rotor{ position:absolute; left:5%; top:5%; width:90%; height:90%; overflow:visible; animation:spin 1.1s linear infinite; }
+  .fan:nth-child(2) .rotor{ animation-duration:.9s; }
+  .fan:nth-child(3) .rotor{ animation-duration:1.25s; }
   .fan::after{ content:""; position:absolute; inset:36%; border-radius:50%; background:radial-gradient(circle at 40% 35%,#3c2c22,#120c08 70%); box-shadow:0 0 0 2px #0b0705, 0 0 22px rgba(255,106,26,.4); }
   .fan:nth-child(2)::after{ background:radial-gradient(circle at 40% 35%,#ffb23a,#e2401a 60%,#7a1a08); box-shadow:0 0 0 2px #0b0705, 0 0 30px rgba(255,120,30,.8); }
   @keyframes spin{ to{ transform:rotate(360deg); } }
@@ -524,7 +533,8 @@
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     #sparks{ display:none; }
-    .fan b, .gpu, .chip, .fire, .cursor{ animation:none !important; }
+    .rotor, .gpu-sway, .chip, .fire, .cursor{ animation:none !important; }
+    .gpu{ transition:none; }
     .btn, .coin, .cell, .chan a{ transition:none; }
   }
 </style>
@@ -594,8 +604,8 @@
         <span class="ru">Выкован под <span class="flame">каждую архитектуру.</span></span>
       </h1>
       <p class="lede">
-        <span class="en">A fast, fully native GPU miner for NVIDIA and AMD. Talks to NVIDIA cards directly through the CUDA Driver API and to AMD Radeon through OpenCL — no Python, no WSL, no extra runtimes. One binary mines eleven coins across ten GPU generations, NVIDIA and AMD in the same rig, each card running its own tuned kernel.</span>
-        <span class="ru">Быстрый, полностью нативный GPU-майнер для NVIDIA и AMD. С картами NVIDIA работает напрямую через CUDA Driver API, с AMD Radeon — через OpenCL, без Python, WSL и лишних рантаймов. Один бинарь майнит одиннадцать монет на десяти поколениях карт, NVIDIA и AMD в одном риге, и под каждую карту — своё ядро.</span>
+        <span class="en">A fast, fully native GPU miner for NVIDIA and AMD. Talks to NVIDIA cards directly through the CUDA Driver API and to AMD Radeon through OpenCL — no Python, no WSL, no extra runtimes. One binary mines twelve coins across ten GPU generations, NVIDIA and AMD in the same rig, each card running its own tuned kernel.</span>
+        <span class="ru">Быстрый, полностью нативный GPU-майнер для NVIDIA и AMD. С картами NVIDIA работает напрямую через CUDA Driver API, с AMD Radeon — через OpenCL, без Python, WSL и лишних рантаймов. Один бинарь майнит двенадцать монет на десяти поколениях карт, NVIDIA и AMD в одном риге, и под каждую карту — своё ядро.</span>
       </p>
       <div class="hero-cta">
         <a class="btn solid lg" href="https://github.com/0xHashRaptor/ForgeMiner/releases/latest">
@@ -618,11 +628,30 @@
         <canvas id="sparks"></canvas>
         <div class="fire"></div>
         <svg class="anvil-big" viewBox="0 0 400 130"><defs><linearGradient id="av" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d2c22"/><stop offset=".18" stop-color="#1d1510"/><stop offset="1" stop-color="#0b0705"/></linearGradient><linearGradient id="rim" x1="0" x2="1"><stop offset="0" stop-color="#ff7a1f" stop-opacity="0"/><stop offset=".45" stop-color="#ffc35a"/><stop offset="1" stop-color="#ff7a1f" stop-opacity=".2"/></linearGradient></defs><path d="M8 24C40 20 60 15 82 15H360l13 7v18l-71 4c-30 2-46 12-49 26l-2 22 48 8 13 18H110l12-18 50-8-2-22c-4-14-20-22-50-24C80 44 40 38 8 24z" fill="url(#av)"/><path d="M60 16.5C70 15.5 76 15 82 15H360l6 3" stroke="url(#rim)" stroke-width="2.4" fill="none"/></svg>
+        <svg class="defs" focusable="false">
+          <defs>
+            <linearGradient id="fm-blade-g" x1="0" y1="-46" x2="0" y2="-12" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4d372a"/><stop offset="1" stop-color="#1a120d"/></linearGradient>
+            <path id="fm-blade" d="M0,-13 Q0.8,-30.8 22.5,-39 A45,45 0 0 0 -3.9,-44.8 Q-12.3,-27.2 -5.5,-11.8 Z"/>
+            <symbol id="fm-rotor" viewBox="-50 -50 100 100">
+              <g fill="url(#fm-blade-g)" stroke="rgba(255,150,70,.3)" stroke-width=".6">
+                <use href="#fm-blade"/><use href="#fm-blade" transform="rotate(40)"/><use href="#fm-blade" transform="rotate(80)"/>
+                <use href="#fm-blade" transform="rotate(120)"/><use href="#fm-blade" transform="rotate(160)"/><use href="#fm-blade" transform="rotate(200)"/>
+                <use href="#fm-blade" transform="rotate(240)"/><use href="#fm-blade" transform="rotate(280)"/><use href="#fm-blade" transform="rotate(320)"/>
+              </g>
+            </symbol>
+          </defs>
+        </svg>
         <div class="gpu">
-          <div class="shroud">
-            <div class="fans"><div class="fan"><b></b></div><div class="fan"><b></b></div><div class="fan"><b></b></div></div>
-            <div class="lbl">FORGEMINER</div>
-            <div class="pcie"></div>
+          <div class="gpu-sway">
+            <div class="shroud">
+              <div class="fans">
+                <div class="fan"><svg class="rotor"><use href="#fm-rotor"/></svg></div>
+                <div class="fan"><svg class="rotor"><use href="#fm-rotor"/></svg></div>
+                <div class="fan"><svg class="rotor"><use href="#fm-rotor"/></svg></div>
+              </div>
+              <div class="lbl">FORGEMINER</div>
+              <div class="pcie"></div>
+            </div>
           </div>
         </div>
         <div class="chip c1"><i>GPU0</i> ada <em>✓</em></div>
@@ -636,7 +665,7 @@
       <div class="facts">
         <div class="fact"><div class="n">12</div><div class="k"><span class="en">coins in one binary</span><span class="ru">монет в одном бинаре</span></div></div>
         <div class="fact"><div class="n">10</div><div class="k"><span class="en">algorithms, one flag to switch</span><span class="ru">алгоритмов, выбор одним флагом</span></div></div>
-        <div class="fact"><div class="n">0.7–2%</div><div class="k"><span class="en">flat dev fee, no hidden second fee</span><span class="ru">фиксированная комиссия, без скрытой второй</span></div></div>
+        <div class="fact"><div class="n">0.7–2%</div><div class="k"><span class="en">flat dev fee, set per coin</span><span class="ru">фиксированная комиссия, своя у каждой монеты</span></div></div>
         <div class="fact"><div class="n">115</div><div class="k"><span class="en">ready-made .bat launchers</span><span class="ru">готовых .bat под монету, пул и регион</span></div></div>
       </div>
     </div>
@@ -680,8 +709,8 @@
         <span class="ru">Двенадцать монет, один бинарь.</span>
       </h2>
       <p class="sec-lede">
-        <span class="en">Pick the coin with a single flag. Standard Stratum pools for everything, automatic reconnect and pool fail-over. Dev fees are flat and shown here — no hidden second fee.</span>
-        <span class="ru">Выбор монеты — одним флагом. Везде обычные Stratum-пулы, авто-переподключение и failover. Комиссия фиксированная и указана здесь — без скрытой второй комиссии.</span>
+        <span class="en">Pick the coin with a single flag. Standard Stratum pools for everything, automatic reconnect and pool fail-over. Dev fees are flat and shown here.</span>
+        <span class="ru">Выбор монеты — одним флагом. Везде обычные Stratum-пулы, авто-переподключение и failover. Комиссия фиксированная и указана здесь.</span>
       </p>
       <div class="coins">
         <div class="coin" style="--c:#b49cff">
@@ -979,8 +1008,8 @@
         <span class="ru">Собери запуск под свой риг. <span class="dim">В пару кликов.</span></span>
       </h2>
       <p class="sec-lede">
-        <span class="en">Pick the coin, system, pool and wallet — the configurator writes the .bat for Windows, the command for Linux, a HiveOS flight sheet or a docker run line. Pools are the same as in the release's ready-made .bat files. Everything happens in your browser; the wallet is never sent anywhere.</span>
-        <span class="ru">Монета, система, пул и кошелёк — конфигуратор соберёт .bat для Windows, команду для Linux, полётный лист HiveOS или строку docker run. Пулы те же, что в готовых .bat из релиза. Всё считается в браузере, кошелёк никуда не отправляется.</span>
+        <span class="en">Pick the coin, system, pool and wallet — the configurator writes the .bat for Windows, the command for Linux, a HiveOS flight sheet or a docker run line. Pools are the same as in the release's ready-made .bat files, and everything is put together right here in your browser.</span>
+        <span class="ru">Монета, система, пул и кошелёк — конфигуратор соберёт .bat для Windows, команду для Linux, полётный лист HiveOS или строку docker run. Пулы те же, что в готовых .bat из релиза, а собирается всё прямо в браузере.</span>
       </p>
 
       <div class="cf">
@@ -1200,7 +1229,7 @@ docker run --rm --gpus all hashraptor/forge \
   <span class="c-flag">--wallet</span> YOUR_PRL_WALLET <span class="c-flag">--worker</span> rig01 \
   <span class="c-flag">--pool</span> de.pearl.herominers.com:1200
 
-<span class="c-dim"># Other coins: --algorithm qhash | kawpow | cryptix | btx | xelis | cfx | noid | quantus</span>
+<span class="c-dim"># Other coins: --algorithm qhash | kawpow | cryptix | btx | xelis | cfx | noid | quantus | iron</span>
 <span class="c-dim">#   KawPow: add --coin rvn | quai | xna</span>
 <span class="c-dim"># Dashboard: add -p 7777:7777 and --api-bind 0.0.0.0:7777</span></pre>
       </div>
@@ -1225,7 +1254,7 @@ docker run --rm --gpus all hashraptor/forge \
       <table class="opt-tbl">
         <thead><tr><th>Flag</th><th>Env</th><th><span class="en">Description</span><span class="ru">Описание</span></th></tr></thead>
         <tbody>
-          <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>quantus</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code>, <code>xelis</code>, <code>cfx</code> or <code>noid</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>quantus</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code>, <code>xelis</code>, <code>cfx</code> или <code>noid</code>.</span></td></tr>
+          <tr><td><code>--algorithm</code></td><td><code>FORGE_ALGO</code></td><td class="desc"><span class="en">Algorithm: <code>pearlhash</code>, <code>quantus</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code>, <code>xelis</code>, <code>cfx</code>, <code>noid</code> or <code>iron</code>.</span><span class="ru">Алгоритм: <code>pearlhash</code>, <code>quantus</code>, <code>qhash</code>, <code>kawpow</code>, <code>cryptix</code>, <code>btx</code>, <code>xelis</code>, <code>cfx</code>, <code>noid</code> или <code>iron</code>.</span></td></tr>
           <tr><td><code>--coin</code></td><td><code>FORGE_COIN</code></td><td class="desc"><span class="en">KawPow coin: <code>rvn</code>, <code>quai</code> or <code>xna</code> — auto-detected from the pool if omitted (set explicitly for Neurai/Vipor).</span><span class="ru">Монета KawPow: <code>rvn</code>, <code>quai</code> или <code>xna</code> — определяется по пулу, если не задана (для Neurai/Vipor указывать явно).</span></td></tr>
           <tr><td><code>--pool</code></td><td><code>FORGE_POOL</code></td><td class="desc"><span class="en">Pool as <code>host:port</code>. TLS is detected automatically (<code>ssl://</code> also accepted); list several for fail-over.</span><span class="ru">Пул как <code>host:port</code>. TLS определяется автоматически (<code>ssl://</code> тоже принимается); можно перечислить несколько для failover.</span></td></tr>
           <tr><td><code>--tls</code></td><td><code>FORGE_TLS</code></td><td class="desc"><span class="en">Force TLS on (<code>--tls</code>) or off (<code>--tls false</code>) for every pool. Rarely needed — TLS is detected on its own; an <code>ssl://</code> prefix on one address wins.</span><span class="ru">Включить (<code>--tls</code>) или выключить (<code>--tls false</code>) TLS на всех пулах. Нужно редко — TLS определяется сам; префикс <code>ssl://</code> у адреса важнее.</span></td></tr>
@@ -1257,8 +1286,8 @@ docker run --rm --gpus all hashraptor/forge \
           <tr><td><code>--mclk</code></td><td><code>FORGE_MCLK</code></td><td class="desc"><span class="en">Lock memory clock (MHz). On GTX 10 / RTX 20, <code>810</code> holds the memory at 810 MHz — Quantus and NOID keep their hashrate at less power.</span><span class="ru">Зафиксировать частоту памяти (МГц). На GTX 10 / RTX 20 <code>810</code> держит память на 810 МГц — Quantus и NOID сохраняют хешрейт при меньшей мощности.</span></td></tr>
           <tr><td><code>--moff</code></td><td><code>FORGE_MOFF</code></td><td class="desc"><span class="en">Memory clock offset (MHz, +/−).</span><span class="ru">Оффсет памяти (МГц, +/−).</span></td></tr>
           <tr><td><code>--plimit</code></td><td><code>FORGE_PLIMIT</code></td><td class="desc"><span class="en">Power limit (Watts; on Windows with AMD, percent of the card's limit).</span><span class="ru">Лимит мощности (Вт; на Windows с AMD — процент от лимита карты).</span></td></tr>
-          <tr><td><code>--vddoff</code></td><td>—</td><td class="desc"><span class="en">AMD: core voltage offset, mV, signed — e.g. <code>-80</code> (RX 6000 / 7000 / 9000; alias <code>--vo</code>).</span><span class="ru">AMD: смещение напряжения ядра, мВ, со знаком — напр. <code>-80</code> (RX 6000 / 7000 / 9000; псевдоним <code>--vo</code>).</span></td></tr>
-          <tr><td><code>--vddc</code></td><td>—</td><td class="desc"><span class="en">AMD: absolute core voltage, mV (RX 5000 / 6000; alias <code>--vcore</code>). RX 7000 / 9000 take only the offset.</span><span class="ru">AMD: абсолютное напряжение ядра, мВ (RX 5000 / 6000; псевдоним <code>--vcore</code>). RX 7000 / 9000 принимают только смещение.</span></td></tr>
+          <tr><td><code>--vddoff</code></td><td>—</td><td class="desc"><span class="en">Core voltage offset, mV, signed — e.g. <code>-80</code> (alias <code>--vo</code>): AMD RX 6000 / 7000 / 9000, and NVIDIA on Linux, where it goes on top of a core lock and offset and brings the voltage down further at the same clock. <code>--voltage-info --gpu &lt;list&gt;</code> shows what a card offers.</span><span class="ru">Смещение напряжения ядра, мВ, со знаком — напр. <code>-80</code> (псевдоним <code>--vo</code>): AMD RX 6000 / 7000 / 9000 и NVIDIA на Linux — там оно ставится поверх лока и офсета ядра и опускает напряжение ещё ниже при той же частоте. <code>--voltage-info --gpu &lt;список&gt;</code> покажет, что умеет карта.</span></td></tr>
+          <tr><td><code>--vddc</code></td><td>—</td><td class="desc"><span class="en">Absolute core voltage, mV (alias <code>--vcore</code>): AMD RX 5000 / 6000 (RX 7000 / 9000 take only the offset), and NVIDIA on Linux. <code>--voltage-recover</code> puts a card back after an interrupted run.</span><span class="ru">Абсолютное напряжение ядра, мВ (псевдоним <code>--vcore</code>): AMD RX 5000 / 6000 (RX 7000 / 9000 принимают только смещение) и NVIDIA на Linux. <code>--voltage-recover</code> вернёт карту после прерванного запуска.</span></td></tr>
           <tr><td><code>--oc-keep</code></td><td><code>FORGE_OC_KEEP=1</code></td><td class="desc"><span class="en">Leave the overclock on the cards when the miner exits.</span><span class="ru">Оставить разгон на картах после выхода майнера.</span></td></tr>
           <tr><td><code>--oc-reset</code></td><td>—</td><td class="desc"><span class="en">Put the cards back to stock (default power limit, clock locks released, offsets 0) and exit — after a crash or a hard kill. With <code>--gpu</code> only those cards.</span><span class="ru">Вернуть карты в сток (штатный лимит мощности, без фиксации частот, оффсеты 0) и выйти — после падения или жёсткого убийства процесса. С <code>--gpu</code> — только эти карты.</span></td></tr>
         </tbody>
@@ -1490,6 +1519,18 @@ docker run --rm --gpus all hashraptor/forge \
   }
   draw(); tickHR();
   if (!reduce) setInterval(tickHR, 1600);
+
+  /* the card leans a little towards the pointer */
+  var gpu = document.querySelector('.gpu'), hero = document.querySelector('.hero');
+  if (gpu && hero && !reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches){
+    hero.addEventListener('mousemove', function(e){
+      var r = hero.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      gpu.style.setProperty('--ty', (x * 18).toFixed(2) + 'deg');
+      gpu.style.setProperty('--tx', (-y * 10).toFixed(2) + 'deg');
+    });
+    hero.addEventListener('mouseleave', function(){ gpu.style.setProperty('--ty', '0deg'); gpu.style.setProperty('--tx', '0deg'); });
+  }
 
   /* sparks over the anvil: drawn only while the hero is on screen */
   var cv = document.getElementById('sparks');
@@ -1741,7 +1782,8 @@ docker run --rm --gpus all hashraptor/forge \
       var m = val.split(',').length;
       if (m!==g) warn.push(L('«' + names[key][0] + '» has ' + m + ' values for ' + g + ' cards.', 'В «' + names[key][1] + '» ' + m + ' знач. на ' + g + ' карт(ы).'));
     });
-    if (T(S.vddoff)) info.push(L('Voltage offset: AMD RX 6000 / 7000 / 9000, and NVIDIA RTX 20–50 on Linux.', 'Смещение напряжения: AMD RX 6000 / 7000 / 9000 и NVIDIA RTX 20–50 на Linux.'));
+    if (T(S.vddoff)) info.push(L('Voltage offset: AMD RX 6000 / 7000 / 9000; on NVIDIA under Linux it goes on top of a core lock and offset. --voltage-info --gpu <list> shows what a card offers.',
+      'Смещение напряжения: AMD RX 6000 / 7000 / 9000; на NVIDIA под Linux — поверх лока и офсета ядра. --voltage-info --gpu <список> покажет, что умеет карта.'));
     if (c.note) info.push(c.note[ru() ? 'ru' : 'en']);
     if (c.k && S.os==='hive') info.push(L('KawPow: the miner takes the coin from the pool host; FORGE_COIN in Extra config names it outright, so a pool whose host does not name the coin — Vipor for Neurai — works too.',
       'KawPow: майнер берёт монету из адреса пула; FORGE_COIN в Extra config задаёт её явно — так работает и пул, у которого хост монету не называет (Vipor для Neurai).'));
