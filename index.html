@@ -237,6 +237,22 @@
   .cursor{ display:inline-block; width:8px; height:15px; background:var(--accent); vertical-align:-2px; animation:blink 1.1s steps(2) infinite; }
   @keyframes blink{ 50%{ opacity:0; } }
 
+  /* live numbers */
+  section.numbers{ padding-top:88px; }
+  .live{
+    position:relative; overflow:hidden; border:1px solid var(--line-2); border-radius:22px; padding:22px 28px 26px;
+    background:radial-gradient(ellipse 60% 120% at 100% 0%, rgba(255,106,26,.14), transparent 60%), linear-gradient(180deg,var(--panel-2),var(--panel));
+  }
+  .live-head{ display:flex; align-items:center; gap:10px; font:600 11.5px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+  .live-head i{ width:8px; height:8px; border-radius:50%; background:var(--good); box-shadow:0 0 0 0 rgba(142,230,166,.6); animation:pulse 2s ease-out infinite; }
+  @keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(142,230,166,.55); } 80%,100%{ box-shadow:0 0 0 9px rgba(142,230,166,0); } }
+  .live-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:16px; }
+  .lv .n{
+    font:700 clamp(32px,4.4vw,56px)/1.05 var(--display); letter-spacing:-.02em; font-variant-numeric:tabular-nums;
+    background:var(--molten); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lv .k{ color:var(--muted); font-size:14.5px; margin-top:6px; }
+
   /* coins */
   .coins{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:14px; }
   .coin{
@@ -508,6 +524,9 @@
     .hero-cta .btn{ flex:1 1 auto; }
     .fact{ padding:20px; }
     .coins{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    section.numbers{ padding-top:64px; }
+    .live{ padding:18px 18px 20px; }
+    .live-grid{ grid-template-columns:minmax(0,1fr); gap:14px; }
     .coin{ padding:14px; }
     .grid, .chan{ grid-template-columns:minmax(0,1fr); }
     .cell, .chan a{ padding:20px; }
@@ -533,7 +552,7 @@
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     #sparks{ display:none; }
-    .rotor, .gpu-sway, .chip, .fire, .cursor{ animation:none !important; }
+    .rotor, .gpu-sway, .chip, .fire, .cursor, .live-head i{ animation:none !important; }
     .gpu{ transition:none; }
     .btn, .coin, .cell, .chan a{ transition:none; }
   }
@@ -696,6 +715,20 @@
 <span class="c-dim">[forge]</span> GPU4 RX 7900XTX → kernel <span class="c-hot">rdna3</span>    <span class="c-ok">ready</span>
 <span class="c-dim">[pool]</span>  connected · <span class="c-ok">share accepted</span> ✓  effort 84%
 <span class="c-dim">$</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE NUMBERS (shown once at least one number has arrived) -->
+  <section id="numbers" class="numbers" hidden>
+    <div class="wrap">
+      <div class="live">
+        <div class="live-head"><i></i><span class="en">Live from GitHub and Docker Hub</span><span class="ru">Живые цифры с GitHub и Docker Hub</span></div>
+        <div class="live-grid">
+          <div class="lv" data-k="dl" hidden><div class="n"></div><div class="k"><span class="en">downloads of the releases on GitHub</span><span class="ru">скачиваний релизов с GitHub</span></div></div>
+          <div class="lv" data-k="pulls" hidden><div class="n"></div><div class="k"><span class="en">pulls of the Docker image</span><span class="ru">загрузок Docker-образа</span></div></div>
+          <div class="lv" data-k="rel" hidden><div class="n"></div><div class="k"><span class="en">releases shipped</span><span class="ru">выпущено релизов</span></div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1889,6 +1922,74 @@ docker run --rm --gpus all hashraptor/forge \
   document.addEventListener('forge:ver', render);
   window.addEventListener('hashchange', function(){ if (location.hash==='#flightsheets'){ S.os = 'hive'; sync(); } });
   sync();
+})();
+</script>
+
+<script>
+/* Live numbers: release downloads and the release count come from the GitHub API, Docker pulls through
+   shields.io (Docker Hub does not answer browser requests from other sites). Each visitor fetches them at
+   most every 30 minutes; a number that cannot be fetched is left out, the block only shows with data. */
+(function () {
+  var box = document.getElementById('numbers');
+  if (!box || !window.fetch) return;
+  var site = document.querySelector('.site'), KEY = 'fm.live', TTL = 30 * 60 * 1000, shown = {};
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(n) {
+    var loc = site.getAttribute('data-lang') === 'ru' ? 'ru-RU' : 'en-US';
+    return n >= 1e6 ? new Intl.NumberFormat(loc, { notation: 'compact', maximumFractionDigits: 1 }).format(n) : Math.round(n).toLocaleString(loc);
+  }
+  function json(u, h) { return fetch(u, h ? { headers: h } : undefined).then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); }); }
+  function quiet(p) { return p.then(function (v) { return v; }, function () { return {}; }); }
+  function github() {
+    var dl = 0, rel = 0;
+    function page(n) {
+      return json('https://api.github.com/repos/0xHashRaptor/ForgeMiner/releases?per_page=100&page=' + n, { 'Accept': 'application/vnd.github+json' })
+        .then(function (list) {
+          list.forEach(function (r) { if (!r.prerelease && !r.draft) rel++; (r.assets || []).forEach(function (a) { dl += a.download_count || 0; }); });
+          return list.length === 100 && n < 5 ? page(n + 1) : (dl ? { dl: dl, rel: rel } : {});
+        });
+    }
+    return page(1);
+  }
+  function docker() {
+    return json('https://img.shields.io/badge/dynamic/json.json?url=' + encodeURIComponent('https://hub.docker.com/v2/repositories/hashraptor/forge/') +
+      '&query=' + encodeURIComponent('$.pull_count') + '&label=pulls')
+      .then(function (d) { var n = parseInt(d && d.value, 10); return n > 0 ? { pulls: n } : {}; });
+  }
+  function paint(t) {
+    Object.keys(shown).forEach(function (k) { box.querySelector('[data-k="' + k + '"] .n').textContent = fmt(shown[k] * t); });
+  }
+  function show(d) {
+    ['dl', 'pulls', 'rel'].forEach(function (k) {
+      if (d[k] > 0) { shown[k] = d[k]; box.querySelector('[data-k="' + k + '"]').hidden = false; }
+    });
+    if (!Object.keys(shown).length) return;
+    box.hidden = false;
+    paint(reduce ? 1 : 0);
+    if (reduce) return;
+    var run = function () {
+      var t0 = performance.now();
+      (function step(now) {
+        var p = Math.min(1, (now - t0) / 1400);
+        paint(1 - Math.pow(1 - p, 3));
+        if (p < 1) requestAnimationFrame(step);
+      })(t0);
+    };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { io.disconnect(); run(); } }, { threshold: .4 });
+      io.observe(box);
+    } else run();
+  }
+  document.addEventListener('forge:lang', function () { paint(1); });
+  var c = null;
+  try { c = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (c && Date.now() - c.t < TTL) return show(c);
+  Promise.all([quiet(github()), quiet(docker())]).then(function (rs) {
+    var d = { t: Date.now() };
+    rs.forEach(function (r) { for (var k in r) d[k] = r[k]; });
+    if (d.dl || d.pulls) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+    show(d);
+  });
 })();
 </script>
 
